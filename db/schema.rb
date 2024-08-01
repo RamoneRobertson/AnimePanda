@@ -10,9 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_31_035912) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_01_125746) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "animes", force: :cascade do |t|
+    t.string "title"
+    t.text "synopsis"
+    t.date "start_date"
+    t.date "end_date"
+    t.float "rating"
+    t.integer "rank"
+    t.integer "popularity"
+    t.string "picture_url"
+    t.integer "episode_count"
+    t.string "studio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer "preference"
+    t.integer "watch_status"
+    t.bigint "anime_id", null: false
+    t.bigint "list_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["anime_id"], name: "index_bookmarks_on_anime_id"
+    t.index ["list_id"], name: "index_bookmarks_on_list_id"
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string "type"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_lists_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +56,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_31_035912) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "myanimelist_username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookmarks", "animes"
+  add_foreign_key "bookmarks", "lists"
+  add_foreign_key "lists", "users"
 end
