@@ -1,2 +1,8 @@
 class AnimesController < ApplicationController
+  def recommendations
+    # if there is a prompt from chatgpt
+    # Get the 5 anime from the params
+    @animes = Anime.first(5)
+    # If the user swip
+  end
 end

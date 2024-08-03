@@ -9,9 +9,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :animes, only: [:index, :show]
+  resources :animes, only: [:index, :show] do
+    collection do
+      get :recommendations
+    end
+  end
 
-  get "animes/recommendations", to: "animes#show_recommendations"
   post "animes/recommendations", to: "animes#request_recommendations"
 
   resources :bookmarks, only: [:create, :update, :destroy]

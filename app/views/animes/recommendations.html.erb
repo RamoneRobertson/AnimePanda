@@ -1,0 +1,12 @@
+<div class="container">
+  <ul>
+    <% @animes.each do |anime| %>
+      <li>
+        <div class="recommendation-card">
+          <h3><%= anime.title %></h3>
+          <p><%= anime.synopsis %></p>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
