@@ -35,7 +35,7 @@ def call_animes
 
   # Step 3: Create the GET request and set headers
   request = Net::HTTP::Get.new(uri.request_uri)
-  request['X-MAL-CLIENT-ID'] = '2aea7651f12b5fb78508077647bd50bc'  # Replace with your actual client ID
+  request['X-MAL-CLIENT-ID'] = ENV['MAL_CLIENT_ID']  # Replace with your actual client ID
 
   # Step 4: Send the HTTP request
   response = http.request(request)
@@ -57,7 +57,7 @@ def anime_info(id)
 
   # Step 3: Create the GET request and set headers
   request = Net::HTTP::Get.new(uri.request_uri)
-  request['X-MAL-CLIENT-ID'] = '2aea7651f12b5fb78508077647bd50bc'  # Replace with your actual client ID
+  request['X-MAL-CLIENT-ID'] = ENV['MAL_CLIENT_ID']  # Replace with your actual client ID
 
   # Step 4: Send the HTTP request
   response = http.request(request)
