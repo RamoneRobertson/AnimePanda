@@ -5,6 +5,7 @@ class List < ApplicationRecord
   # The list has many anime from the bookmarks added to it
   has_many :anime, through: :bookmarks
 
-  validates :type, presence: true
-  validates :type, uniqueness: true
+  validates :list_type, presence: true
+  validates :list_type, uniqueness: true
+  enum list_type: { watchlist: 0, seen: 1 }
 end

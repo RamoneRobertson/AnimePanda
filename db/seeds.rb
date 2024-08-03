@@ -11,10 +11,9 @@ require 'net/http'
 require 'json'
 require 'uri'
 
-
+List.destroy_all
 User.destroy_all
 Anime.destroy_all
-List.destroy_all
 Bookmark.destroy_all
 
 # Get 10 Animes from https://api.myanimelist.net/v2/anime/ranking?ranking_type=all&limit=10
@@ -63,14 +62,29 @@ def anime_info(id)
   response = http.request(request)
 
   # Step 5: Parse the JSON response
-  data = JSON.parse(response.body)
-  # puts JSON.pretty_generate(data)
-  # puts data["start_date"]
-  # puts data["synopsis"]
-  # puts data["mean"]
+  JSON.parse(response.body)
 end
 
+def user_info
+  # Step 1: Define the API endpoint
+  url = "https://api.myanimelist.net/v2/users/jkinami/animelist?fields=list_status"
 
+  uri = URI(url)
+
+  # Step 2: Create an HTTP request object
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true if uri.scheme == 'https'  # Use SSL/TLS if the URL is HTTPS
+
+  # Step 3: Create the GET request and set headers
+  request = Net::HTTP::Get.new(uri.request_uri)
+  request['X-MAL-CLIENT-ID'] = ENV['MAL_CLIENT_ID']  # Replace with your actual client ID
+
+  # Step 4: Send the HTTP request
+  response = http.request(request)
+
+  # Step 5: Parse the JSON response
+  JSON.parse(response.body)
+end
 
 call_animes.each do |anime|
   mal_id = anime["node"]["id"]
@@ -89,4 +103,17 @@ call_animes.each do |anime|
   new_anime.save
 end
 
+new_user = User.new(email: "panda@anime.com", mal_username: "jkinami", password: "seed1234")
+new_user.save
+
+new_seen_list = List.new(list_type: :seen)
+new_seen_list.user = new_user
+new_seen_list.save
+
+new_watch_list = List.new()
+new_watch_list.user = new_user
+new_watch_list.save
+
 puts "There is a total of #{Anime.count} animes in the database"
+puts "There is a total of #{User.count} users in the database"
+puts "There is a total of #{List.count} lists in the database"
