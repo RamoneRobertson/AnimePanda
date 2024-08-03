@@ -1,0 +1,18 @@
+<div class="border-bottom border-1 border-dark">
+  <h1>My Show Watchlist</h1>
+</div>
+
+<div class="border-bottom border-1 border-dark">
+  <% @anime_lists.each do |anime| %>
+    <h1>Title: <%= anime.title %></h1>
+    <% if anime.picture_url == nil %>
+      <p>Image: Image Empty</p>
+    <% end %>
+    <p>Start Date: <%= anime.start_date %></p>
+    <p>Rating: <%= anime.rating %></p>
+    <p>Rank: <%= anime.rank %></p>
+    <p>Popularity: <%= anime.popularity %></p>
+    <p>Synopsis: <%= anime.synopsis %></p>
+    <p>Studio Name: <%= anime.studio %></p>
+  <% end %>
+</div>
