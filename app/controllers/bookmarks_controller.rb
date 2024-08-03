@@ -7,6 +7,6 @@ class BookmarksController < ApplicationController
   private
 
   def bookmarks_params
-    params.require(:bookmarks).permit(:anime_id, :list_id)
+    params.require(:bookmarks).permit(:preference, :watch_status, :anime_id, :list_id)
   end
 end
