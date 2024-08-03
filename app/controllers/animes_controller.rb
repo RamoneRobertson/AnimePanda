@@ -5,4 +5,7 @@ class AnimesController < ApplicationController
     @animes = Anime.first(5)
     # If the user swip
   end
+  def index
+    @animes = Anime.all
+  end
 end

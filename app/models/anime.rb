@@ -4,7 +4,7 @@ class Anime < ApplicationRecord
   has_many :list, through: :bookmarks
 
   # An anime must have a title and synopsis
-  validates :title, :synopsis, :start_date, presence: true
+  validates :title, :synopsis, presence: true
   # An anime cannot have the same title or synopsis
   validates :title, :synopsis, uniqueness: true
 
