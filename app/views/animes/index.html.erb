@@ -1,0 +1,9 @@
+<h1>index yo!</h1>
+<%= render "components/panda_button" %>
+<% if @animes.any? %>
+  <% @animes.each do |anime| %>
+    <h2><%= anime.title %></h2>
+  <% end %>
+<% else %>
+  <p>No animes in database</p>
+<% end %>
