@@ -1,6 +1,5 @@
 class ListsController < ApplicationController
   def show_watchlist
-    @bookmark = Bookmark.first
-    @anime_lists = @bookmark.list.anime
+    @anime_lists = current_user.list.first.bookmarks
   end
 end

@@ -9,6 +9,6 @@ class Bookmark < ApplicationRecord
   # Added three status on watch_status attribute
   enum watch_status: [ :Completed, :Watching, :Dropped ]
 
-  # Added two status on preferences
+  # Added two status on preferences attributes
   enum preference: [ :liked, :dislike ]
 end
