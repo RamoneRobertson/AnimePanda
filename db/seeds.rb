@@ -12,9 +12,9 @@ require 'json'
 require 'uri'
 
 
+List.destroy_all
 User.destroy_all
 Anime.destroy_all
-List.destroy_all
 Bookmark.destroy_all
 
 # Get 10 Animes from https://api.myanimelist.net/v2/anime/ranking?ranking_type=all&limit=10
