@@ -106,11 +106,14 @@ end
 new_user = User.new(email: "panda@anime.com", mal_username: "jkinami", password: "seed1234")
 new_user.save
 
-new_list = List.new(list_type: "seen")
-new_list.user = new_user
-new_list.save
+new_seen_list = List.new(list_type: :seen)
+new_seen_list.user = new_user
+new_seen_list.save
 
+new_watch_list = List.new()
+new_watch_list.user = new_user
+new_watch_list.save
 
 puts "There is a total of #{Anime.count} animes in the database"
 puts "There is a total of #{User.count} users in the database"
-puts "There is a total of #{List.new} lists in the database"
+puts "There is a total of #{List.count} lists in the database"
