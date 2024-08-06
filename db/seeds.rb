@@ -11,6 +11,7 @@ require 'net/http'
 require 'json'
 require 'uri'
 
+
 List.destroy_all
 User.destroy_all
 Anime.destroy_all

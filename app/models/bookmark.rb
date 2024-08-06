@@ -5,4 +5,10 @@ class Bookmark < ApplicationRecord
   validates :watch_status, presence: true
   # In every list an anime cannot appear twice
   validates :anime, uniqueness: { scope: :list }, on: :create
+
+  # Added three status on watch_status attribute
+  enum watch_status: [ :watching, :completed, :dropped ]
+
+  # Added two status on preferences attributes
+  enum preference: [ :liked, :dislike ]
 end
