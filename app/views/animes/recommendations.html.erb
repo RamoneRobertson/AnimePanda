@@ -1,4 +1,4 @@
-<div class="anime-container">
+<div class="anime-container" data-controller="anime-vote">
   <% @animes.each_with_index do |anime, index| %>
     <div class="item">
       <div class="anime-card">
@@ -14,6 +14,10 @@
   <% end %>
 </div>
 <footer>
-  <i class="fa-solid fa-circle-xmark" style="color: #ff6161;"></i>
-  <i class="fa-solid fa-paw" style="color: #63E6BE;"></i>
+  <a href="">
+    <i class="fa-solid fa-circle-xmark" style="color: #ff6161;" data-anime-vote-target="dislike"></i>
+  </a>
+  <a href="">
+    <i class="fa-solid fa-paw" style="color: #63E6BE;" data-anime-vote-target="like"></i>
+  </a>
 </footer>
