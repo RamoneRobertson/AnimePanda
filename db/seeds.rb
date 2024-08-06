@@ -117,3 +117,6 @@ new_watch_list.save
 puts "There is a total of #{Anime.count} animes in the database"
 puts "There is a total of #{User.count} users in the database"
 puts "There is a total of #{List.count} lists in the database"
+
+puts JSON.pretty_generate(user_info)
+puts user_info["data"]
