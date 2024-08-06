@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_142040) do
   end
 
   create_table "lists", force: :cascade do |t|
-    t.string "list_type"
+    t.integer "list_type", default: 0, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -56,6 +56,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_142040) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "mal_username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

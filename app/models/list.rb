@@ -7,4 +7,5 @@ class List < ApplicationRecord
 
   validates :list_type, presence: true
   validates :list_type, uniqueness: true
+  enum list_type: { watchlist: 0, seen: 1 }
 end

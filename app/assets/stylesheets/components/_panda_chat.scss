@@ -1,0 +1,33 @@
+.anime-panda-icon{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 2;
+
+  .circle{
+    // background-color: black;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    background-color: #FFFFFF;
+  }
+}
+
+.panda-chat-box{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  z-index: 1;
+
+
+  .box{
+    // height: 500px;
+    height: 0px;
+    width: 75%;
+    background-color: var(--chat-bg);
+    margin: 0 auto;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0px 0px 8px #0F0F0F;
+    transition: height 0.6s;
+  }
+}
