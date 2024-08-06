@@ -1,8 +1,37 @@
-<h1>index yo!</h1>
-<%= render "components/panda_button" %>
+<div class="main-banner bg-secondary" style="height: 40vh;">
+  <h1 style="font-size: 3rem;">AnimePanda</h1>
+</div>
+<div class="buttons p-3">
+  <div class="lucky-button d-flex justify-content-center mb-4">
+    <button class="btn btn-dark rounded-4">Feeling Lucky</button>
+  </div>
+  <div class="row m-0">
+    <div class="col-4">
+      <button class="btn btn-dark rounded-4 h-100 w-100">Action</button>
+    </div>
+    <div class="col-4">
+      <button class="btn btn-dark rounded-4 h-100 w-100">Shounen</button>
+    </div>
+    <div class="col-4">
+      <button class="btn btn-dark rounded-4 h-100 w-100">Slice of Life</button>
+    </div>
+  </div>
+</div>
+<div class="container popular p-3">
+  <h2>Popular Anime</h2>
+  <%# best = @anime.select {|anime|  } %>
+  <div class="row" style="height: 100px">
+    <% @random_popular_three.each do |item| %>
+      <div class="col-4"><%= item.title %></div>
+    <% end %>
+    <%# <div class="col-4"></div>
+    <div class="col-4"></div>
+    <div class="col-4"></div> %>
+  </div>
+</div>
 <% if @animes.any? %>
   <% @animes.each do |anime| %>
-    <h2><%= anime.title %></h2>
+    <h2><%= anime.title %>, rating: <%= anime.rating %></h2>
   <% end %>
 <% else %>
   <p>No animes in database</p>
