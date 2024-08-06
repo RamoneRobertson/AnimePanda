@@ -99,8 +99,9 @@ call_animes.each do |anime|
   rating = info["mean"]
   episode_count = info["num_episodes"]
   popularity = info["popularity"]
+  studio = info["studios"][0]["name"]
 
-  new_anime = Anime.new(title: title, picture_url: picture_url, start_date: start_date, synopsis: synopsis, rating: rating, rank: rank, episode_count: episode_count, popularity: popularity)
+  new_anime = Anime.new(title: title, picture_url: picture_url, start_date: start_date, synopsis: synopsis, rating: rating, rank: rank, episode_count: episode_count, popularity: popularity, studio: studio)
   new_anime.save
 end
 

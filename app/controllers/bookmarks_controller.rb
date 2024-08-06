@@ -1,12 +1,20 @@
 class BookmarksController < ApplicationController
 
   def create
-    @bookmark = Bookmark.new(bookmarks_params)
+    @user = current_user
+    @watchlist = @user.list.find_by(list_type: 'watchlist')
+    @seenlist = @user.list.find_by(list_type: 'seen')
+    @bookmark = Bookmark.new(bookmark_params)
+    if @bookmark.watch_status = "watching"
+      @bookmark.list = @watchlist
+    else
+      @bookmark.list = @seenlist
+    end
+
+    @bookmark.save
   end
 
-  private
-
-  def bookmarks_params
-    params.require(:bookmarks).permit(:anime_id, :list_id)
+  def bookmark_params
+    params.require(:bookmark).permit(:anime_id, :watch_status)
   end
 end
