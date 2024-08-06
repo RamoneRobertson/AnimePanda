@@ -1,12 +1,18 @@
-<div class="container">
-  <ul>
-    <% @animes.each do |anime| %>
-      <li>
-        <div class="recommendation-card">
-          <h3><%= anime.title %></h3>
-          <p><%= anime.synopsis %></p>
+<div class="anime-container">
+  <% @animes.each_with_index do |anime, index| %>
+    <div class="item">
+      <div class="anime-card">
+        <div class="anime-img">
+          <%= image_tag anime.picture_url, alt: "A nice poster of the anime to show the main characters and themes of the show." %>
         </div>
-      </li>
-    <% end %>
-  </ul>
+        <div class="anime-card-body">
+          <h3><%= anime.title %></h3>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
+<footer>
+  <i class="fa-solid fa-circle-xmark"></i>
+  <i class="fa-solid fa-paw"></i>
+</footer>
