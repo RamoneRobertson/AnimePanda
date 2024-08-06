@@ -8,16 +8,14 @@
   margin: 28px auto;
 }
 
-.vote-bar {
-  text-decoration: none;
+footer {
   display: flex;
   justify-content: space-around;
-  align-content: center;
-  text-align: center;
-  width: 100%;
+  align-items: center;
+  border-radius: 16px;
+  text-shadow: 1px 3px 6px #212324;
 
   i {
-    margin: 16px;
     font-size: 48px;
   }
 }

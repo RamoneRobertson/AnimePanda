@@ -10,18 +10,19 @@
   display: flex;
   flex-direction: column;
   height: 75%;
-  padding: 16px;
-  height: 75vh;
+  padding-top: 8px;
+  height: 72vh;
 
   img {
     width: 100%;
     height: auto;
+    object-fit: cover;
   }
 }
 
 .item {
   margin: 8px;
-  background: linear-gradient(#b92b27, #1565C0);
+  background: linear-gradient(#F3904F, #3B4371);
 
   &:nth-child(1) {
     z-index: 1;
@@ -53,13 +54,19 @@
   }
 }
 
+.item:after {
+
+}
+
 .anime-img {
   height: 80%;
   overflow: hidden;
 }
 
 .anime-card-body {
-  background: white;
+  background: 3b416b;
   height: 20%;
-  padding: 16px;
+  padding-top: 16px;
+  border: transparent;
+  box-shadow: none;
 }
