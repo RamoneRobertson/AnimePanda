@@ -16,4 +16,14 @@ export default class extends Controller {
     event.preventDefault();
     this.itemTarget.classList.add("nope");
   }
+
+  animationDone(event){
+    if (event.animationName === 'like'){
+      this.itemTarget.classList.remove("yes")
+    }
+
+    if (event.animationName === 'dislike'){
+      this.itemTarget.classList.remove("nope")
+    }
+  }
 }
