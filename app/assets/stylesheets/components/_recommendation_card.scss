@@ -2,7 +2,6 @@
   width: 100%;
   color: #FFFFFF;
   font-size: 16px;
-  margin-bottom: 16px;
   padding: 4px;
   max-width: 496px;
   text-shadow: 1px 3px 6px #212324;
@@ -21,36 +20,40 @@
 }
 
 .item {
-  margin: 8px;
+  margin: 16px;
   background: linear-gradient(#F3904F, #3B4371);
+  // For the swipe animation we want to rotate the card around the bottom
+  transform-origin: 50% 99%;
 
   &:nth-child(1) {
     z-index: 1;
+    // Setting the position relative on this item pushes it to the top of the stack
     position: relative;
   }
 
   &:nth-child(2) {
     z-index: 0;
     position: absolute;
-    // transform: translateY(-4px);
+    display: none;
   }
 
   &:nth-child(3) {
     z-index: -1;
     position: absolute;
-    // transform: translateY(-8px);
+    display: none;
   }
 
 
   &:nth-child(4) {
     z-index: -2;
     position: absolute;
-    // transform: translateY(-12px);
+    display: none;
   }
 
   &:nth-child(5) {
     z-index: -3;
     position: absolute;
+    display: none;
   }
 }
 
