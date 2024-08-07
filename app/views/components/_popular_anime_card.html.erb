@@ -1,0 +1,22 @@
+<div class="pop-anime-card rounded-4 my-3" style="overflow: hidden; box-shadow: 1px 1px 8px 0px #00000047; position: relative;">
+  <div class="c-image" style="background-image: url('<%= item.picture_url %>'); background-size: cover; height: 200px;">
+  </div>
+  <div class="c-info p-3 mt-3">
+    <h4><%= item.title %></h4>
+    <div class="episodes d-flex gap-2">
+      <p><i class="fa-solid fa-layer-group"></i></p>
+      <p><strong><%= item.episode_count %></strong> episode<%= "s" if item.episode_count > 1 %></p>
+    </div>
+    <p><%= item.synopsis[0..75] %>...</p>
+    <div class="c-icons d-flex gap-3" style="position: absolute; top: 187px;">
+      <div class="rating d-flex align-items-center gap-2 rounded-pill bg-light" style="padding: 3px 10px; box-shadow: 1px 1px 8px 0px #00000047;">
+        <p style="margin: 0"><i class="fa-solid fa-star"></i></p>
+        <p style="margin: 0"><%= item.rating %></p>
+      </div>
+      <div class="popularity d-flex align-items-center gap-2 rounded-pill bg-light" style="padding: 3px 10px; box-shadow: 1px 1px 8px 0px #00000047;">
+        <p style="margin: 0"><i class="fa-solid fa-heart"></i></p>
+        <p style="margin: 0"><%= item.popularity %></p>
+      </div>
+    </div>
+  </div>
+</div>

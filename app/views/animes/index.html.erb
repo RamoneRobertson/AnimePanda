@@ -11,6 +11,7 @@
     </div>
     <div class="col-4">
       <button class="btn btn-dark rounded-4 h-100 w-100">Shounen</button>
+      <%# style="background-color: var(--chat-bg);" %>
     </div>
     <div class="col-4">
       <button class="btn btn-dark rounded-4 h-100 w-100">Slice of Life</button>
@@ -18,21 +19,22 @@
   </div>
 </div>
 <div class="container popular p-3">
-  <h2>Popular Anime</h2>
+  <div class="d-flex gap-2">
+    <h2><i class="fa-solid fa-paw"></i></h2>
+    <h2>Popular Anime</h2>
+  </div>
   <%# best = @anime.select {|anime|  } %>
-  <div class="row" style="height: 100px">
+  <div class="row">
     <% @random_popular_three.each do |item| %>
-      <div class="col-4"><%= item.title %></div>
+      <div class="col-12 col-lg-4">
+        <%= render "components/popular_anime_card", item: item %>
+      </div>
     <% end %>
-    <%# <div class="col-4"></div>
-    <div class="col-4"></div>
-    <div class="col-4"></div> %>
   </div>
 </div>
-<% if @animes.any? %>
-  <% @animes.each do |anime| %>
-    <h2><%= anime.title %>, rating: <%= anime.rating %></h2>
-  <% end %>
-<% else %>
-  <p>No animes in database</p>
-<% end %>
+<div class="container top-anime">
+  <div class="d-flex gap-2">
+    <h2><i class="fa-solid fa-paw"></i></h2>
+    <h2>Top Anime</h2>
+  </div>
+</div>
