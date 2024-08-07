@@ -5,11 +5,13 @@ export default class extends Controller {
   static targets = ["item"]
 
   connect() {
+
   }
 
   like(event) {
     event.preventDefault();
     this.itemTarget.classList.add("yes");
+    const animeTitle = this.itemTarget.querySelector("h3").innerText;
   }
 
   dislike(event){
