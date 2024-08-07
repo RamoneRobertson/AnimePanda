@@ -18,12 +18,16 @@ export default class extends Controller {
   }
 
   animationDone(event){
-    if (event.animationName === 'like'){
+    if(event.animationName === 'like'){
       this.itemTarget.classList.remove("yes")
     }
 
-    if (event.animationName === 'dislike'){
+    if(event.animationName === 'dislike'){
       this.itemTarget.classList.remove("nope")
+    }
+
+    if(event.animationName == 'like' || event.animationName == 'dislike'){
+      this.itemTarget.remove();
     }
   }
 }
