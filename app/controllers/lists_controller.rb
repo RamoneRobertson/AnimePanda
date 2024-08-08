@@ -3,7 +3,6 @@ class ListsController < ApplicationController
     @anime_lists = current_user.list.watchlist
     filter_status
     hide_navbar
-    console
   end
 
   private
