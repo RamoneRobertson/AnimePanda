@@ -6,7 +6,7 @@
 </div>
 <svg class="banner-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
   <path
-    fill="var(--panda-green)"
+    fill="var(--panda-black)"
     fill-opacity="1"
     d="M0,224L80,213.3C160,203,320,181,480,197.3C640,213,800,267,960,288C1120,309,1280,299,1360,293.3L1440,288L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z">
   </path>
@@ -14,7 +14,7 @@
 <div class="buttons p-3">
   <div class="lucky-button d-flex justify-content-center mb-4">
     <%= link_to animes_recommendations_path do %>
-      <button class="btn core-button">Feeling Lucky</button>
+      <button class="btn core-button">Random 5</button>
     <% end %>
   </div>
   <div class="row m-0">
@@ -31,25 +31,26 @@
   </div>
 </div>
 <hr class="dotted-hr">
-<%# <svg style="position: relative; top: 1px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="var(--panda-green)" fill-opacity="1" d="M0,192L48,186.7C96,181,192,171,288,181.3C384,192,480,224,576,245.3C672,267,768,277,864,266.7C960,256,1056,224,1152,213.3C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg> %>
+<%# render "components/wavey_break" %>
 <div class="popular">
   <div class="container p-3">
     <div class="d-flex gap-2">
       <h2><i class="fa-solid fa-paw"></i></h2>
       <h2>Popular Anime</h2>
     </div>
-    <%# best = @anime.select {|anime|  } %>
-    <div class="row">
+    <div class="scrolling-wrapper">
       <% @random_popular_three.each do |item| %>
-        <div class="col-12 col-lg-4" style="padding: 0 45px;">
+        <div class="anime-card p-3">
           <%= render "components/popular_anime_card", item: item %>
         </div>
       <% end %>
     </div>
   </div>
 </div>
-<%# <svg style="position: relative; top: -1px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="var(--panda-green)" fill-opacity="1" d="M0,192L48,186.7C96,181,192,171,288,181.3C384,192,480,224,576,245.3C672,267,768,277,864,266.7C960,256,1056,224,1152,213.3C1248,203,1344,213,1392,218.7L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg> %>
+</div>
+<%# <svg style="position: relative; top: -1px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="var(--panda-main)" fill-opacity="1" d="M0,192L48,186.7C96,181,192,171,288,181.3C384,192,480,224,576,245.3C672,267,768,277,864,266.7C960,256,1056,224,1152,213.3C1248,203,1344,213,1392,218.7L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg> %>
 <hr class="dotted-hr">
+<%# render "components/wavey_break" %>
 <div class="container top-anime">
   <div class="d-flex gap-2">
     <h2><i class="fa-solid fa-paw"></i></h2>

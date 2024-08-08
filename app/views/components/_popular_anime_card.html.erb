@@ -1,4 +1,4 @@
-<div class="pop-anime-card rounded-5 my-3">
+<div class="pop-anime-card rounded-5 h-100">
   <div class="pop-image" style="background-image: url('<%= item.picture_url %>');">
   </div>
   <div class="pop-info p-3 mt-3">
@@ -7,7 +7,7 @@
       <p><i class="fa-solid fa-layer-group"></i></p>
       <p><strong><%= item.episode_count %></strong> episode<%= "s" if item.episode_count > 1 %></p>
     </div>
-    <p><i><%= item.synopsis[0..75] %>...</i></p>
+    <p class="anime-synopsis"><i><%= item.synopsis[0..75] %>...</i></p>
     <div class="pop-icons d-flex gap-3">
       <div class="rating d-flex align-items-center gap-2 rounded-pill bg-light">
         <p><i class="fa-solid fa-star"></i></p>

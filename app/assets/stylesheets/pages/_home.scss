@@ -7,7 +7,7 @@
 
 .main-banner{
   height: 25vh;
-  background-color: var(--panda-green);
+  background-color: var(--panda-black);
 
   .title{
     position: relative;
@@ -31,8 +31,40 @@
 }
 
 .dotted-hr{
-  width: 60%;
+  width: 95px;
   margin: 15px auto;
   border: none;
-  border-top: 10px dotted black;
+  border-top: 13px dotted black;
+}
+
+// .scrolling-wrapper {
+//   overflow-x: scroll;
+//   overflow-y: hidden;
+//   white-space: nowrap;
+
+//   .anime-card {
+//     display: inline-block;
+//   }
+// }
+
+.scrolling-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  .anime-card {
+    flex: 0 0 auto;
+  }
+}
+
+// .carousel-control-prev-icon {
+//   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230F0F0F' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+// }
+
+// .carousel-control-next-icon {
+//   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230F0F0F' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+// }
+
+.carousel-indicators button{
+  background-color: var(--panda-green) !important;
 }
