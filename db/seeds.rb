@@ -26,7 +26,7 @@ Bookmark.destroy_all
 
 def call_animes
 # Step 1: Define the API endpoint
-  url = 'https://api.myanimelist.net/v2/anime/ranking?ranking_type=all&limit=10'
+  url = 'https://api.myanimelist.net/v2/anime/ranking?ranking_type=all&limit=30'
   uri = URI(url)
 
   # Step 2: Create an HTTP request object
@@ -111,6 +111,10 @@ new_user.save
 new_seen_list = List.new(list_type: :seen)
 new_seen_list.user = new_user
 new_seen_list.save
+
+new_reco_list = List.new(list_type: :recommendations)
+new_reco_list.user = new_user
+new_reco_list.save
 
 new_watch_list = List.new()
 new_watch_list.user = new_user
