@@ -21,9 +21,12 @@
 
   background-color: var(--panda-white);
   color: var(--panda-black);
-  border: 3px solid var(--panda-grey);
-  border-radius: 16px;
+  // border: 3px solid var(--panda-grey);
+  // border-radius: 16px;
   font-weight: bold;
+
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px 0px #0000002b;
 }
 .sub-button:hover{
   background-color: var(--panda-black);
