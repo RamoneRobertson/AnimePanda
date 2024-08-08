@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <% if current_page?(root_url) %>
+      <%= render "components/show_anime_banner" %>
+    <% end %>
     <% unless @hide_navbar %>
       <%= render "shared/navbar" %>
     <% end %>
-
+    <%= render "shared/flashes" %>
     <%= yield %>
+    <%= render "components/panda_button" %>
   </body>
 </html>

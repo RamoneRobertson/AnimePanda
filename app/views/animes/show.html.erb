@@ -1,0 +1,24 @@
+<div class="title d-flex gap-3">
+  <i class="fa-solid fa-backward"></i>
+  <h2 class="fw-bold"><%= @anime.title %></h2>
+  <%= button_to bookmarks_path, method: :post, params: { bookmark: { anime_id: @anime.id, watch_status: :watching } } do %>
+    <i class="fa-solid fa-plus"></i>
+  <% end %>
+</div>
+<div class="info d-flex gap-3">
+  <div>
+    <h6 class="fw-bold">Rank: <%= @anime.rank %></h6>
+    <h6 class="fw-bold">Rating: <%= @anime.rating %>/10</h6>
+  </div>
+  <div>
+    <h6 class="fw-bold">Studio: <%= @anime.studio %></h6>
+  </div>
+</div>
+<div class="picture">
+  <%= image_tag @anime.picture_url %>
+</div>
+<div class="synopsis">
+  <h2 class="fw-bold">Synopsis:</h2>
+  <h4 class="fw-bold">Episodes: <%= @anime.episode_count %></h4>
+  <%= @anime.synopsis %>
+</div>

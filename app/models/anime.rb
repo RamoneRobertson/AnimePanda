@@ -1,7 +1,7 @@
 class Anime < ApplicationRecord
   has_many :bookmarks
   # An anime can be in multiple lists (watchlist, liked, disliked ect...)
-  has_many :list, through: :bookmarks
+  # belongs_to :list, through: :bookmarks
 
   # An anime must have a title and synopsis
   validates :title, :synopsis, presence: true

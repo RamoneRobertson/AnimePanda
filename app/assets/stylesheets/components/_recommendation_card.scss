@@ -1,0 +1,72 @@
+.anime-card {
+  width: 100%;
+  color: #FFFFFF;
+  font-size: 16px;
+  padding: 4px;
+  max-width: 496px;
+  text-shadow: 1px 3px 6px #212324;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  height: 75%;
+  padding-top: 8px;
+  height: 72vh;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+
+.item {
+  margin: 16px;
+  background: linear-gradient(#F3904F, #3B4371);
+  // For the swipe animation we want to rotate the card around the bottom
+  transform-origin: 50% 100%;
+
+  &:nth-child(1) {
+    z-index: 1;
+    // Setting the position relative on this item pushes it to the top of the stack
+    position: relative;
+  }
+
+  &:nth-child(2) {
+    z-index: 0;
+    position: absolute;
+    transform: translateY(-36px);
+  }
+
+  &:nth-child(3) {
+    z-index: -1;
+    position: absolute;
+    display: none;
+  }
+
+
+  &:nth-child(4) {
+    z-index: -2;
+    position: absolute;
+    display: none;
+  }
+
+  &:nth-child(5) {
+    z-index: -3;
+    position: absolute;
+    display: none;
+  }
+}
+
+.anime-img {
+  height: 80%;
+  overflow: hidden;
+}
+
+.anime-card-body {
+  background: transparent;
+  height: 20%;
+  padding-top: 8px;
+  border: transparent;
+  box-shadow: none;
+}
