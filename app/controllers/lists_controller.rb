@@ -1,5 +1,4 @@
 class ListsController < ApplicationController
-
   def show_watchlist
     @anime_lists = current_user.list.first.bookmarks
     filter_status

@@ -1,3 +1,33 @@
+.page-name {
+  display: flex;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  a {
+    position: absolute;
+    left: 15px;
+  }
+
+  h1 {
+    flex: 1;
+    text-align: center;
+  }
+
+  i {
+    color: black;
+    font-size: larger;
+  }
+}
+
+.empty-bookmark {
+  padding-top: 50px;
+  text-align: center;
+  img {
+    width: 80%;
+  }
+}
+
 .card-product {
   overflow: hidden;
   background: white;
@@ -71,9 +101,9 @@
   flex-direction: row;
   justify-content: center;
   column-gap: 20px;
-  padding-bottom: 15px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-bottom: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .sort-button-design {
