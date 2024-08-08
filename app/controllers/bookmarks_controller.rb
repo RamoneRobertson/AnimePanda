@@ -2,10 +2,10 @@ class BookmarksController < ApplicationController
 
   def create
     @user = current_user
-    @watchlist = @user.list.find_by(list_type: 'watchlist')
-    @seenlist = @user.list.find_by(list_type: 'seen')
-    @recommend_list = @user.list.find_by(list_type: 'recommendations')
-    @dropped_list = @user.list.find_by(list_type: 'dropped')
+    @watchlist = @user.lists.find_by(list_type: 'watchlist')
+    @seenlist = @user.lists.find_by(list_type: 'seen')
+    @recommend_list = @user.lists.find_by(list_type: 'recommendations')
+    @dropped_list = @user.lists.find_by(list_type: 'dropped')
     @bookmark = Bookmark.new(bookmark_params)
     if @bookmark.watch_status = "watching"
       @bookmark.list = @watchlist
