@@ -6,12 +6,14 @@
 
 .pop-image{
   background-size: cover;
-  height: 200px;
+  // height: 200px;
+  height: var(--anime-card-pic-height);
 }
 
 .pop-icons{
   position: absolute;
-  top: 187px;
+  // top: 187px;
+  top: calc(var(--anime-card-pic-height) - 13px);
 
   div{
     padding: 3px 10px;
