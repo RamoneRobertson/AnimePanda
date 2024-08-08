@@ -33,29 +33,17 @@ footer {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
 }
 
-#dislike-btn {
-  width: 72%;
-  padding: 8px 16px;
-  text-decoration: none;
-  border-radius: 16px;
-  background-color: rgba(66, 249, 81, 0.1);
-  border: 1px solid rgba(10, 10, 10, 0.1);
-  backdrop-filter: blur(30px);
-  color: rgba(255,255,255,0.8);
-  cursor: pointer;
-}
-
 button{
   margin-left: 16px;
   margin-right: 16px;
 }
 
 .item.yes {
-  animation: like 0.7s ease-out;
+  animation: like 0.5s ease-out;
 }
 
 .item.nope {
-  animation: dislike 0.7s ease-out;
+  animation: dislike 0.5s ease-out;
 }
 
 @keyframes like {
@@ -65,12 +53,9 @@ button{
   }
   to {
     transform: rotate(30deg) translateX(30rem);
-    background-color: green;
     opacity: 0;
   }
 }
-
-
 
 @keyframes dislike {
   from {
