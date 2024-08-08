@@ -1,9 +1,47 @@
-<h1>index yo!</h1>
-<%= render "components/panda_button" %>
-<% if @animes.any? %>
-  <% @animes.each do |anime| %>
-    <h2><%= anime.title %></h2>
-  <% end %>
-<% else %>
-  <p>No animes in database</p>
-<% end %>
+<div class="main-banner" style="height: 30vh; background-color: var(--banner-bg-color);">
+  <h1 style="font-size: 3rem;">AnimePanda</h1>
+</div>
+<svg class="banner-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+  <path
+    fill="var(--banner-bg-color)"
+    fill-opacity="1"
+    d="M0,224L80,213.3C160,203,320,181,480,197.3C640,213,800,267,960,288C1120,309,1280,299,1360,293.3L1440,288L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z">
+  </path>
+</svg>
+<div class="buttons p-3">
+  <div class="lucky-button d-flex justify-content-center mb-4">
+    <button class="btn btn-dark rounded-4">Feeling Lucky</button>
+  </div>
+  <div class="row m-0">
+    <div class="col-4">
+      <button class="btn btn-dark rounded-4 h-100 w-100">Action</button>
+    </div>
+    <div class="col-4">
+      <button class="btn btn-dark rounded-4 h-100 w-100">Shounen</button>
+      <%# style="background-color: var(--chat-bg);" %>
+    </div>
+    <div class="col-4">
+      <button class="btn btn-dark rounded-4 h-100 w-100">Slice of Life</button>
+    </div>
+  </div>
+</div>
+<div class="container popular p-3">
+  <div class="d-flex gap-2">
+    <h2><i class="fa-solid fa-paw"></i></h2>
+    <h2>Popular Anime</h2>
+  </div>
+  <%# best = @anime.select {|anime|  } %>
+  <div class="row">
+    <% @random_popular_three.each do |item| %>
+      <div class="col-12 col-lg-4">
+        <%= render "components/popular_anime_card", item: item %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="container top-anime">
+  <div class="d-flex gap-2">
+    <h2><i class="fa-solid fa-paw"></i></h2>
+    <h2>Top Anime</h2>
+  </div>
+</div>

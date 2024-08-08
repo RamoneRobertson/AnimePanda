@@ -1,0 +1,5 @@
+<% random_anime = @animes.sample %>
+<div class="text-light" style="background-image: url('<%= image_path random_anime.picture_url %>'); background-position: center; background-size: cover; height: 15vh;">
+  <p style="font-size: 2rem; padding: 16px;"><%= random_anime.title %></p>
+  <%# image_tag @animes.first.picture_url %>
+</div>
