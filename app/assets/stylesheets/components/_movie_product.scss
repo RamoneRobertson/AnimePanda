@@ -1,0 +1,146 @@
+.page-name {
+  display: flex;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  a {
+    position: absolute;
+    left: 15px;
+  }
+
+  h1 {
+    flex: 1;
+    text-align: center;
+  }
+
+  i {
+    color: black;
+    font-size: larger;
+  }
+}
+
+.empty-bookmark {
+  padding-top: 50px;
+  text-align: center;
+  h1 {
+    font-size: x-large;
+  }
+
+  img {
+    width: 80%;
+  }
+}
+
+.card-product {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding: 16px;
+  border-radius: 20px;
+}
+
+.anime-item {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 10px;
+}
+
+.anime-item-content {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.anime-img {
+  height: 170px;
+  width: 120px;
+  padding: 5px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.card-product-infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 150px;
+  padding: 8px 16px;
+  flex: 1;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  i {
+    color: #efa924;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: x-large;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+
+.details-info {
+  display: flex;
+  flex-direction: row;
+  column-gap: 6px;
+  margin-top: 8px;
+  padding-bottom: 15px;
+}
+
+.info-border {
+  background-color: #c9c9c9;
+  border-radius: 11px;
+  padding: 6px;
+  font-size: x-small;
+}
+
+.sort-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 20px;
+  padding-bottom: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.sort-button-design {
+  background-color: #c9c9c9;
+  border-radius: 5px;
+  padding: 4px;
+  width: 100px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+      color: #007bff;
+    }
+  }
+}
+
+.card-divider {
+  border: 0;
+  border-top: 1px solid black;
+  margin: 16px 0;
+}
+
+.rating-star {
+  color: #efa924;
+}
