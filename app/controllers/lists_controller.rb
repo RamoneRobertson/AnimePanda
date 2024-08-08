@@ -1,7 +1,9 @@
 class ListsController < ApplicationController
+
   def show_watchlist
     @anime_lists = current_user.list.first.bookmarks
     filter_status
+    hide_navbar
   end
 
   private
@@ -17,5 +19,9 @@ class ListsController < ApplicationController
     else
       @bookmarks = @anime_lists.all
     end
+  end
+
+  def hide_navbar
+    @hide_navbar = true
   end
 end
