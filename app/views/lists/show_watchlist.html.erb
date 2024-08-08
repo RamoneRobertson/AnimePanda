@@ -27,31 +27,29 @@
       <p>Add Anime by pressing <strong>"Add to Watchlist"</strong> through Anime show page</p>
     </div>
     <% else %>
-  <div class="card-product">
-      <% @bookmarks.each do |list_animes| %>
-        <% list_animes.anime.each do |animes| %>
-        <div class="anime-item mb-3">
-          <div class="anime-item-content">
-            <% if animes.picture_url.nil? %>
-              <p>Image: Image Empty</p>
-            <% else %>
-              <img src=<%="#{animes.picture_url}" %> class="anime-img">
-            <% end %>
-            <div class="card-product-infos">
-              <strong><h2><%= animes.title %></h2></strong>
-              <div class="details-info">
-                <div class="info-border">Ep <%= animes.episode_count %></div>
+      <div class="card-product">
+          <% @bookmarks.each do |list_animes| %>
+              <div class="anime-item mb-3">
+                <div class="anime-item-content">
+                  <% if list_animes.anime.picture_url.nil? %>
+                    <p>Image: Image Empty</p>
+                  <% else %>
+                    <img src=<%="#{list_animes.anime.picture_url}" %> class="anime-img">
+                  <% end %>
+                  <div class="card-product-infos">
+                    <strong><h2><%= list_animes.anime.title %></h2></strong>
+                    <div class="details-info">
+                      <div class="info-border">Ep <%= list_animes.anime.episode_count %></div>
 
-                <div class="info-border"><%= animes.start_date.year %></div>
+                      <div class="info-border"><%= list_animes.anime.start_date.year %></div>
+                    </div>
+                    <p class= "pb-3" ><%= list_animes.anime.rating %> <i class="fa-solid fa-star rating-star"></i></p>
+                    <p class= "pt-1">Rank: <%= list_animes.anime.rank %></p>
+                  </div>
+                </div>
+                <hr class="card-divider">
               </div>
-              <p class= "pb-3" ><%= animes.rating %> <i class="fa-solid fa-star rating-star"></i></p>
-              <p class= "pt-1">Rank: <%= animes.rank %></p>
-            </div>
-          </div>
-          <hr class="card-divider">
-        </div>
+            <% end  %>
       <% end %>
-    <% end %>
-  <% end %>
   </div>
 </div>
