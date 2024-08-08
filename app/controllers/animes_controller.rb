@@ -13,4 +13,8 @@ class AnimesController < ApplicationController
     best_anime = @animes.sort_by {|anime| anime.rating}.reverse
     @random_popular_three = best_anime[0..5].sample(3)
   end
+
+  def show
+    @anime = Anime.find(params[:id])
+  end
 end

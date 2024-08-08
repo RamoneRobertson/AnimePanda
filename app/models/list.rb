@@ -3,9 +3,9 @@ class List < ApplicationRecord
   # If the list is deleted the bookmarks get deleted too
   has_many :bookmarks, dependent: :destroy
   # The list has many anime from the bookmarks added to it
-  has_many :anime, through: :bookmarks
+  has_many :animes, through: :bookmarks
 
   validates :list_type, presence: true
   validates :list_type, uniqueness: true
-  enum list_type: { watchlist: 0, seen: 1 }
+  enum list_type: { watchlist: 0, seen: 1, recommendations: 2, liked: 3}
 end
