@@ -1,0 +1,37 @@
+.pop-anime-card{
+  overflow: hidden;
+  box-shadow: 1px 1px 8px 0px #00000047;
+  position: relative;
+}
+
+.pop-image{
+  background-size: cover;
+  // height: 200px;
+  height: var(--anime-card-pic-height);
+}
+
+.pop-icons{
+  position: absolute;
+  // top: 187px;
+  top: calc(var(--anime-card-pic-height) - 13px);
+
+  div{
+    padding: 3px 10px;
+    box-shadow: 1px 1px 8px 0px #00000047;
+  }
+
+  p{
+    margin: 0;
+  }
+}
+
+.pop-info{
+  h4{
+    font-weight: bold;
+  }
+
+  .episodes{
+    font-size: 0.9rem;
+    margin-left: 20px;
+  }
+}

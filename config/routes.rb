@@ -9,11 +9,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :animes, only: [:index, :show] do
+  resources :animes, only: [:show] do
     collection do
       get :recommendations
     end
   end
+  # resources :animes, only: [:index, :show]
+  resources :animes, only: [:show]
 
   post "animes/recommendations", to: "animes#request_recommendations"
 
