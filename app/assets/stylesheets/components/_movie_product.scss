@@ -23,6 +23,10 @@
 .empty-bookmark {
   padding-top: 50px;
   text-align: center;
+  h1 {
+    font-size: x-large;
+  }
+
   img {
     width: 80%;
   }
@@ -70,16 +74,21 @@
   i {
     color: #efa924;
   }
+
+  h2 {
+    margin: 0;
+    font-size: x-large;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  p {
+    margin: 0;
+  }
 }
 
-.card-product-infos h2 {
-  margin: 0;
-  font-size: x-large;
-  line-height: 1.2;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
-}
 
 .details-info {
   display: flex;
