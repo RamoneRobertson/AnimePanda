@@ -9,13 +9,11 @@ export default class extends Controller {
   }
 
   like(event) {
-    event.preventDefault();
     this.itemTarget.classList.add("yes");
     const animeTitle = this.itemTarget.querySelector("h3").innerText;
   }
 
   dislike(event){
-    event.preventDefault();
     this.itemTarget.classList.add("nope");
   }
 

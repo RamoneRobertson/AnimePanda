@@ -50,24 +50,27 @@ button{
   margin-right: 16px;
 }
 
+.item.yes {
+  animation: like 0.7s ease-out;
+}
+
+.item.nope {
+  animation: dislike 0.7s ease-out;
+}
+
 @keyframes like {
   from {
     transform: rotate(0deg);
     opacity: 1;
   }
   to {
-    transform: rotate(40deg) translateY(-80px);
+    transform: rotate(30deg) translateX(30rem);
+    background-color: green;
     opacity: 0;
   }
 }
 
-.item.yes {
-  animation: like 0.5s ease-out;
-}
 
-.item.nope {
-  animation: dislike 0.5s ease-out;
-}
 
 @keyframes dislike {
   from {
@@ -75,7 +78,7 @@ button{
     opacity: 1;
   }
   to {
-    transform: rotate(-40deg) translateY(-80px);
+    transform: rotate(-30deg) translateX(-30rem);
     opacity: 0;
   }
 }
