@@ -3,38 +3,42 @@
 </div>
 <div class="show-wrapper">
   <div class="sort-buttons">
-    <div class="sort-button-design"><%= link_to "All", lists_watchlist_path%></div>
-
-    <div class="sort-button-design"><%= link_to "Watching", lists_watchlist_path(status: "watching") %></div>
-
-    <div class="sort-button-design"><%= link_to "Completed", lists_watchlist_path(status: "completed") %>
-</div>
-    <div class="sort-button-design"><%= link_to "Dropped", lists_watchlist_path(status: "dropped") %></div>
+    <div class="sort-button-design text-decoration-none">
+      <%= link_to "All", lists_watchlist_path %>
+    </div>
+    <div class="sort-button-design text-decoration-none">
+      <%= link_to "Watching", lists_watchlist_path(status: "watching") %>
+    </div>
+    <div class="sort-button-design text-decoration-none">
+      <%= link_to "Completed", lists_watchlist_path(status: "completed") %>
+    </div>
+    <div class="sort-button-design text-decoration-none">
+      <%= link_to "Dropped", lists_watchlist_path(status: "dropped") %>
+    </div>
   </div>
-  <% @bookmarks.each do |list_anime| %>
-    <div class="anime-item mb-3">
 
-      <div class="card-product">
-        <% if list_anime.anime.picture_url.nil? %>
-          <p>Image: Image Empty</p>
-        <% else %>
-        <img src=<%="#{list_anime.anime.picture_url}" %>>
-        <% end %>
-        <div class="card-product-infos">
-          <h1><%= list_anime.anime.title %></h1>
+  <div class="card-product">
+    <% @bookmarks.each do |list_anime| %>
+      <div class="anime-item mb-3">
+        <div class="anime-item-content">
+          <% if list_anime.anime.picture_url.nil? %>
+            <p>Image: Image Empty</p>
+          <% else %>
+            <img src=<%="#{list_anime.anime.picture_url}" %> class="anime-img">
+          <% end %>
+          <div class="card-product-infos">
+            <strong><h2><%= list_anime.anime.title %></h2></strong>
             <div class="details-info">
-              <div class="info-border"> Ep <%= list_anime.anime.episode_count %></div>
+              <div class="info-border">Ep <%= list_anime.anime.episode_count %></div>
 
               <div class="info-border"><%= list_anime.anime.start_date.year %></div>
-
             </div>
-              <p>Rating: <%= list_anime.anime.rating %></p>
-
-              <p>Rank: <%= list_anime.anime.rank %></p>
+            <p><%= list_anime.anime.rating %> <i class="fa-solid fa-star rating-star"></i></p>
+            <p>Rank: <%= list_anime.anime.rank %></p>
+          </div>
         </div>
+        <hr class="card-divider">
       </div>
-        <%# <p>Synopsis: <%= list_anime.anime.synopsis %>
-        <%# <p>Studio Name: <%= list_anime.anime.studio %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
