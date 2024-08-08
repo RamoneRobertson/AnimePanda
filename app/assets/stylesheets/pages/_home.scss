@@ -4,3 +4,35 @@
   position: relative;
   bottom: 1px;
 }
+
+.main-banner{
+  height: 25vh;
+  background-color: var(--panda-green);
+
+  .title{
+    position: relative;
+    top: 30px;
+  }
+
+  h1{
+    // background: linear-gradient(to right, black, white);
+    // background-clip: text;
+    // color: transparent;
+    // width: fit-content;
+    // font-weight: bold;
+
+    font-weight: bold;
+    color: var(--panda-white);
+  }
+  i{
+    font-size: 1.7rem;
+    color: var(--panda-white)
+  }
+}
+
+.dotted-hr{
+  width: 60%;
+  margin: 15px auto;
+  border: none;
+  border-top: 10px dotted black;
+}
