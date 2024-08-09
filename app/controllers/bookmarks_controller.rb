@@ -20,7 +20,17 @@ class BookmarksController < ApplicationController
     @bookmark.save
   end
 
+  def update
+    @recommend_list = current_user.list.find_by(list_type: 'recommendations')
+    bookmark = Bookmark.find(params[:id])
+    bookmark.update(bookmark_params)
+    respond_to do |format|
+      format.html { redirect_to recommendations_animes_path }
+      format.text { render :recommendations }
+    end
+  end
+
   def bookmark_params
-    params.require(:bookmark).permit(:anime_id, :watch_status)
+    params.require(:bookmark).permit(:anime_id, :watch_status, :preference)
   end
 end
