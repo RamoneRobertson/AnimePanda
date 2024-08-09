@@ -3,8 +3,8 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="nav-sticky"
 export default class extends Controller {
   connect() {
-    console.log("hello from the nav sticky controller");
-    console.log(this.element);
+    // console.log("hello from the nav sticky controller");
+    // console.log(this.element);
 
     const scrollWatcher = document.createElement("div");
     scrollWatcher.setAttribute("data-scroll-watcher", "");
