@@ -33,6 +33,18 @@
   color: var(--panda-white);
 }
 
+.buttons-scrolling-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 16px;
+  gap: 15px;
+
+  .button-card {
+    flex: 0 0 auto;
+  }
+}
+
 
 // background-color: #F7D06B;
 // color: #b66f00;

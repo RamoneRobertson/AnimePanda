@@ -13,26 +13,42 @@
 </svg>
 <div style="position: relative; margin-top: 60px;">
   <div class="buttons p-3" style="position: absolute; bottom: 0; width: 100%;">
-    <div class="lucky-button d-flex justify-content-center mb-4">
+    <div class="lucky-button d-flex justify-content-center mb-2">
       <%= link_to animes_recommendations_path do %>
-        <button class="btn core-button">Random 5</button>
+        <button class="btn core-button">Recommend anything</button>
       <% end %>
     </div>
-    <div class="row m-0">
+    <%# <div class="row m-0">
       <div class="col-4">
         <button class="btn sub-button h-100 w-100">Action</button>
       </div>
       <div class="col-4">
         <button class="btn sub-button h-100 w-100">Shounen</button>
-        <%# style="background-color: var(--chat-bg);" %>
       </div>
       <div class="col-4">
         <button class="btn sub-button h-100 w-100">Slice of Life</button>
       </div>
+    </div> %>
+    <div class="buttons-scrolling-wrapper">
+      <div class="button-card">
+        <button class="btn sub-button">Action</button>
+      </div>
+      <div class="button-card">
+        <button class="btn sub-button">Shounen</button>
+      </div>
+      <div class="button-card">
+        <button class="btn sub-button">Slice of Life</button>
+      </div>
+      <div class="button-card">
+        <button class="btn sub-button">Western</button>
+      </div>
+      <div class="button-card">
+        <button class="btn sub-button">Ghibli</button>
+      </div>
     </div>
   </div>
 </div>
-<%# <hr class="dotted-hr"> %>
+<hr class="dotted-hr">
 <%# render "components/pawprints" %>
 <%# render "components/wavey_break" %>
 <div class="popular">

@@ -3,7 +3,7 @@ class AnimesController < ApplicationController
 
   def index
     @animes = Anime.all
-    best_anime = @animes.sort_by {|anime| anime.rating}.reverse
+    best_anime = @animes.sort_by {|anime| anime.popularity}.reverse
     @random_popular_three = best_anime[0..5].sample(3)
   end
 end
