@@ -2,20 +2,22 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="anime-vote"
 export default class extends Controller {
-  static targets = ["item", "like", "dislike"]
+  static targets = ["item", "like", "dislike", "animes"]
 
   connect(){
-
+    console.log("connected")
   }
 
   like(){
     this.itemTarget.dataset.preference = "liked"
     this.itemTarget.classList.add("yes");
+    this.redirect();
   }
 
   dislike(){
     this.itemTarget.dataset.preference = "dislike"
     this.itemTarget.classList.add("nope");
+    this.redirect();
   }
 
   animationDone(event){
@@ -36,7 +38,6 @@ export default class extends Controller {
 
   #updatePreference(){
     const animeId = this.itemTarget.dataset.value
-    const preference = this.itemTarget.dataset.preference
     const csrfToken = document.querySelector("[name='csrf-token']").content
     fetch("/bookmarks", {
       method: "POST",
@@ -49,5 +50,11 @@ export default class extends Controller {
         watch_status: "like"
       })
     })
+  }
+
+  redirect(){
+    if (this.animesTarget.children.length === 1){
+      window.location.href = "/lists/liked";
+    }
   }
 }

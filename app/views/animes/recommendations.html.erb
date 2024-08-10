@@ -1,18 +1,20 @@
-<div class="anime-container" data-controller="anime-vote">
-  <% @animes.each do |anime| %>
-    <div class="item" data-preference="none" data-value="<%= anime.id %>" data-anime-vote-target="item" data-action="animationend->anime-vote#animationDone">
-      <div class="anime-card">
-        <div class="recommendation-anime-img">
-          <%= image_tag anime.picture_url, alt: "A nice poster of the anime to show the main characters and themes of the show." %>
-        </div>
-        <div class="anime-card-body">
-          <h2><%= anime.title %></h2>
-          <strong><span><%= anime.rating %></span></strong>
-          <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+<div class="anime-container" data-controller="anime-vote" data-likes=0  >
+  <div data-anime-vote-target="animes">
+    <% @animes.each do |anime| %>
+      <div class="item"  data-value="<%= anime.id %>" data-anime-vote-target="item" data-action="animationend->anime-vote#animationDone">
+        <div class="anime-card">
+          <div class="recommendation-anime-img">
+            <%= image_tag anime.picture_url, alt: "A nice poster of the anime to show the main characters and themes of the show." %>
+          </div>
+          <div class="anime-card-body">
+            <h2><%= anime.title %></h2>
+            <strong><span><%= anime.rating %></span></strong>
+            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
   <footer>
     <button class="vote-btn" data-anime-vote-target="dislike" data-action="click->anime-vote#dislike">
       <i class="fa-solid fa-face-frown"></i>
