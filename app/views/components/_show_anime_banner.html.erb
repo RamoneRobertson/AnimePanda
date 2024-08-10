@@ -2,7 +2,7 @@
 <div class="text-light" style="background-image: linear-gradient(
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
-    ), url('<%= image_path random_anime.picture_url %>'); background-position: center; background-size: cover; height: 15vh;">
-  <p style="font-size: 2rem; padding: 16px;"><%= random_anime.title %></p>
+    ), url('<%= image_path random_anime.picture_url %>'); background-position: center; background-size: cover; min-height: 15vh;">
+  <p style="font-size: 2rem; padding: 16px; margin: 0;"><%= random_anime.title %></p>
   <%# image_tag @animes.first.picture_url %>
 </div>
