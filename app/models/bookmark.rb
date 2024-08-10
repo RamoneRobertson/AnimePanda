@@ -7,7 +7,7 @@ class Bookmark < ApplicationRecord
   validates :anime, uniqueness: { scope: :list }, on: :create
 
   # Added three status on watch_status attribute
-  enum watch_status: [ :watching, :completed, :dropped, :recommended ]
+  enum watch_status: [ :watching, :completed, :dropped, :recommended, :like ]
 
   # Added two status on preferences attributes
   enum preference: [ :liked, :dislike ]
