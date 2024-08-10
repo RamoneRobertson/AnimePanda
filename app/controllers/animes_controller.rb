@@ -1,11 +1,13 @@
 class AnimesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
   def recommendations
+    @skip_panda = true
     @user = current_user
     @animes = Anime.first(5)
+    @liked = Like.new(list_type: 3)
     @recommend_list = @user.list.find_by(list_type: 'recommendations')
     @animes.each do |anime|
-      new_bookmark = Bookmark.new(watch_status: :recommended, anime: anime, list: @recommend_list)
+      new_bookmark = Bookmark.new(watch_status: :recommended, anime: anime, list: @recommend_list, preference: nil)
       new_bookmark.save
     end
   end

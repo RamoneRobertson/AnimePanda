@@ -22,10 +22,18 @@ class BookmarksController < ApplicationController
 
   def update
     @recommend_list = current_user.list.find_by(list_type: 'recommendations')
-    bookmark = Bookmark.find(params[:id])
-    bookmark.update(bookmark_params)
+    @bookmarks = @recommend_list.bookmarks
+    @bookmark = Bookmark.find(params[:id])
+    if @recommend_list.nil?
+      redirect_to root_path
+    end
+
     respond_to do |format|
-      format.html { redirect_to recommendations_animes_path }
+      # if @bookmark.update(bookmark_params)
+      #   @bookmarks.reject{|bookmark| Bookmark.where("id = ?, #{bookmark.id}")}
+      # end
+
+      format.html { redirect_to recommendations_animes_path}
       format.text { render :recommendations }
     end
   end
