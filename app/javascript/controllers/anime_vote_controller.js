@@ -46,7 +46,7 @@ export default class extends Controller {
         "Accept": "text/plain" },
       body: JSON.stringify({
         anime_id: `${animeId}`,
-        watch_status: "liked"
+        watch_status: "like"
       })
     })
   }
