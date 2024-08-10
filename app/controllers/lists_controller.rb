@@ -23,7 +23,7 @@ class ListsController < ApplicationController
       else
         @bookmarks = @animes_lists.all
       end
-    end
+  end
 
   def hide_navbar
     @hide_navbar = true
