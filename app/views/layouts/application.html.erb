@@ -11,6 +11,8 @@
   <body>
     <% if current_page?(root_url) %>
       <%= render "components/show_anime_banner" %>
+    <% else %>
+      <%# <div style="height: 10vh; background-color: var(--panda-white);"></div> %>
     <% end %>
     <% unless @hide_navbar %>
       <%# render "shared/navbar" %>
