@@ -22,5 +22,5 @@ Rails.application.routes.draw do
   resources :bookmarks, only: [:create, :update, :destroy]
 
   get "lists/watchlist", to: "lists#show_watchlist"
-  get "lists/liked", to: "list#show_liked"
+  get "lists/liked", to: "lists#show_liked"
 end
