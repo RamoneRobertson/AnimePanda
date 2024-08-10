@@ -11,8 +11,11 @@ export default class extends Controller {
   fire(){
     // console.log(this.navToggleTarget);
     this.navToggleTarget.classList.toggle("nav-toggle-active");
-    this.innerElementsTargets.forEach(element => {
-      element.classList.toggle("d-none");
-    });
+
+    setTimeout(() => {
+      this.innerElementsTargets.forEach(element => {
+        element.classList.toggle("d-none");
+      });
+    }, 300);
   }
 }
