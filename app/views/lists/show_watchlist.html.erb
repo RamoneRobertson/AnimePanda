@@ -34,7 +34,7 @@
                   <% if list_animes.anime.picture_url.nil? %>
                     <p>Image: Image Empty</p>
                   <% else %>
-                    <img src=<%="#{list_animes.anime.picture_url}" %> class="anime-img">
+                    <img src=<%="#{list_animes.anime.picture_url}" %> class="anime-image">
                   <% end %>
                   <div class="card-product-infos">
                     <strong><h2><%= list_animes.anime.title %></h2></strong>
@@ -47,8 +47,8 @@
                     <p class= "pt-1">Rank: <%= list_animes.anime.rank %></p>
                   </div>
                 </div>
-                <hr class="card-divider">
               </div>
+                <hr class="card-divider">
             <% end  %>
       <% end %>
   </div>

@@ -5,6 +5,11 @@ class ListsController < ApplicationController
     hide_navbar
   end
 
+  def show_liked
+    @liked_lists = current_user.liked_list.bookmarks
+    hide_navbar
+  end
+
   private
 
   def filter_status
@@ -18,7 +23,7 @@ class ListsController < ApplicationController
       else
         @bookmarks = @animes_lists.all
       end
-    end
+  end
 
   def hide_navbar
     @hide_navbar = true

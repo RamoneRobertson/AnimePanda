@@ -8,4 +8,8 @@ class User < ApplicationRecord
   def watchlist
     lists.watchlist.first
   end
+
+  def liked_list
+    lists.liked.first
+  end
 end
