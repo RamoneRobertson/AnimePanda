@@ -8,11 +8,14 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
+
   <body>
     <% if current_page?(root_url) %>
       <%= render "components/show_anime_banner" %>
     <% end %>
-    <%= render "shared/navbar" %>
+    <% unless @hide_navbar %>
+      <%= render "shared/navbar" %>
+    <% end %>
     <%= render "shared/flashes" %>
     <%= yield %>
     <%= render "components/panda_button" unless @skip_panda %>
