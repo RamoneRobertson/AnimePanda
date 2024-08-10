@@ -8,12 +8,18 @@ class BookmarksController < ApplicationController
         @bookmark = Bookmark.new(bookmark_params)
         update_list(@bookmark)
         @bookmark.save
+        @anime = Anime.find(bookmark_params[:anime_id])
+        if @bookmark.list.list_type == 'watchlist'
+          flash[:notice] = "Anime is added to your watchlist"
+          redirect_to @anime
+        end
       # else
       #   @bookmark = @user.lists.recommendations[0].bookmarks.find_by(bookmark_params["anime_id"])
       #   update_to_watching(@bookmark)
       #   update_list(@bookmark)
       #   @bookmark.save
       # end
+
   end
 
   # def update_to_watching(bookmark)
