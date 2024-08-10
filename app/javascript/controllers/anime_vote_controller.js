@@ -28,7 +28,6 @@ export default class extends Controller {
 
     if(event.animationName === 'dislike'){
       this.itemTarget.classList.remove("nope")
-      this.#updatePreference();
     }
 
     if(event.animationName == 'like' || event.animationName == 'dislike'){
