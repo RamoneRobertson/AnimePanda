@@ -54,7 +54,7 @@ export default class extends Controller {
 
   redirect(){
     if (this.animesTarget.children.length === 1){
-      window.location.href = "/lists/liked";
+      window.location.href = " /lists/liked";
     }
   }
 }
