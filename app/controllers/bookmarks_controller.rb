@@ -16,20 +16,25 @@ class BookmarksController < ApplicationController
       # end
   end
 
+
   # def update_to_watching(bookmark)
   #   bookmark.watch_status = "watching"
   # end
 
   def update_list(bookmark)
     @user = current_user
-    if @bookmark.watch_status == "watching"
-      @bookmark.list = @user.lists.find_by(list_type: 'watchlist')
-    elsif @bookmark.watch_status == "completed"
-      @bookmark.list = @user.lists.find_by(list_type: 'seen')
-    elsif @bookmark.watch_status == "recommended"
-      @bookmark.list = @user.lists.find_by(list_type: 'recommendations')
+    if @bookmark.preference == "liked"
+      @bookmark.list = @user.lists.find_by(list_type: 'liked')
     else
-      @bookmark.list = @user.lists.find_by(list_type: 'dropped')
+      if @bookmark.watch_status == "watching"
+        @bookmark.list = @user.lists.find_by(list_type: 'watchlist')
+      elsif @bookmark.watch_status == "completed"
+        @bookmark.list = @user.lists.find_by(list_type: 'seen')
+      elsif @bookmark.watch_status == "recommended"
+        @bookmark.list = @user.lists.find_by(list_type: 'recommendations')
+      else
+        @bookmark.list = @user.lists.find_by(list_type: 'dropped')
+      end
     end
   end
 
