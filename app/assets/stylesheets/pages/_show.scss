@@ -1,0 +1,53 @@
+.picture {
+position: relative;
+height: 100%;
+}
+
+.show-anime-img {
+  display: inline-block;
+  width: 100%;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 78%;
+  left: 0;
+  padding-left: 15px;
+  color: white;
+}
+
+.back-arrow {
+  position: absolute;
+  top: -431px;
+
+  i {
+    text-decoration: none;
+    color: white;
+    font-size: xx-large;
+  }
+}
+
+.info {
+  padding-top: 10px;
+}
+
+.show-info {
+  display: flex;
+  gap: 10px;
+  padding-top: 10px;
+  font-size: larger;
+}
+
+.synopsis {
+  padding: 15px;
+  position: relative;
+  min-height: 200px;
+}
+
+.sticky-button-container {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 10px;
+  z-index: 1000;
+  right: 5;
+}

@@ -1,24 +1,34 @@
-<div class="title d-flex gap-3">
-  <i class="fa-solid fa-backward"></i>
-  <h2 class="fw-bold"><%= @anime.title %></h2>
-  <%= button_to bookmarks_path, method: :post, params: { bookmark: { anime_id: @anime.id, watch_status: :watching } } do %>
-    <i class="fa-solid fa-plus"></i>
-  <% end %>
-</div>
-<div class="info d-flex gap-3">
-  <div>
-    <h6 class="fw-bold">Rank: <%= @anime.rank %></h6>
-    <h6 class="fw-bold">Rating: <%= @anime.rating %>/10</h6>
+<div class="show-container">
+  <div class="picture">
+    <%= image_tag @anime.picture_url, class: "show-anime-img" %>
+    <div class="text-overlay">
+      <div class="back-arrow">
+        <div class="title d-flex gap-3">
+          <%= link_to root_path do %>
+            <i class="fa-solid fa-arrow-left text-decoration-none"></i>
+           <% end %>
+        </div>
+      </div>
+      <div class="info">
+        <h2 class="fw-bold"><%= @anime.title %></h2>
+        <h6 class="fw-bold"><%= @anime.rating %> <i class="fa-solid fa-star rating-star"></i></h6>
+        <div class="show-info d-flex gap-3">
+          <h6 class= "info-border" style="font-size: medium;">Rank: <%= @anime.rank %></h6>
+          <h6 class = "info-border" style="font-size: medium;">Ep <%= @anime.episode_count %></h6>
+          <h6 class = "info-border" style="font-size: medium;"><%= @anime.start_date.year %></h6>
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
+
+  <div class="synopsis">
+    <h2>Synopsis</h2>
+    <%= @anime.synopsis %>
+    <div class="sticky-button-container">
+      <%= button_to bookmarks_path, method: :post, class: "btn btn-primary sticky-button", params: { bookmark: { anime_id: @anime.id, watch_status: :watching } } do %>
+        Add to Watchlist
+      <% end %>
+    </div>
+  </div>
     <h6 class="fw-bold">Studio: <%= @anime.studio %></h6>
-  </div>
-</div>
-<div class="picture">
-  <%= image_tag @anime.picture_url %>
-</div>
-<div class="synopsis">
-  <h2 class="fw-bold">Synopsis:</h2>
-  <h4 class="fw-bold">Episodes: <%= @anime.episode_count %></h4>
-  <%= @anime.synopsis %>
 </div>

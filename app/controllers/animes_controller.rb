@@ -23,5 +23,12 @@ class AnimesController < ApplicationController
 
   def show
     @anime = Anime.find(params[:id])
+    hide_navbar
+  end
+
+  private
+
+  def hide_navbar
+    @hide_navbar = true
   end
 end
