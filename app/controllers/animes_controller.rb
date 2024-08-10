@@ -5,7 +5,7 @@ class AnimesController < ApplicationController
     @user = current_user
     @animes = Anime.first(5)
     @likes = []
-    @recommend_list = @user.list.find_by(list_type: 'recommendations')
+    @recommend_list = @user.lists.find_by(list_type: 'recommendations')
     # If the user swip
     @animes.each do |anime|
       new_bookmark = Bookmark.new(watch_status: :recommended, anime: anime, list: @recommend_list)
