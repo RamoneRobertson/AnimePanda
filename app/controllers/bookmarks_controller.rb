@@ -22,6 +22,7 @@ class BookmarksController < ApplicationController
 
   end
 
+
   # def update_to_watching(bookmark)
   #   bookmark.watch_status = "watching"
   # end
