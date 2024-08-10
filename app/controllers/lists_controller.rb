@@ -8,7 +8,6 @@ class ListsController < ApplicationController
   def show_liked
     @liked_lists = current_user.liked_list.bookmarks
     hide_navbar
-    console
   end
 
   private
