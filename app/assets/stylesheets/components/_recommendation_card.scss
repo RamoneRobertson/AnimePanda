@@ -17,6 +17,8 @@
     height: auto;
     object-fit: contain;
     object-position: center;
+    padding: 8px;
+    border-radius: 16px;
   }
 }
 
@@ -69,7 +71,7 @@
 .anime-card-body {
   background: transparent;
   height: 20%;
-  padding-top: 8px;
+  padding: 8px;
   border: transparent;
   box-shadow: none;
 }
