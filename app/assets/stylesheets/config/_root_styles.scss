@@ -6,3 +6,10 @@
 .box-shadow-effect{
   box-shadow: 0px 0px 8px 0px #0000002b;
 }
+
+a {
+  text-decoration: none; /* Removes underline */
+  color: inherit; /* Makes the link color inherit from its parent element */
+  background: none; /* Removes any background */
+  border: none; /* Removes any border */
+}
