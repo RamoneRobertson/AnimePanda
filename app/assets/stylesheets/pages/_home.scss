@@ -72,3 +72,11 @@
 .carousel-indicators button{
   background-color: var(--panda-green) !important;
 }
+
+
+a {
+  text-decoration: none; /* Removes underline */
+  color: inherit; /* Makes the link color inherit from its parent element */
+  background: none; /* Removes any background */
+  border: none; /* Removes any border */
+}

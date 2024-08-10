@@ -59,9 +59,11 @@
     </div>
     <div class="scrolling-wrapper">
       <% @random_popular_three.each do |item| %>
-        <div class="home-anime-card p-3">
-          <%= render "components/popular_anime_card", item: item %>
-        </div>
+        <%= link_to anime_path(item) do %>
+          <div class="home-anime-card p-3">
+            <%= render "components/popular_anime_card", item: item %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -78,13 +80,17 @@
     <div class="top-cards rounded-4 my-3 box-shadow-effect" style="background-color: var(--panda-white);">
       <% @top_anime.each_with_index do |anime, index| %>
         <% if index == @top_anime.size - 1  %>
-          <div>
-            <%= render "components/anime_top_card", anime: anime, index: index %>
-          </div>
+          <%= link_to anime_path(anime) do %>
+            <div>
+              <%= render "components/anime_top_card", anime: anime, index: index %>
+            </div>
+          <% end %>
         <% else %>
-          <div class="border-bottom">
-            <%= render "components/anime_top_card", anime: anime, index: index %>
-          </div>
+          <%= link_to anime_path(anime) do %>
+            <div class="border-bottom">
+              <%= render "components/anime_top_card", anime: anime, index: index %>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
       <%# render "components/anime_top_card", anime: @top_anime.last %>

@@ -1,7 +1,9 @@
 <div class="p-3">
   <div class="title d-flex gap-3">
-    <%= link_to lists_liked_path do %>
-      <i class="fa-solid fa-backward"></i>
+    <% if !@liked.animes.empty? %>
+      <%= link_to lists_liked_path do %>
+        <i class="fa-solid fa-backward"></i>
+      <% end %>
     <% end %>
     <h2 class="fw-bold"><%= @anime.title %></h2>
     <%= button_to bookmarks_path, method: :post, params: { bookmark: { anime_id: @anime.id, watch_status: :watching } } do %>
