@@ -1,0 +1,34 @@
+<div class="page-name">
+  <%= link_to animes_recommendations_path do %>
+    <i class="fa-solid fa-arrow-left text-decoration-none"></i>
+  <% end %>
+  <h1>Liked Anime</h1>
+</div>
+
+<div class="card-product">
+  <% @liked_lists.each do |liked_animes| %>
+    <div class="anime-item mb-3">
+      <div class="card-design">
+        <%= link_to anime_path(liked_animes.anime) do %>
+          <div class="anime-item-content">
+            <% if liked_animes.anime.picture_url.nil? %>
+              <p>Image: Image Empty</p>
+            <% else %>
+              <img src="<%= liked_animes.anime.picture_url %>" class="anime-image">
+            <% end %>
+            <div class="card-product-infos">
+              <strong><h2><%= liked_animes.anime.title %></h2></strong>
+              <div class="details-info">
+                <div class="info-border">Ep <%= liked_animes.anime.episode_count %></div>
+                <div class="info-border"><%= liked_animes.anime.start_date.year %></div>
+              </div>
+              <p class="pb-3"><%= liked_animes.anime.rating %> <i class="fa-solid fa-star rating-star"></i></p>
+              <p class="pt-1">Rank: <%= liked_animes.anime.rank %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+        <hr class="card-divider">
+  <% end %>
+</div>

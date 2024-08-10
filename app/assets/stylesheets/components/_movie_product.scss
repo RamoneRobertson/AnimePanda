@@ -51,6 +51,7 @@
   align-items: stretch;
   width: 100%;
   padding: 10px 0;
+  overflow: hidden;
 }
 
 .anime-image {
@@ -82,13 +83,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    width: 100%;
+    max-width: 100%;
   }
 
   p {
     margin: 0;
   }
 }
-
 
 .details-info {
   display: flex;
@@ -139,8 +141,26 @@
   border: 0;
   border-top: 1px solid black;
   margin: 16px 0;
+  width: calc(100% - 32px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .rating-star {
   color: #efa924;
+}
+
+.card-design {
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+  color: black;
+}
+
+.card-design a {
+  text-decoration: none;
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
