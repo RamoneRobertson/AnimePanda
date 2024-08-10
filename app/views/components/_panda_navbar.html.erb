@@ -1,8 +1,16 @@
-<div data-controller="nav-sticky" class="panda-nav">
+<div data-controller="navbar-toggle nav-sticky" class="panda-nav">
+  <div data-navbar-toggle-target="navToggle" class="nav-toggle-bar d-flex flex-column">
+    <div class="p-3">
+      <div data-navbar-toggle-target="innerElements" class="pb-3 d-none"><%= link_to "Home", root_path, class: "text-decoration-none text-dark" %></div>
+      <div data-navbar-toggle-target="innerElements" class="d-none"><%= link_to "Watchlist", lists_watchlist_path, class: "text-decoration-none text-dark" %></div>
+    </div>
+  </div>
   <div class="back-part"></div>
   <div class="front-part d-flex gap-1">
     <div class="left-nav-section flex-grow-1"></div>
-    <div class="middle-nav-section"><%= image_tag "PandaLogo.png", width: "45px" %></div>
+    <div data-action="click->navbar-toggle#fire" class="middle-nav-section">
+      <%= image_tag "PandaLogo.png", width: "45px", class: "nav-interaction" %>
+    </div>
     <div class="right-nav-section flex-grow-1"></div>
   </div>
 </div>
