@@ -1,7 +1,10 @@
 .pop-anime-card{
   overflow: hidden;
-  box-shadow: 1px 1px 8px 0px #00000047;
+  // box-shadow: 1px 1px 8px 0px #00000047;
   position: relative;
+  // background-color: var(--panda-white);
+  background-color: var(--panda-white);
+  width: 300px;
 }
 
 .pop-image{
@@ -33,5 +36,22 @@
   .episodes{
     font-size: 0.9rem;
     margin-left: 20px;
+    color: var(--panda-green);
+  }
+
+  p{
+    text-wrap: wrap;
+  }
+
+  .anime-synopsis{
+    color: #B7B7B7;
+  }
+
+  .fa-star{
+    color: #F7D06B;
+  }
+
+  .fa-heart{
+    color: #FFB7C5;
   }
 }

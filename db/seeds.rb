@@ -116,6 +116,10 @@ new_reco_list = List.new(list_type: :recommendations)
 new_reco_list.user = new_user
 new_reco_list.save
 
+new_liked_list = List.new(list_type: :liked)
+new_liked_list.user = new_user
+new_liked_list.save
+
 new_watch_list = List.new()
 new_watch_list.user = new_user
 new_watch_list.save
@@ -124,5 +128,5 @@ puts "There is a total of #{Anime.count} animes in the database"
 puts "There is a total of #{User.count} users in the database"
 puts "There is a total of #{List.count} lists in the database"
 
-puts JSON.pretty_generate(user_info)
-puts user_info["data"]
+# puts JSON.pretty_generate(user_info)
+# puts user_info["data"]

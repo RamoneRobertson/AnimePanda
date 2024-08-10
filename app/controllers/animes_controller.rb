@@ -5,7 +5,7 @@ class AnimesController < ApplicationController
     @user = current_user
     @animes = Anime.first(5)
     @likes = []
-    @recommend_list = @user.list.find_by(list_type: 'recommendations')
+    @recommend_list = @user.lists.find_by(list_type: 'recommendations')
     # If the user swip
     @animes.each do |anime|
       new_bookmark = Bookmark.new(watch_status: :recommended, anime: anime, list: @recommend_list)
@@ -16,8 +16,9 @@ class AnimesController < ApplicationController
 
   def index
     @animes = Anime.all
-    best_anime = @animes.sort_by {|anime| anime.rating}.reverse
+    best_anime = @animes.sort_by {|anime| anime.popularity}.reverse
     @random_popular_three = best_anime[0..5].sample(3)
+    @top_anime = @animes.sort_by {|anime| anime.rating }.reverse[0..3]
   end
 
   def show
