@@ -35,16 +35,19 @@ export default class extends Controller {
   }
 
   #updatePreference(){
-    const bookmarkId = this.itemTarget.dataset.value
+    const animeId = this.itemTarget.dataset.value
     const preference = this.itemTarget.dataset.preference
     const csrfToken = document.querySelector("[name='csrf-token']").content
-    fetch(`/bookmarks/${bookmarkId}`, {
-      method: "PATCH",
+    fetch("/bookmarks", {
+      method: "POST",
       headers: {
         "X-CSRF-Token": csrfToken,
         "Content-Type": "application/json",
         "Accept": "text/plain" },
-      body: JSON.stringify({preference: `${preference}`})
+      body: JSON.stringify({
+        anime_id: `${animeId}`,
+        watch_status: "liked"
+      })
     })
   }
 }

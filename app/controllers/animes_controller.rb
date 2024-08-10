@@ -4,8 +4,7 @@ class AnimesController < ApplicationController
     @skip_panda = true
     @user = current_user
     @animes = Anime.first(5)
-    @liked = Like.new(list_type: 3)
-    @recommend_list = @user.list.find_by(list_type: 'recommendations')
+    @recommend_list = @user.lists.find_by(list_type: 'recommendations')
     @animes.each do |anime|
       new_bookmark = Bookmark.new(watch_status: :recommended, anime: anime, list: @recommend_list, preference: nil)
       new_bookmark.save

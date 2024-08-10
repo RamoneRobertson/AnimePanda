@@ -1,8 +1,8 @@
 <div class="anime-container" data-controller="anime-vote">
   <% @animes.each do |anime| %>
-    <div class="item" data-preference="none" data-value="<%= anime.bookmarks.first.id %>" data-anime-vote-target="item" data-action="animationend->anime-vote#animationDone">
+    <div class="item" data-preference="none" data-value="<%= anime.id %>" data-anime-vote-target="item" data-action="animationend->anime-vote#animationDone">
       <div class="anime-card">
-        <div class="anime-img">
+        <div class="recommendation-anime-img">
           <%= image_tag anime.picture_url, alt: "A nice poster of the anime to show the main characters and themes of the show." %>
         </div>
         <div class="anime-card-body">

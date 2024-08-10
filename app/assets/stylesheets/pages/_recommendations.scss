@@ -5,17 +5,8 @@
   justify-content: center;
   align-items: center;
   margin: 28px auto;
-}
 
-footer {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 16px;
 
-  i {
-    font-size: 28px;
-  }
 }
 
 .vote-btn {
@@ -30,11 +21,12 @@ footer {
   letter-spacing: 2px;
   cursor: pointer;
   box-shadow: 1px 1px 10px 0px black;
-}
-
-button{
   margin-left: 16px;
   margin-right: 16px;
+
+   i{
+    font-size: 32px;
+  }
 }
 
 .item.yes {
