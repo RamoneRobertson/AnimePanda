@@ -1,6 +1,9 @@
 <div class="show-container">
   <div class="picture">
-    <%= image_tag @anime.picture_url, class: "show-anime-img" %>
+    <div class="image-container">
+      <%= image_tag @anime.picture_url, class: "show-anime-img" %>
+      <div class="gradient-overlay"></div>
+    </div>
     <div class="text-overlay">
       <div class="back-arrow">
         <div class="title d-flex gap-3">
@@ -9,26 +12,27 @@
            <% end %>
         </div>
       </div>
-      <div class="info">
-        <h2 class="fw-bold"><%= @anime.title %></h2>
+      <div class="info row">
+        <h2 class="fw-bold text-truncate col-8"><%= @anime.title %></h2>
         <h6 class="fw-bold"><%= @anime.rating %> <i class="fa-solid fa-star rating-star"></i></h6>
         <div class="show-info d-flex gap-3">
-          <h6 class= "info-border" style="font-size: medium;">Rank: <%= @anime.rank %></h6>
-          <h6 class = "info-border" style="font-size: medium;">Ep <%= @anime.episode_count %></h6>
-          <h6 class = "info-border" style="font-size: medium;"><%= @anime.start_date.year %></h6>
+          <h6 class= "info-border" style="font-size: medium; color: white;">Rank: <%= @anime.rank %></h6>
+          <h6 class = "info-border" style="font-size: medium; color: white;">Ep <%= @anime.episode_count %></h6>
+          <h6 class = "info-border" style="font-size: medium; color: white;"><%= @anime.start_date.year %></h6>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="synopsis">
-    <h2>Synopsis</h2>
-    <%= @anime.synopsis %>
-    <div class="sticky-button-container">
-      <%= button_to bookmarks_path, method: :post, class: "btn btn-primary sticky-button", params: { bookmark: { anime_id: @anime.id, watch_status: :watching } } do %>
-        Add to Watchlist
-      <% end %>
+  <div style="background-color: black;">
+    <div class="synopsis">
+      <h2>Synopsis</h2>
+      <%= @anime.synopsis %>
+      <h6 class="fw-bold studio-info">Studio: <%= @anime.studio %></h6>
+      <div class="sticky-button-container">
+        <%= button_to bookmarks_path, method: :post, class: "btn btn-success sticky-button", params: { bookmark: { anime_id: @anime.id, watch_status: :watching } }, style: "width: 195px; border-radius: 10px; background-color: #01b866; color: white;" do %>
+          Add to Watchlist
+        <% end %>
+      </div>
     </div>
   </div>
-    <h6 class="fw-bold">Studio: <%= @anime.studio %></h6>
 </div>
