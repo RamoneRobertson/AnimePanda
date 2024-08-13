@@ -24,9 +24,7 @@ class BookmarksController < ApplicationController
 
   def destroy
     @bookmark = Bookmark.find(params[:id])
-    if @bookmark.delete
-      redirect_to recommendations_animes_path
-    end
+    @bookmark.delete
   end
 
 

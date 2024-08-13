@@ -16,16 +16,16 @@ export default class extends Controller {
   // Add the yes class from _recommendation.scss, runs the like animation
   like(event){
     this.animeTarget.classList.add("yes");
-    this.redirect();
     this.#removeBookmark();
+    this.#redirect();
     this.#updatePreference();
   }
 
   // Add the nope class from _recommendation.scss, runs the dislike animation
   dislike(event){
     this.animeTarget.classList.add("nope");
-    this.redirect();
     this.#removeBookmark();
+    this.#redirect();
   }
 
   // run after the animation is complete
@@ -84,11 +84,11 @@ export default class extends Controller {
 
   // Function redirects to the /lists/liked view by tracking animesTarget.children
   // What should happen after the swiping is done
-  redirect(){
+  #redirect(){
     if (this.animesTarget.children.length === 1){
       this.likeTarget.classList.add('d-none')
       this.dislikeTarget.classList.add('d-none')
-      // window.location.href = " /lists/liked";
+      window.location.href = "/lists/liked";
     }
   }
 }
