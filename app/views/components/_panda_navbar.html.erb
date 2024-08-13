@@ -1,4 +1,4 @@
-<div data-controller="navbar-toggle nav-sticky" class="panda-nav">
+<div data-controller="navbar-toggle nav-sticky" data-navbar-toggle-user-value="<%= !current_user.nil? %>" class="panda-nav">
   <div data-navbar-toggle-target="navToggle" class="nav-toggle-bar d-flex flex-column">
     <div class="p-3">
       <% if current_user.nil? %>

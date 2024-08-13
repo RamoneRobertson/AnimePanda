@@ -60,7 +60,7 @@
     <div class="scrolling-wrapper">
       <% @random_popular_three.each do |item| %>
         <%= link_to anime_path(item) do %>
-          <div class="home-anime-card p-3">
+          <div class="home-anime-card p-3 h-100">
             <%= render "components/popular_anime_card", item: item %>
           </div>
         <% end %>
@@ -69,7 +69,7 @@
   </div>
 </div>
 </div>
-<hr class="dotted-hr">
+<%# <hr class="dotted-hr"> %>
 <%# render "components/wavey_break" %>
 <div class="top-anime">
   <div class="container p-3">

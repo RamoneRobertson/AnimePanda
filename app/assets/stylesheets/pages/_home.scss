@@ -1,5 +1,14 @@
 // Specific CSS for your home-page
 
+.show-anime-banner{
+  background-position: center;
+  background-size: cover;
+  // height: 20vh;
+  min-height: 20vh;
+  // padding: 16px;
+  color: var(--panda-white);
+}
+
 .banner-wave{
   position: relative;
   bottom: 1px;

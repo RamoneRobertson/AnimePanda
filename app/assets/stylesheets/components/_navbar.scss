@@ -25,10 +25,15 @@
     width: 100%;
     background-color: #f5f5f5;
     z-index: 2;
+    border-bottom: 4px solid var(--panda-grey);
   }
-  .nav-toggle-active{
+  .nav-toggle-user-active{
     padding-top: 75px;
     height: 225px;
+  }
+  .nav-toggle-active{
+    padding-top: 60px;
+    height: 125px;
   }
 
   .back-part{

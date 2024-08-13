@@ -1,10 +1,20 @@
 <% random_anime = @animes.sample %>
+<%# random_anime = @animes.sort_by {|anime| anime.rating }.reverse[0..20].sample %>
 <%= link_to anime_path(random_anime) do %>
-  <div class="text-light" style="background-image: linear-gradient(
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0.5)
-      ), url('<%= image_path random_anime.picture_url %>'); background-position: center; background-size: cover; height: 15vh;">
-    <p style="font-size: 2rem; padding: 16px;"><%= random_anime.title %></p>
+  <div class="show-anime-banner" style="background-image: linear-gradient(
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.8)
+      ), url('<%= image_path random_anime.picture_url %>');">
+    <div class="d-flex justify-content-center align-items-center px-5 py-2">
+      <div style="padding: 16px;">
+        <%= image_tag random_anime.picture_url, style: "width: 100px;" %>
+      </div>
+      <div style="padding: 16px;">
+        <h2><strong>Recommended!</strong></h2>
+        <p><%= random_anime.title %></p>
+        <button class="btn sub-button">Check it out</button>
+      </div>
+    </div>
     <%# image_tag @animes.first.picture_url %>
   </div>
 <% end %>
