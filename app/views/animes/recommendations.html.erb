@@ -1,29 +1,46 @@
-<div class="anime-container rounded-5" data-controller="anime-vote" data-likes=0  >
-  <div data-anime-vote-target="animes">
-    <% @animes.each do |anime| %>
-      <div class="item rounded-5"  data-value="<%= anime.id %>" data-anime-vote-target="item" data-action="animationend->anime-vote#animationDone">
-        <div class="anime-card rounded-5">
-          <div class="recommendation-anime-img">
-            <%= image_tag anime.picture_url, alt: "A nice poster of the anime to show the main characters and themes of the show." %>
-          </div>
-          <div class="anime-card-body">
-            <h2><%= anime.title %></h2>
-            <strong><span><%= anime.rating %></span></strong>
+<%# Update data likes every time the user hits like. send as params for the likes show page %>
+<div class="reco-container" data-controller="anime-vote" data-likes=0>
+  <%# the reco container holds all the animes for the anime-vote animes target %>
+  <div class="reco-container" data-anime-vote-target="animes">
+    <%# Getting the recommend_list from the animes controller %>
+    <% @recommend_list.bookmarks.each do |bookmark| %>
+      <div class="reco-anime" data-anime-vote-target="anime" data-anime="<%= bookmark.anime_id %>" data-bk="<%= bookmark.id %>">
+        <div class="reco-img fade-img">
+          <%= image_tag bookmark.anime.picture_url, alt: "A poster of the bookmark.anime displaying the characters and overall theme", class: "fade-img" %>
+        </div>
+        <div class="reco-details">
+          <div class="reco-header">
+            <h3><%= bookmark.anime.title %></h3>
             <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+            <span><%= bookmark.anime.rating %>/10</span>
+          </div>
+          <div class="reco-synopsis fade-img">
+            <h4>Synopsis</h4>
+            <p><%= bookmark.anime.synopsis %></p>
+          </div>
+          <div class="green-expand-link">
+            <p>Read More</p>
+          </div>
+          <div class="reco-info">
+            <h4>Info</h4>
+            <p>Episodes: <%= bookmark.anime.episode_count %></p>
+            <p>Studio <%= bookmark.anime.studio %></p>
+            <p>Rank: <%= bookmark.anime.rank %></p>
+            <p>Popularity: <%= bookmark.anime.popularity %></p>
+            <p>Premiered: <%= bookmark.anime.start_date.strftime("%B %d, %Y") %></p>
           </div>
         </div>
       </div>
     <% end %>
   </div>
-  <footer>
-    <button class="vote-btn" data-anime-vote-target="dislike" data-action="click->anime-vote#dislike">
-      <i class="fa-solid fa-face-frown"></i>
+  <div class="reco-buttons">
+    <%# data action to run the dislike function in anime vote %>
+    <button id="dislike-btn" data-anime-vote-target="dislike" data-action="click->anime-vote#dislike">
+      <i class="fa-solid fa-x"></i>
     </button>
-    <button class="vote-btn">
-      <i class="fa-solid fa-house"></i>
+    <%# data action to run the like function in anime vote %>
+    <button id="like-btn" data-anime-vote-target="like" data-action="click->anime-vote#like">
+      <i class="fa-solid fa-heart"></i>
     </button>
-    <button class="vote-btn" data-anime-vote-target="like" data-action="click->anime-vote#like">
-      <i class="fa-solid fa-face-smile"></i>
-    </button>
-  </footer>
+  </div>
 </div>

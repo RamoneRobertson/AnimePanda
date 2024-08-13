@@ -1,0 +1,39 @@
+.reco-buttons{
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 0px;
+  z-index: 10;
+  width: 100%;
+  background: transparent;
+}
+
+#like-btn{
+  width: 50%;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgb(55,160,137);
+  background: linear-gradient(297deg, rgba(55,160,137,1) 16%, rgba(1,184,102,1) 50%);
+  color: white;
+  border: 0;
+  margin: 8px;
+
+  i{
+    font-size: 28px;
+  }
+}
+
+#dislike-btn{
+  width: 50%;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 0;
+  background-color: rgba(78, 93, 107, 0.5);
+  margin: 8px;
+
+  i{
+    font-size: 28px;
+  }
+}

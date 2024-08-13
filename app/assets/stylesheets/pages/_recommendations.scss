@@ -1,39 +1,102 @@
-.anime-container {
-  width: 100%;
+.reco-container{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
-
-
-}
-
-.vote-btn {
-  width: 72px;
-  height: 72px;
-  text-decoration: none;
-  border-radius: 50%;
-  background: linear-gradient(#df3c0b, #e27a5a);
-  border: 1px solid rgba(10, 10, 10, 0.1);
-  backdrop-filter: blur(30px);
+  background: #000;
   color: #FFFFFF;
-  letter-spacing: 2px;
-  cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
-  margin-left: 16px;
-  margin-right: 16px;
+  overflow: scroll;
 
-   i{
-    font-size: 32px;
+  img{
+    width: 100%;
+  }
+
+  .reco-img{
+    object-fit: fill;
+  }
+
+  .reco-header{
+    text-align: center;
+  }
+
+  .reco-info {
+    padding: 16px;
+    background: #000;
+    P {
+      color: #babbb6;
+    }
+  }
+
+  .reco-synopsis {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    text-wrap: wrap;
+    -webkit-line-clamp: 5;
+    padding: 16px;
+
+    h4 {
+      color: #FFFFFF;
+    }
+
+    P {
+      color: #babbb6;
+    }
   }
 }
 
-.item.yes {
+.fade-img {
+  position: relative;
+}
+
+.fade-img:after {
+  content:"";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #000 100%);
+  height: 40%;
+}
+
+.reco-anime {
+
+  &:nth-child(1) {
+    z-index: 1;
+    position: relative;
+  }
+
+  &:nth-child(2) {
+    z-index: 0;
+    position: absolute;
+    display: none;
+  }
+
+  &:nth-child(3) {
+    z-index: -1;
+    position: absolute;
+    display: none;
+  }
+
+
+  &:nth-child(4) {
+    z-index: -2;
+    position: absolute;
+    display: none;
+  }
+
+  &:nth-child(5) {
+    z-index: -3;
+    position: absolute;
+    display: none;
+  }
+}
+
+.reco-anime.yes {
   animation: like 0.5s ease-out;
 }
 
-.item.nope {
+.reco-anime.nope {
   animation: dislike 0.5s ease-out;
 }
 
@@ -56,5 +119,12 @@
   to {
     transform: rotate(-30deg) translateX(-30rem);
     opacity: 0;
+  }
+}
+
+.green-expand-link{
+  text-align: center;
+  p {
+    color: var(--panda-green);
   }
 }
