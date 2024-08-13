@@ -4,7 +4,7 @@
   <div class="reco-container" data-anime-vote-target="animes">
     <%# Getting the recommend_list from the animes controller %>
     <% @recommend_list.bookmarks.each do |bookmark| %>
-      <div class="reco-anime" data-anime-vote-target="anime" data-anime="<%= bookmark.anime_id %>" data-bk="<%= bookmark.id %>">
+      <div class="reco-anime" data-anime-vote-target="anime" data-anime="<%= bookmark.anime_id %>" data-bk="<%= bookmark.id %>" data-action="animationend->anime-vote#animationDone">
         <div class="reco-img fade-img">
           <%= image_tag bookmark.anime.picture_url, alt: "A poster of the bookmark.anime displaying the characters and overall theme", class: "fade-img" %>
         </div>

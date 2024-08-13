@@ -14,18 +14,18 @@ export default class extends Controller {
 
   }
   // Add the yes class from _recommendation.scss, runs the like animation
-  like(){
+  like(event){
     this.animeTarget.classList.add("yes");
-    // this.redirect();
-    // this.#removeBookmark();
-    // this.#updatePreference();
+    this.redirect();
+    this.#removeBookmark();
+    this.#updatePreference();
   }
 
   // Add the nope class from _recommendation.scss, runs the dislike animation
-  dislike(){
+  dislike(event){
     this.animeTarget.classList.add("nope");
-    // this.redirect();
-    // this.#removeBookmark();
+    this.redirect();
+    this.#removeBookmark();
   }
 
   // run after the animation is complete
