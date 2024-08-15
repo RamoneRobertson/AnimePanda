@@ -1,29 +1,7 @@
-<div class="anime-container rounded-5" data-controller="anime-vote" data-likes=0  >
+<%# Update data likes every time the user hits like. send as params for the likes show page %>
+<div class="reco-container" data-controller="anime-vote" data-likes=0>
   <div data-anime-vote-target="animes">
-    <% @animes.each do |anime| %>
-      <div class="item rounded-5"  data-value="<%= anime.id %>" data-anime-vote-target="item" data-action="animationend->anime-vote#animationDone">
-        <div class="anime-card rounded-5">
-          <div class="recommendation-anime-img">
-            <%= image_tag anime.picture_url, alt: "A nice poster of the anime to show the main characters and themes of the show." %>
-          </div>
-          <div class="anime-card-body">
-            <h2><%= anime.title %></h2>
-            <strong><span><%= anime.rating %></span></strong>
-            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <%= render "components/reco_anime" %>
   </div>
-  <footer>
-    <button class="vote-btn" data-anime-vote-target="dislike" data-action="click->anime-vote#dislike">
-      <i class="fa-solid fa-face-frown"></i>
-    </button>
-    <button class="vote-btn">
-      <i class="fa-solid fa-house"></i>
-    </button>
-    <button class="vote-btn" data-anime-vote-target="like" data-action="click->anime-vote#like">
-      <i class="fa-solid fa-face-smile"></i>
-    </button>
-  </footer>
+  <%= render "components/reco_buttons" %>
 </div>
