@@ -1,7 +1,7 @@
 .reco-buttons{
   display: flex;
   flex-direction: row;
-  position: fixed;
+  position: sticky;
   bottom: 0px;
   z-index: 10;
   width: 100%;

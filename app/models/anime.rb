@@ -10,4 +10,6 @@ class Anime < ApplicationRecord
 
   # rank, popularity and episode count must be a numerical integer value
   validates :rank, :popularity, :episode_count, numericality: { only_integer: true }
+  acts_as_taggable_on :tags
+  acts_as_taggable_on :genres
 end
