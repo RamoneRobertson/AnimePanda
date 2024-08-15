@@ -8,13 +8,20 @@ class BookmarksController < ApplicationController
         @bookmark = Bookmark.new(bookmark_params)
         update_list(@bookmark)
         @bookmark.save
+        @anime = Anime.find(bookmark_params[:anime_id])
+        if @bookmark.list.list_type == 'watchlist'
+          flash[:notice] = "Anime is added to your watchlist"
+          redirect_to @anime
+        end
       # else
       #   @bookmark = @user.lists.recommendations[0].bookmarks.find_by(bookmark_params["anime_id"])
       #   update_to_watching(@bookmark)
       #   update_list(@bookmark)
       #   @bookmark.save
       # end
+
   end
+
 
   # def update_to_watching(bookmark)
   #   bookmark.watch_status = "watching"
@@ -28,6 +35,8 @@ class BookmarksController < ApplicationController
       @bookmark.list = @user.lists.find_by(list_type: 'seen')
     elsif @bookmark.watch_status == "recommended"
       @bookmark.list = @user.lists.find_by(list_type: 'recommendations')
+    elsif @bookmark.watch_status == "like"
+      @bookmark.list = @user.lists.find_by(list_type: 'liked')
     else
       @bookmark.list = @user.lists.find_by(list_type: 'dropped')
     end

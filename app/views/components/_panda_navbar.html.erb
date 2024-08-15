@@ -1,0 +1,21 @@
+<div data-controller="navbar-toggle nav-sticky" class="panda-nav">
+  <div data-navbar-toggle-target="navToggle" class="nav-toggle-bar d-flex flex-column">
+    <div class="p-3">
+      <% if current_user.nil? %>
+        <div data-navbar-toggle-target="innerElements" class="d-none"><%= link_to "Log in", new_user_session_path, class: "text-decoration-none text-dark" %></div>
+      <% else %>
+        <div data-navbar-toggle-target="innerElements" class="pb-3 d-none"><%= link_to "Home", root_path, class: "text-decoration-none text-dark" %></div>
+        <div data-navbar-toggle-target="innerElements" class="pb-3 d-none"><%= link_to "Watchlist", lists_watchlist_path, class: "text-decoration-none text-dark" %></div>
+        <div data-navbar-toggle-target="innerElements" class="pb-3 d-none"><%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "text-decoration-none text-dark" %></div>
+      <% end %>
+    </div>
+  </div>
+  <div class="back-part"></div>
+  <div class="front-part d-flex gap-1">
+    <div class="left-nav-section flex-grow-1"></div>
+    <div data-action="click->navbar-toggle#fire" class="middle-nav-section">
+      <%= image_tag "PandaLogo.png", width: "45px", class: "nav-interaction" %>
+    </div>
+    <div class="right-nav-section flex-grow-1"></div>
+  </div>
+</div>

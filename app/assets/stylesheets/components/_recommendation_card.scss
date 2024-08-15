@@ -15,16 +15,20 @@
   img {
     width: 100%;
     height: auto;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
+    padding: 8px;
+    border-radius: 16px;
   }
 }
 
-
 .item {
   margin: 16px;
-  background: linear-gradient(#F3904F, #3B4371);
+  // background: linear-gradient(#F3904F, #3B4371);
+  background: linear-gradient(#01b866, #134E5E);
   // For the swipe animation we want to rotate the card around the bottom
   transform-origin: 50% 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   &:nth-child(1) {
     z-index: 1;
@@ -35,7 +39,8 @@
   &:nth-child(2) {
     z-index: 0;
     position: absolute;
-    transform: translateY(-36px);
+    top: 67px;
+    display: none;
   }
 
   &:nth-child(3) {
@@ -58,7 +63,7 @@
   }
 }
 
-.anime-img {
+.recommendation-anime-img {
   height: 80%;
   overflow: hidden;
 }
@@ -66,7 +71,7 @@
 .anime-card-body {
   background: transparent;
   height: 20%;
-  padding-top: 8px;
+  padding: 8px;
   border: transparent;
   box-shadow: none;
 }
