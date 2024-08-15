@@ -1,14 +1,15 @@
 <div class="p-2 d-flex">
-  <div class="top_anime_pic rounded-3" style="overflow: hidden;">
+  <div class="top_anime_pic rounded-3">
     <%= image_tag anime.picture_url, width: "50px" %>
   </div>
   <div class="top_anime_info d-flex flex-grow-1">
     <div class="p-2 flex-grow-1">
       <p style="font-weight: bold;"><%= anime.title %></p>
+      <p class="top-anime-studio">by <%= anime.studio %></p>
     </div>
-    <div class="d-flex align-items-end gap-1" style="color: var(--panda-sub);">
-      <p style="margin: 0;"><i class="fa-solid fa-ranking-star"></i></p>
-      <p style="margin: 0;"><%= index + 1 %></p>
+    <div class="top-anime-ranking d-flex align-items-end gap-1">
+      <p><i class="fa-solid fa-ranking-star"></i></p>
+      <p><%= index + 1 %></p>
     </div>
   </div>
 </div>
