@@ -3,10 +3,42 @@
 .show-anime-banner{
   background-position: center;
   background-size: cover;
-  // height: 20vh;
-  min-height: 20vh;
-  // padding: 16px;
   color: var(--panda-white);
+  position: relative;
+  transition: height 1s;
+}
+
+.show-banner-remove-button{
+  position: absolute;
+  right: 9px;
+  top: 3px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--panda-grey);
+}
+
+.banner-dropdown-toggle{
+  position: absolute;
+  right: 11px;
+  bottom: 4px;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 1s;
+  color: var(--panda-green);
+}
+.banner-dropdown-toggle.active{
+  transform: rotate(180deg);
+}
+
+.show-banner-trailer{
+  height: 0;
+  // height: 190px;
+  transition: all 1s;
+  padding: 0;
+}
+.show-banner-trailer.show{
+  height: 190px;
+  padding: 16px 0;
 }
 
 .banner-wave{

@@ -5,7 +5,11 @@
     <h4><%= item.title %></h4>
     <div class="episodes d-flex gap-2">
       <p><i class="fa-solid fa-layer-group"></i></p>
-      <p><strong><%= item.episode_count %></strong> episode<%= "s" if item.episode_count > 1 %></p>
+      <% if item.episode_count == 0 %>
+        <p>No episodes available yet.</p>
+      <% else %>
+        <p><strong><%= item.episode_count %></strong> episode<%= "s" if item.episode_count > 1 %></p>
+      <% end %>
     </div>
     <p class="anime-synopsis"><i><%= item.synopsis[0..75] %>...</i></p>
     <div class="pop-icons d-flex gap-3">

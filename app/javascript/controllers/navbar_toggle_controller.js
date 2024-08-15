@@ -22,6 +22,6 @@ export default class extends Controller {
       this.innerElementsTargets.forEach(element => {
         element.classList.toggle("d-none");
       });
-    }, 300);
+    }, 200);
   }
 }
