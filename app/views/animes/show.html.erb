@@ -1,4 +1,5 @@
-<div class="show-container">
+<div data-controller="anime">
+  <!-- Image Container -->
   <div class="picture">
     <div class="image-container">
       <%= image_tag @anime.picture_url, class: "show-anime-img" %>
@@ -9,30 +10,51 @@
         <div class="title d-flex gap-3">
           <%= link_to root_path do %>
             <i class="fa-solid fa-arrow-left text-decoration-none"></i>
-           <% end %>
+          <% end %>
         </div>
       </div>
       <div class="info row">
-        <h2 class="fw-bold text-truncate col-8"><%= @anime.title %></h2>
-        <h6 class="fw-bold"><%= @anime.rating %> <i class="fa-solid fa-star rating-star"></i></h6>
+      <% if @anime.title.length > 18 %>
+        <h2 class="fw-bold text-truncate col-8" style="max-width: 100%;" data-anime-target="title"><%= @anime.title %></h2>
+      <% else %>
+        <h2 class="fw-bold" data-anime-target="title"><%= @anime.title %></h2>
+      <% end %>
+        <h6 class="fw-bold" data-anime-target="rating"><%= @anime.rating %> <i class="fa-solid fa-star rating-star"></i></h6>
         <div class="show-info d-flex gap-3">
-          <h6 class= "info-border" style="font-size: medium; color: white;">Rank: <%= @anime.rank %></h6>
-          <h6 class = "info-border" style="font-size: medium; color: white;">Ep <%= @anime.episode_count %></h6>
-          <h6 class = "info-border" style="font-size: medium; color: white;"><%= @anime.start_date.year %></h6>
+          <h6 class="info-border" style="font-size: medium; color: white;">Rank: <%= @anime.rank %></h6>
+          <h6 class="info-border" style="font-size: medium; color: white;">Ep <%= @anime.episode_count %></h6>
+          <h6 class="info-border" style="font-size: medium; color: white;"><%= @anime.start_date.year %></h6>
         </div>
       </div>
     </div>
   </div>
-  <div style="background-color: black;">
-    <div class="synopsis">
+
+  <div class="synopsis-container">
+    <div class="synopsis" data-anime-target="synopsis">
       <h2>Synopsis</h2>
-      <%= @anime.synopsis %>
-      <h6 class="fw-bold studio-info">Studio: <%= @anime.studio %></h6>
-      <div class="sticky-button-container">
-        <%= button_to bookmarks_path, method: :post, class: "btn btn-success sticky-button", params: { bookmark: { anime_id: @anime.id, watch_status: :watching } }, style: "width: 195px; border-radius: 10px; background-color: #01b866; color: white;" do %>
-          Add to Watchlist
-        <% end %>
+      <div data-anime-target="content" class="synopsis-content">
+        <%= @anime.synopsis %>
+      </div>
+      <!-- Toggle Button -->
+      <button class="toggle-button" data-anime-target="toggleButton" data-action="click->anime#toggle">
+        Read More
+      </button>
       </div>
     </div>
+  </div>
+
+  <div class="info-container">
+    <h1>Infomartion</h1>
+    <p>Title: <%= @anime.title %></p>
+    <p>Episode: <%= @anime.episode_count %></p>
+    <p>Rating: <%= @anime.rating %></p>
+    <p>Rank: <%= @anime.rank %></p>
+    <p>Popularity: <%= @anime.popularity %></p>
+    <p>Aired Date: <%= @anime.start_date %> to <%= @anime.end_date %></p>
+    <p>Studio: <%= @anime.studio %></p>
+    <div class="sticky-button-container">
+      <%= button_to bookmarks_path, method: :post, class: "btn btn-success sticky-button", params: { bookmark: { anime_id: @anime.id, watch_status: :watching } }, style: "width: 195px; border-radius: 10px; background-color: #01b866; color: white;" do %>
+        Add to Watchlist
+      <% end %>
   </div>
 </div>

@@ -25,6 +25,7 @@ class AnimesController < ApplicationController
     @anime = Anime.find(params[:id])
     hide_navbar
     hide_panda
+    console
   end
 
   private

@@ -27,8 +27,6 @@ background-color: black;
 }
 
 .show-info {
-  display: flex;
-  gap: 10px;
   padding-top: 10px;
   font-size: larger;
 }
@@ -41,9 +39,42 @@ background-color: black;
   padding: 20px;
   position: relative;
   min-height: 200px;
-  color: white;
+  border-radius: 20px;
   background-color: black;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  color: white;
+}
+
+.synopsis h2 {
+  text-align: left;
+}
+
+.synopsis-content {
+  max-height: 100px;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  position: relative;
+}
+
+.toggle-button {
+  display: block;
+  margin: 10px auto 0 auto;
+  text-align: center;
+  color: #01b866;
+  border: none;
+  background-color: transparent;
+  font-size: large;
+}
+
+
+.synopsis-content.expanded {
+  max-height: 1000px;
+}
+
+.synopsis-container {
+  background-color: black;
+  color: white;
 }
 
 .sticky-button-container {
@@ -71,9 +102,9 @@ background-color: black;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 30%; /* Adjust height as needed */
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1.5) 100%);
-  pointer-events: none; /* Ensures it does not interfere with image interactions */
+  height: 30%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+  pointer-events: none;
 }
 
 
@@ -96,4 +127,10 @@ background-color: black;
   font-weight: 700;
   color: #ffffff;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.info-container {
+  padding: 20px;
+  color: white;
+  background-color: black;
 }
