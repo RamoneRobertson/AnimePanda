@@ -22,6 +22,11 @@ class BookmarksController < ApplicationController
 
   end
 
+  def destroy
+    @bookmark = Bookmark.find(params[:id])
+    @bookmark.delete
+  end
+
 
   # def update_to_watching(bookmark)
   #   bookmark.watch_status = "watching"

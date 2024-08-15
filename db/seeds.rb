@@ -112,8 +112,17 @@ call_animes.each do |anime|
   episode_count = info["num_episodes"]
   popularity = info["popularity"]
   studio = info["studios"][0]["name"]
+  genres = info["genres"]
+
 
   new_anime = Anime.new(title: title, picture_url: picture_url, start_date: start_date, synopsis: synopsis, rating: rating, rank: rank, episode_count: episode_count, popularity: popularity, studio: studio, trailer: trailer)
+  puts "---------- #{new_anime.title} ----------"
+  anime_genre_list = []
+  genres.each do |genre|
+    puts "genre tag: #{genre["name"]}"
+    anime_genre_list.push(genre["name"])
+  end
+  new_anime.genre_list = anime_genre_list.join(",")
   new_anime.save
 end
 

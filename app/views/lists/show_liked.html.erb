@@ -4,7 +4,6 @@
   <% end %>
   <h1>Liked Anime</h1>
 </div>
-
 <div class="card-product">
   <% @liked_lists.each do |liked_animes| %>
     <div class="anime-item mb-3">
@@ -17,7 +16,9 @@
               <img src="<%= liked_animes.anime.picture_url %>" class="anime-image">
             <% end %>
             <div class="card-product-infos">
-              <strong><h2><%= liked_animes.anime.title %></h2></strong>
+              <strong>
+                <h2><%= liked_animes.anime.title %></h2>
+              </strong>
               <div class="details-info">
                 <div class="info-border">Ep <%= liked_animes.anime.episode_count %></div>
                 <div class="info-border"><%= liked_animes.anime.start_date.year %></div>
@@ -29,6 +30,6 @@
         <% end %>
       </div>
     </div>
-        <hr class="card-divider">
+    <hr class="card-divider">
   <% end %>
 </div>
