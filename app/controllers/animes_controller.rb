@@ -2,6 +2,7 @@ class AnimesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
   def recommendations
     @skip_panda = true
+    # @hide_navbar = true
     @user = current_user
     @animes = Anime.first(5)
     @recommend_list = @user.lists.find_by(list_type: 'recommendations')

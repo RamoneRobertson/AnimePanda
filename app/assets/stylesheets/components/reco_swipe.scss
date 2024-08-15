@@ -1,0 +1,29 @@
+.reco-anime.yes {
+  animation: like 0.5s ease-out;
+}
+
+.reco-anime.nope {
+  animation: dislike 0.5s ease-out;
+}
+
+@keyframes like {
+  from {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: rotate(30deg) translateX(30rem);
+    opacity: 0;
+  }
+}
+
+@keyframes dislike {
+  from {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: rotate(-30deg) translateX(-30rem);
+    opacity: 0;
+  }
+}
