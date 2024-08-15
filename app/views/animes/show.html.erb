@@ -3,7 +3,7 @@
   <div class="picture">
     <div class="image-container">
       <iframe width="400" height="550"
-        src="<%= @anime.trailer %>?autoplay=1&loop=1&playlist=<%= @anime.trailer.split('/').last.split('?').first %>"
+        src="<%= @anime.trailer %>?autoplay=1&loop=1&controls=0&rel=0&playlist=<%= @anime.trailer.split('/').last.split('?').first %>"
         frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
       </iframe>
@@ -24,10 +24,10 @@
         <h2 class="fw-bold" data-anime-target="title"><%= @anime.title %></h2>
       <% end %>
         <h6 class="fw-bold" data-anime-target="rating"><%= @anime.rating %> <i class="fa-solid fa-star rating-star"></i></h6>
-        <div class="show-info d-flex gap-3">
-          <h6 class="info-border" style="font-size: medium; color: white;">Rank: <%= @anime.rank %></h6>
-          <h6 class="info-border" style="font-size: medium; color: white;">Ep <%= @anime.episode_count %></h6>
-          <h6 class="info-border" style="font-size: medium; color: white;"><%= @anime.start_date.year %></h6>
+        <div class="show-info d-flex gap-3 ">
+          <% @anime.genre_list.each do |genre| %>
+            <h6 class="info-border" style="font-size: small; color: white;"><%= genre.capitalize %></h6>
+          <% end %>
         </div>
       </div>
     </div>
@@ -60,6 +60,5 @@
       <%= button_to bookmarks_path, method: :post, class: "btn btn-success sticky-button", params: { bookmark: { anime_id: @anime.id, watch_status: :watching } }, style: "width: 195px; border-radius: 10px; background-color: #01b866; color: white;" do %>
         Add to Watchlist
       <% end %>
-
   </div>
 </div>
