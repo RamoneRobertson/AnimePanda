@@ -2,14 +2,18 @@
   <!-- Image Container -->
   <div class="picture">
     <div class="image-container">
-      <%= image_tag @anime.picture_url, class: "show-anime-img" %>
+      <iframe width="400" height="550"
+        src="<%= @anime.trailer %>?autoplay=1&loop=1&playlist=<%= @anime.trailer.split('/').last.split('?').first %>"
+        frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
       <div class="gradient-overlay"></div>
     </div>
     <div class="text-overlay">
       <div class="back-arrow">
         <div class="title d-flex gap-3">
           <%= link_to root_path do %>
-            <i class="fa-solid fa-arrow-left text-decoration-none"></i>
+            <i class="fa-solid fa-arrow-left text-decoration-none pt-5"></i>
           <% end %>
         </div>
       </div>
@@ -56,5 +60,6 @@
       <%= button_to bookmarks_path, method: :post, class: "btn btn-success sticky-button", params: { bookmark: { anime_id: @anime.id, watch_status: :watching } }, style: "width: 195px; border-radius: 10px; background-color: #01b866; color: white;" do %>
         Add to Watchlist
       <% end %>
+
   </div>
 </div>
