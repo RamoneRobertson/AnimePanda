@@ -36,6 +36,22 @@
     height: 125px;
   }
 
+  .opacity-transition{
+    transition: all 1s;
+  }
+
+  .no-opacity{
+    opacity: 0;
+  }
+
+  .full-opacity{
+    opacity: 1;
+  }
+
+  .no-width{
+    width: 0 !important;
+  }
+
   .back-part{
     background-color:
     var(--panda-white);

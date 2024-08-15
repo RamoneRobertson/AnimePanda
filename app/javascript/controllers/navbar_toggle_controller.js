@@ -18,10 +18,43 @@ export default class extends Controller {
       this.navToggleTarget.classList.toggle("nav-toggle-active");
     }
 
-    setTimeout(() => {
-      this.innerElementsTargets.forEach(element => {
-        element.classList.toggle("d-none");
-      });
-    }, 200);
+    if(this.innerElementsTarget.classList.contains("d-none")){
+      // setTimeout(() => {
+      //   this.innerElementsTargets.forEach(element => {
+      //     element.classList.toggle("d-none");
+      //   });
+      // }, 350);
+      // setTimeout(() => {
+      //   let timeout = 0;
+      //   this.innerElementsTargets.forEach(element => {
+      //     setTimeout(() => {
+      //       element.classList.toggle("d-none");
+      //     }, timeout);
+      //     timeout += 250;
+      //   });
+      // }, 250);
+      setTimeout(() => {
+        let timeout = 10;
+        this.innerElementsTargets.forEach(element => {
+          element.classList.remove("d-none");
+          setTimeout(() => {
+            element.classList.add("full-opacity");
+            element.classList.remove("no-width");
+          }, timeout);
+          timeout += 275;
+        });
+      }, 250);
+
+    }else{
+      setTimeout(() => {
+        this.innerElementsTargets.forEach(element => {
+          element.classList.add("d-none");
+          element.classList.remove("full-opacity");
+          element.classList.add("no-width");
+        });
+      }, 10);
+    }
+
+
   }
 }
