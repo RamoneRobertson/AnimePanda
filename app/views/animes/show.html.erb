@@ -18,24 +18,31 @@
         </div>
       </div>
       <div class="info row">
-      <% if @anime.title.length > 18 %>
+      <% if @anime.title.length > 22 %>
         <h2 class="fw-bold text-truncate col-8" style="max-width: 100%;" data-anime-target="title"><%= @anime.title %></h2>
       <% else %>
-        <h2 class="fw-bold" data-anime-target="title"><%= @anime.title %></h2>
+        <h2 class="fw-bold" style="max-width: 100%;" data-anime-target="title"><%= @anime.title %></h2>
       <% end %>
         <h6 class="fw-bold" data-anime-target="rating"><%= @anime.rating %> <i class="fa-solid fa-star rating-star"></i></h6>
-        <div class="show-info d-flex gap-3 ">
-          <% @anime.genre_list.each do |genre| %>
-            <h6 class="info-border" style="font-size: small; color: white;"><%= genre.capitalize %></h6>
-          <% end %>
-        </div>
+          <div class="show-info">
+            <% @anime.genre_list.each do |genre| %>
+              <% if genre == "psychological" %>
+                <h6 class="info-border text-truncate"><%= genre.capitalize %></h6>
+              <% else %>
+                <h6 class="info-border"><%= genre.capitalize %></h6>
+              <% end %>
+            <% end %>
+          </div>
       </div>
     </div>
   </div>
-
   <div class="synopsis-container">
     <div class="synopsis" data-anime-target="synopsis">
-      <h2>Synopsis</h2>
+      <% if @anime.genre_list.count <= 4 %>
+        <h2>Synopsis</h2>
+      <% else %>
+        <h2 class="pt-4">Synopsis</h2>
+      <% end %>
       <div data-anime-target="content" class="synopsis-content">
         <%= @anime.synopsis %>
       </div>
@@ -48,7 +55,11 @@
   </div>
 
   <div class="info-container">
-    <h1>Infomartion</h1>
+    <% if @anime.genre_list.count <= 4 %>
+        <h1>Information</h1>
+      <% else %>
+        <h2 class="pt-4">Information</h2>
+      <% end %>
     <p>Title: <%= @anime.title %></p>
     <p>Episode: <%= @anime.episode_count %></p>
     <p>Rating: <%= @anime.rating %></p>

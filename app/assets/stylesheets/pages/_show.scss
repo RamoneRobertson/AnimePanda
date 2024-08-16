@@ -27,8 +27,22 @@ background-color: black;
 }
 
 .show-info {
-  padding-top: 10px;
-  font-size: larger;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: 380px;
+}
+
+.info-border {
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  font-size: small;
+  color: white;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: bolder;
 }
 
 .studio-info {
@@ -36,7 +50,7 @@ background-color: black;
 }
 
 .synopsis {
-  padding: 20px;
+  padding: 0px 20px;
   position: relative;
   min-height: 200px;
   border-radius: 20px;
@@ -44,6 +58,7 @@ background-color: black;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   color: white;
+  top: 21px;
 }
 
 .synopsis h2 {
