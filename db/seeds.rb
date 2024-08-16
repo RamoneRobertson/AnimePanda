@@ -11,120 +11,10 @@ require 'net/http'
 require 'json'
 require 'uri'
 
-
 List.destroy_all
 User.destroy_all
 Anime.destroy_all
 Bookmark.destroy_all
-
-# Get 10 Animes from https://api.myanimelist.net/v2/anime/ranking?ranking_type=all&limit=10
-# Get Anime info
-# Create Anime
-
-# Create user - jkinami
-# Create user watchlist
-
-def call_animes
-# Step 1: Define the API endpoint
-  url = 'https://api.myanimelist.net/v2/anime/ranking?ranking_type=all&limit=30'
-  uri = URI(url)
-
-  # Step 2: Create an HTTP request object
-  http = Net::HTTP.new(uri.host, uri.port)
-  http.use_ssl = true if uri.scheme == 'https'  # Use SSL/TLS if the URL is HTTPS
-
-  # Step 3: Create the GET request and set headers
-  request = Net::HTTP::Get.new(uri.request_uri)
-  request['X-MAL-CLIENT-ID'] = ENV['MAL_CLIENT_ID']  # Replace with your actual client ID
-
-  # Step 4: Send the HTTP request
-  response = http.request(request)
-
-  # Step 5: Parse the JSON response
-  data = JSON.parse(response.body)
-  data["data"]
-end
-
-def anime_info(id)
-  # Step 1: Define the API endpoint
-  url = "https://api.myanimelist.net/v2/anime/#{id}?fields=id,title,main_picture,alternative_titles,start_date,end_date,synopsis,mean,rank,popularity,num_list_users,num_scoring_users,nsfw,created_at,updated_at,media_type,status,genres,my_list_status,num_episodes,start_season,broadcast,source,average_episode_duration,rating,pictures,background,related_anime,related_manga,recommendations,studios,statistics"
-
-  uri = URI(url)
-
-  # Step 2: Create an HTTP request object
-  http = Net::HTTP.new(uri.host, uri.port)
-  http.use_ssl = true if uri.scheme == 'https'  # Use SSL/TLS if the URL is HTTPS
-
-  # Step 3: Create the GET request and set headers
-  request = Net::HTTP::Get.new(uri.request_uri)
-  request['X-MAL-CLIENT-ID'] = ENV['MAL_CLIENT_ID']  # Replace with your actual client ID
-
-  # Step 4: Send the HTTP request
-  response = http.request(request)
-
-  # Step 5: Parse the JSON response
-  JSON.parse(response.body)
-end
-
-def user_info
-  # Step 1: Define the API endpoint
-  url = "https://api.myanimelist.net/v2/users/jkinami/animelist?fields=list_status"
-
-  uri = URI(url)
-
-  # Step 2: Create an HTTP request object
-  http = Net::HTTP.new(uri.host, uri.port)
-  http.use_ssl = true if uri.scheme == 'https'  # Use SSL/TLS if the URL is HTTPS
-
-  # Step 3: Create the GET request and set headers
-  request = Net::HTTP::Get.new(uri.request_uri)
-  request['X-MAL-CLIENT-ID'] = ENV['MAL_CLIENT_ID']  # Replace with your actual client ID
-
-  # Step 4: Send the HTTP request
-  response = http.request(request)
-
-  # Step 5: Parse the JSON response
-  JSON.parse(response.body)
-end
-
-def find_trailer(id)
-  url = "https://myanimelist.net/anime/#{id}"
-  html_file = URI.open(url).read
-  html_doc = Nokogiri::HTML.parse(html_file)
-  trailer = ""
-  html_doc.search(".video-promotion a").each do |element|
-    trailer = element.attribute("href").value
-  end
-  trailer
-end
-
-call_animes.each do |anime|
-  mal_id = anime["node"]["id"]
-  title = anime["node"]["title"]
-  picture_url = anime["node"]["main_picture"]["large"]
-  rank = anime["ranking"]["rank"].to_i
-  trailer = find_trailer(mal_id)
-
-  info = anime_info(mal_id)
-  start_date = info["start_date"]
-  synopsis = info["synopsis"]
-  rating = info["mean"]
-  episode_count = info["num_episodes"]
-  popularity = info["popularity"]
-  studio = info["studios"][0]["name"]
-  genres = info["genres"]
-
-
-  new_anime = Anime.new(title: title, picture_url: picture_url, start_date: start_date, synopsis: synopsis, rating: rating, rank: rank, episode_count: episode_count, popularity: popularity, studio: studio, trailer: trailer)
-  puts "---------- #{new_anime.title} ----------"
-  anime_genre_list = []
-  genres.each do |genre|
-    puts "genre tag: #{genre["name"]}"
-    anime_genre_list.push(genre["name"])
-  end
-  new_anime.genre_list = anime_genre_list.join(",")
-  new_anime.save
-end
 
 new_user = User.new(email: "panda@anime.com", mal_username: "jkinami", password: "seed1234")
 new_user.save
@@ -145,9 +35,83 @@ new_watch_list = List.new()
 new_watch_list.user = new_user
 new_watch_list.save
 
+mal_service = MyanimelistService.new
+top_rank_data =  mal_service.call_top_rank
+popular_data = mal_service.call_popular
+user_mal_info = mal_service.call_user(new_user.mal_username)
+
+def add_anime(id)
+  mal_service = MyanimelistService.new
+  info = mal_service.call_anime(id)
+  title = info["alternative_titles"]["en"]
+  picture_url = info["main_picture"]["large"]
+  start_date = info["start_date"]
+  synopsis = info["synopsis"]
+  rating = info["mean"]
+  episode_count = info["num_episodes"]
+  popularity = info["popularity"]
+  studio = info["studios"][0]["name"]
+  rank = info["rank"].to_i
+  trailer = mal_service.find_trailer(id)
+  genres = info["genres"]
+
+  new_anime = Anime.new(title: title, picture_url: picture_url, start_date: start_date, synopsis: synopsis, rating: rating, rank: rank, episode_count: episode_count, popularity: popularity, studio: studio, trailer: trailer, mal_id: id)
+  puts "---------- #{new_anime.title} ----------"
+  anime_genre_list = []
+  genres.each do |genre|
+    puts "genre tag: #{genre["name"]}"
+    anime_genre_list.push(genre["name"])
+  end
+  new_anime.genre_list = anime_genre_list.join(",")
+  new_anime.save
+  new_anime
+end
+
+def add_from_mal(user, mal_info)
+  mal_info.each do |node|
+    id = node[0]
+    anime = ""
+    watch_status = node[1] == "plan_to_watch" ? "like" : node[1]
+
+    list = ""
+
+    if Anime.exists?(mal_id: id)
+      anime = Anime.find_by(mal_id: id)
+    else
+      anime = add_anime(id)
+    end
+
+    if watch_status == "like"
+      list = user.lists.find_by(list_type: 'liked')
+    elsif watch_status == "completed"
+      list = user.lists.find_by(list_type: 'seen')
+    elsif watch_status == "watching"
+      list = user.lists.find_by(list_type: 'watchlist')
+    end
+    new_bookmark = Bookmark.new(anime: anime, watch_status: watch_status)
+    new_bookmark.list = list
+    new_bookmark.save
+  end
+end
+
+puts "----------Adding Top #{top_rank_data.count} Ranked Animes----------"
+top_rank_data.each do |anime|
+  add_anime(anime["node"]["id"])
+end
+puts "----------Adding Top #{popular_data.count} Popular Animes----------"
+popular_data.each do |anime|
+  if Anime.exists?(mal_id: anime["node"]["id"])
+    anime = Anime.find_by(mal_id: anime["node"]["id"])
+  else
+    add_anime(anime["node"]["id"])
+  end
+end
+puts "----------Adding User Seen Animes----------"
+add_from_mal(new_user, user_mal_info)
+
 puts "There is a total of #{Anime.count} animes in the database"
 puts "There is a total of #{User.count} users in the database"
 puts "There is a total of #{List.count} lists in the database"
-
+puts "There is a total of #{Bookmark.count} bookmarks in the database"
 # puts JSON.pretty_generate(user_info)
 # puts user_info["data"]

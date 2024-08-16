@@ -52,7 +52,8 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "nokogiri"
 gem 'acts-as-taggable-on', '>= 9.0.1'
-
+gem "ruby-openai"
+gem "pg_search"
 
 group :development, :test do
   gem "dotenv-rails"
