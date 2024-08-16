@@ -18,17 +18,6 @@
         <button class="btn core-button">Recommend anything</button>
       <% end %>
     </div>
-    <%# <div class="row m-0">
-      <div class="col-4">
-        <button class="btn sub-button h-100 w-100">Action</button>
-      </div>
-      <div class="col-4">
-        <button class="btn sub-button h-100 w-100">Shounen</button>
-      </div>
-      <div class="col-4">
-        <button class="btn sub-button h-100 w-100">Slice of Life</button>
-      </div>
-    </div> %>
     <div class="buttons-scrolling-wrapper">
       <div class="button-card">
         <button class="btn sub-button box-shadow-effect">Action</button>
@@ -60,7 +49,7 @@
     <div class="scrolling-wrapper">
       <% @random_popular_three.each do |item| %>
         <%= link_to anime_path(item) do %>
-          <div class="home-anime-card p-3">
+          <div class="home-anime-card p-3 h-100">
             <%= render "components/popular_anime_card", item: item %>
           </div>
         <% end %>
@@ -69,7 +58,7 @@
   </div>
 </div>
 </div>
-<hr class="dotted-hr">
+<%# <hr class="dotted-hr"> %>
 <%# render "components/wavey_break" %>
 <div class="top-anime">
   <div class="container p-3">
