@@ -1,7 +1,11 @@
-<%# Update data likes every time the user hits like. send as params for the likes show page %>
-<div class="reco-container" data-controller="anime-vote" data-likes=0>
-  <div data-anime-vote-target="animes">
-    <%= render "components/reco_anime" %>
+<% message = ["I recommended these based on your interest in action and suspense themes!", "You're welcome ;)"] %>
+<div data-controller="typing" data-typing-message-value="<%= message %>">
+  <%# Update data likes every time the user hits like. send as params for the likes show page %>
+  <div class="reco-container" data-controller="anime-vote" data-likes=0>
+    <div data-anime-vote-target="animes">
+      <%= render "components/reco_anime" %>
+    </div>
+    <%= render "components/reco_buttons" %>
   </div>
-  <%= render "components/reco_buttons" %>
+  <%= render "components/panda_button", message:  %>
 </div>

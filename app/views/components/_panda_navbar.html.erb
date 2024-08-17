@@ -10,12 +10,7 @@
         <div data-navbar-toggle-target="innerElements" class="no-opacity opacity-transition no-width mb-3 pb-1 fw-bold d-none"><%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "text-decoration-none text-dark" %></div>
       <% end %>
     </div>
-    <div class="d-flex justify-content-end" style="margin: 70px 10px 0 0;">
-      <div class="d-flex align-items-center" style="background-color: var(--panda-green); color: var(--panda-white); border-radius: 12px; position: relative; max-width: 48%;">
-        <div style="position: absolute; top: -9px; border: 19px solid transparent; border-bottom-color: var(--panda-green); border-top: 0; border-left: 0;"></div>
-        <p style="margin: 0; padding: 8px 16px;">Welcome back</p>
-      </div>
-    </div>
+    <%# render "components/panda_messages" %>
   </div>
   <div class="back-part"></div>
   <div class="front-part d-flex gap-1">

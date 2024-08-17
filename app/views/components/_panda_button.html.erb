@@ -1,16 +1,26 @@
-<div data-controller="panda-chat-toggle" data-panda-chat-toggle-height-value="500px" style="position: sticky; bottom: 0;">
-  <div class="anime-panda-icon">
+<div data-typing-target="panda" id="the-panda" class="d-none" data-panda-chat-toggle-height-value="500px" style="position: sticky; bottom: 0; z-index: 99;">
+  <div data-action="click->typing#disable" class="anime-panda-icon">
     <div class="circle" data-action="click->panda-chat-toggle#toggle">
     </div>
   </div>
-  <div class="panda-chat-box">
-    <div class="box" data-panda-chat-toggle-target="chat">
-      <div>
-        <%# <p>What can I do for you?</p> %>
-      </div>
-      <div>
-        <%# <p>Text...</p> %>
-      </div>
+  <div data-action="click->typing#disable" class="message-box" style="
+    background-color: var(--panda-green);
+    color: var(--panda-white);
+    max-width: 69%;
+    right: 50px;
+    position: absolute;
+    bottom: 75px;
+    border-radius: 12px;
+    ">
+    <div>
+      <div style="position: absolute;
+    bottom: -15px;
+    right: 10px;
+    border: 23px solid transparent;
+    border-top-color: var(--panda-green);
+    border-bottom: 0;
+    border-right: 0;"></div>
+      <p id="panda_message" style="margin: 0; padding: 8px 16px;">Hello</p>
     </div>
   </div>
 </div>

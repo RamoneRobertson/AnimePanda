@@ -7,15 +7,25 @@ export default class extends Controller {
   }
 
   loading(){
-    this.#loadBar();
-    setTimeout(() => {
-      this.loading();
-    }, 100);
+    // this.#loadBar();
+    // setTimeout(() => {
+    //   this.loading();
+    // }, 100);
+
+    const thePanda = document.querySelector("#the-panda");
+    if(thePanda.classList.contains("d-none")){
+      thePanda.classList.remove("d-none");
+    }
+
+    // const chatBox = document.querySelector("#panda_message");
+    // chatBox.innerText = "Loading...";
   }
 
   #loadBar(){
     // console.log("Started loading");
     const loadingDiv = document.querySelector(".turbo-progress-bar");
+    const chatBox = document.querySelector("#panda_message");
+
     // if(loadingDiv != null){
     //   // console.log(loadingDiv.style.width);
     //   console.log(`Turbo amount: ${parseFloat(loadingDiv.style.width)}`);
@@ -26,6 +36,13 @@ export default class extends Controller {
     if(loadingDiv != null){
       const percentage = parseFloat(loadingDiv.style.width);
       console.log(`${percentage} %`)
+
+      if(percentage >= 100) return;
+
+      chatBox.innerText = `Loading...${percentage}%`;
+    }else{
+      // const chatBox = document.querySelector("#panda_message");
+      // chatBox.innerText = "Loading...";
     }
   }
 }

@@ -17,9 +17,11 @@
       <%= render "components/panda_navbar" %>
     <% end %>
     <%= render "shared/flashes" %>
-    <%= yield %>
-    <% unless @hide_panda || @skip_panda%>
-      <%= render "components/panda_button" %>
-    <% end %>
+    <div style="min-height: 100vh">
+      <%= yield %>
+      <%# unless @hide_panda || @skip_panda%>
+      <%# render "components/panda_button" %>
+      <%# end %>
+    </div>
   </body>
 </html>
