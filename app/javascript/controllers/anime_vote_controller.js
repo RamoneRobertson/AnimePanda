@@ -33,7 +33,6 @@ export default class extends Controller {
     if(event.animationName === 'like'){
       //  remove the yes class found in _recommendation.scss, to prepare for the next anime in the stack
       this.animeTarget.classList.remove("yes")
-      // this.#updatePreference();
     }
 
     //  remove the nope class found in _recommendation.scss, to prepare for the next anime in the stack

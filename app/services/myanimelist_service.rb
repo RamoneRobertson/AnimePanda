@@ -59,8 +59,7 @@ class MyanimelistService
     response = http.request(request)
 
     # Step 5: Parse the JSON response
-    data = JSON.parse(response.body)
-    data["data"].first
+    JSON.parse(response.body)
   end
 
 
