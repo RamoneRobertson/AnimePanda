@@ -21,14 +21,14 @@ export default class extends Controller {
 
   loading(){
     // console.log("working");
-    if(this.element.classList.contains("d-none")){
-      this.element.classList.remove("d-none");
+    if(this.pandaTarget.classList.contains("d-none")){
+      this.pandaTarget.classList.remove("d-none");
     }
     this.#updateChat(["Just a moment..."]);
   }
 
   disable(){
-    this.element.classList.add("d-none");
+    this.pandaTarget.classList.add("d-none");
   }
 
   #updateChat(array){
