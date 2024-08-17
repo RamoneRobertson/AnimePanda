@@ -6,12 +6,7 @@ class ListsController < ApplicationController
   end
 
   def show_liked
-    @like_counter = nil
-    respond_to do |format|
-      format.text
-    end
-    @liked_lists = current_user.liked_list.bookmarks
-
+    @liked_lists = current_user.liked_list.bookmarks.where(created_at: 90.seconds.ago..Time.current)
   end
 
   private
