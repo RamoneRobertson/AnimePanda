@@ -7,15 +7,15 @@
   .circle{
     // background-color: black;
     border-radius: 50%;
-    height: 100px;
-    width: 100px;
+    height: 50px;
+    width: 50px;
     // background-color: #FFFFFF;
     background-color: var(--panda-green);
     // background-image: url("https://static.vecteezy.com/system/resources/previews/018/915/714/original/cute-panda-head-cartoon-mascot-doodle-art-hand-drawn-outline-concept-kawaii-icon-illustration-vector.jpg");
     background-image: url("pandahead.png");
     background-position: center;
     // background-size: 95px;
-    background-size: 103px;
+    background-size: 50px;
     box-shadow: 1px 1px 10px 0px black;
   }
 }
