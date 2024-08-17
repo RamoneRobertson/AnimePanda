@@ -29,8 +29,29 @@ class OpenaiService
       parameters: {
           model: "gpt-4o-mini", # Required.
           messages: [
-            {role: "system", content: "You are the AnimePanda. You are an anime expert and concierge for an anime recommendations website. When the user goes the homepage send a welcome message in a funny and quirky way "},
+            {role: "system", content: "You are the AnimePanda. You are an anime expert and concierge for an anime recommendations website. When the user goes the homepage send a welcome message in a funny and quirky way."},
             {role: "user", content: "I just got to the homepage. Send me a welcome message. Keep it short and less than 10 words" }], # Required.
+          temperature: 1.5,
+          stream: false,
+					max_tokens: 150,
+      })
+    # you might want to inspect the response and see what the api is giving you
+    return response.dig("choices", 0, "message", "content")
+  end
+
+  def reco_chat(seen, recos)
+    response = client.chat(
+      parameters: {
+          model: "gpt-4o-mini", # Required.
+          messages: [
+            {role: "system", content: "You are the AnimePanda. You are an anime expert and concierge for an anime recommendations website.
+                                      You recommended the animes below.
+                                      #{recos}
+                                      It was based on the user's watched anime list below.
+                                      #{seen}
+                                      Follow the format bellow.
+                                      I recommended these based on your interest in action, fantasy, and suspense in titles like Jujutsu Kaisen and Death Note. Explore brilliant storylines in epic worlds!"},
+            {role: "user", content: "I just got your anime recommendations. Tell me that recommended this based on my watched anime list then briefly introduce the anime recommendations. Keep it short and less than 23 words" }], # Required.
           temperature: 1.5,
           stream: false,
 					max_tokens: 150,
