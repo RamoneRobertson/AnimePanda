@@ -1,26 +1,19 @@
 import { Controller } from "@hotwired/stimulus"
 import Typed from "typed.js"
 
+let currentTyped = null;
+
 // Connects to data-controller="typing"
 export default class extends Controller {
   static values = { message: Array }
   static targets = [ "panda" ]
 
   connect() {
-
-    // document.querySelector(".recommend-button").addEventListener("click", (event) => {
-    //   this.loading();
-    // });
-
-    // console.log("hello");
-    // console.log(this.pandaTarget);
-
     if(this.messageValue == null) return;
     this.#updateChat(this.messageValue)
   }
 
   loading(){
-    // console.log("working");
     if(this.pandaTarget.classList.contains("d-none")){
       this.pandaTarget.classList.remove("d-none");
     }
@@ -32,8 +25,12 @@ export default class extends Controller {
   }
 
   #updateChat(array){
+    if(currentTyped != null){
+      // stop current typed animation if there is one
+      currentTyped.destroy();
+    }
     this.pandaTarget.classList.remove("d-none");
-    new Typed(document.querySelector("#panda_message"), {
+    const typed = new Typed(document.querySelector("#panda_message"), {
       strings: array,
       showCursor: false,
       smartBackspace: true,
@@ -41,6 +38,7 @@ export default class extends Controller {
       // onLastStringBackspaced: (self) => {this.#diableChat()},
       typeSpeed: 25
     })
+    currentTyped = typed;
   }
 
   #diableChat(){
