@@ -30,9 +30,11 @@ class AnimesController < ApplicationController
   end
 
   def show
+    chatgpt = OpenaiService.new
     @user = current_user
     @liked = @user.lists.find_by(list_type: 'liked')
     @anime = Anime.find(params[:id])
+    @show_chat = chatgpt.show_chat(@anime.title)
     hide_panda
   end
 

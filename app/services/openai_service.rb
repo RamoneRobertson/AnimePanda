@@ -39,6 +39,21 @@ class OpenaiService
     return response.dig("choices", 0, "message", "content")
   end
 
+  def show_chat(anime)
+    response = client.chat(
+      parameters: {
+          model: "gpt-4o-mini", # Required.
+          messages: [
+            {role: "system", content: "You are the AnimePanda. Can you recommend an anime that is similar to #{anime}"},
+            {role: "user", content: "Recommend me an anime. Keep it short and less than 23 words" }], # Required.
+          temperature: 1.5,
+          stream: false,
+					max_tokens: 150,
+      })
+    # you might want to inspect the response and see what the api is giving you
+    return response.dig("choices", 0, "message", "content")
+  end
+
   def reco_chat(seen, recos)
     response = client.chat(
       parameters: {
