@@ -14,19 +14,18 @@
   </head>
   <body>
     <% if current_page?(root_url) %>
-      <%= render "components/show_anime_banner" %>
-    <% else %>
-      <%# <div style="height: 10vh; background-color: var(--panda-white);"></div> %>
+      <%# render "components/show_anime_banner" %>
     <% end %>
     <% unless @hide_navbar %>
       <%# render "shared/navbar" %>
       <%= render "components/panda_navbar" %>
     <% end %>
     <%= render "shared/flashes" %>
-    <%= yield %>
-
-    <% unless @hide_panda || @skip_panda%>
-      <%= render "components/panda_button" %>
-    <% end %>
+    <div style="min-height: 100vh">
+      <%= yield %>
+      <%# unless @hide_panda || @skip_panda%>
+      <%# render "components/panda_button" %>
+      <%# end %>
+    </div>
   </body>
 </html>

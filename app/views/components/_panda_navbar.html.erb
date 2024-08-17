@@ -1,6 +1,7 @@
 <div data-controller="navbar-toggle nav-sticky" data-navbar-toggle-user-value="<%= !current_user.nil? %>" class="panda-nav">
   <div data-navbar-toggle-target="navToggle" class="nav-toggle-bar d-flex flex-column">
-    <div class="p-3">
+    <%# <div style="height: 100vh; background-color: rgb(0 0 0 / 32%);"></div> %>
+    <div class="px-3">
       <% if current_user.nil? %>
         <div data-navbar-toggle-target="innerElements" class="no-opacity opacity-transition no-width fw-bold d-none"><%= link_to "Log in", new_user_session_path, class: "text-decoration-none text-dark" %></div>
       <% else %>
@@ -9,6 +10,7 @@
         <div data-navbar-toggle-target="innerElements" class="no-opacity opacity-transition no-width mb-3 pb-1 fw-bold d-none"><%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "text-decoration-none text-dark" %></div>
       <% end %>
     </div>
+    <%# render "components/panda_messages" %>
   </div>
   <div class="back-part"></div>
   <div class="front-part d-flex gap-1">
