@@ -20,8 +20,11 @@
                 <h2><%= liked_animes.anime.title %></h2>
               </strong>
               <div class="details-info">
-                <div class="info-border">Ep <%= liked_animes.anime.episode_count %></div>
-                <div class="info-border"><%= liked_animes.anime.start_date.year %></div>
+                <div class="info-border">
+                 <% liked_animes.anime.genre_list.each do |genres| %>
+                  <%= genres %>
+                 <% end %>
+                </div>
               </div>
               <p class="pb-3"><%= liked_animes.anime.rating %> <i class="fa-solid fa-star rating-star"></i></p>
               <p class="pt-1">Rank: <%= liked_animes.anime.rank %></p>

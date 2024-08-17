@@ -3,10 +3,12 @@ class ListsController < ApplicationController
     @animes_lists = current_user.watchlist.bookmarks
     filter_status
     hide_navbar
+    console
   end
 
   def show_liked
     @liked_lists = current_user.liked_list.bookmarks
+    console
   end
 
   private
