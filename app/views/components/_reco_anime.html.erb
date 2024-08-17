@@ -1,4 +1,4 @@
-<% @recommend_list.bookmarks.each do |bookmark| %>
+<% @recommend_list.bookmarks.first(5).each do |bookmark| %>
   <div class="reco-anime" data-anime-vote-target="anime" data-anime="<%= bookmark.anime_id %>" data-bk="<%= bookmark.id %>" data-action="animationend->anime-vote#animationDone">
     <% if bookmark.anime.trailer? %>
       <div class="reco-trailer">
