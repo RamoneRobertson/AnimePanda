@@ -27,7 +27,6 @@ class AnimesController < ApplicationController
     @user = current_user
     @liked = @user.lists.find_by(list_type: 'liked')
     @anime = Anime.find(params[:id])
-    hide_navbar
     hide_panda
   end
 
