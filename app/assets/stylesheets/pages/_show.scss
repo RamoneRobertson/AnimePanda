@@ -35,7 +35,8 @@ background-color: black;
 
 .info-border {
   padding: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #01b866;
+  opacity: 90%;
   border-radius: 5px;
   font-size: small;
   color: white;
@@ -138,6 +139,21 @@ background-color: black;
   }
 }
 
+.play-button {
+  color: #01b866;
+}
+
+.rating-play {
+  display: flex;
+  gap: 15px;
+  font-size: x-large;
+}
+
+.info {
+  max-width: 550px;
+  font-size: x-large;
+}
+
 .info h6.fw-bold {
   font-size: 1.25rem;
   font-weight: 700;
@@ -149,4 +165,19 @@ background-color: black;
   padding: 20px;
   color: white;
   background-color: black;
+}
+
+
+.iframe-container {
+  display: none; /* Hidden by default */
+  margin-top: 20px; /* Adjust as needed */
+}
+
+.iframe-container.active {
+  display: block; /* Show when active */
+}
+
+
+#play {
+  color: #01b866;
 }

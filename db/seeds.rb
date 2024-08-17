@@ -115,3 +115,4 @@ puts "There is a total of #{List.count} lists in the database"
 puts "There is a total of #{Bookmark.count} bookmarks in the database"
 # puts JSON.pretty_generate(user_info)
 # puts user_info["data"]
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
