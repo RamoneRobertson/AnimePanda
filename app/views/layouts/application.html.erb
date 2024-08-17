@@ -20,6 +20,9 @@
     <% end %>
     <%= render "shared/flashes" %>
     <%= yield %>
-    <%= render "components/panda_button" unless @skip_panda %>
+
+    <% unless @hide_panda || @skip_panda%>
+      <%= render "components/panda_button" %>
+    <% end %>
   </body>
 </html>

@@ -27,7 +27,8 @@ class AnimesController < ApplicationController
     @user = current_user
     @liked = @user.lists.find_by(list_type: 'liked')
     @anime = Anime.find(params[:id])
-    # raise
+    hide_navbar
+    hide_panda
   end
 
   def genrate_chatgpt_anime
@@ -87,6 +88,16 @@ class AnimesController < ApplicationController
 
 
   private
+
+  def hide_navbar
+    @hide_navbar = true
+  end
+
+  def hide_panda
+    @hide_panda = true
+    # raise
+  end
+
   def bookmark_params
     params.require(:bookmark).permit(:id)
   end
