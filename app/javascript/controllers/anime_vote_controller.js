@@ -8,7 +8,7 @@ export default class extends Controller {
   // anime -> reco-anime div
   // dislike -> dislike btn
   //  like -> like btn
-  static targets = ["animes", "anime", "dislike", "like", "likes"]
+  static targets = ["animes", "anime", "dislike", "like"]
 
   connect(){
 
@@ -18,7 +18,6 @@ export default class extends Controller {
     this.animeTarget.classList.add("yes");
     this.#updatePreference();
     this.#removeBookmark();
-    this.likesTarget.dataset.likes++
     this.#redirect();
   }
 
@@ -86,22 +85,6 @@ export default class extends Controller {
     this.dislikeTarget.classList.toggle('d-none');
   }
 
-  likeCounter(){
-    const likeCounter = this.likesTarget.dataset.likes
-    const csrfToken = document.querySelector("[name='csrf-token']").content
-    fetch("/lists/liked", {
-      method: "GET",
-      headers: {
-        "X-CSRF-Token": csrfToken,
-        "Content-Type": "application/json",
-        "Accept": "text/plain" },
-        "liked_counter": `${likeCounter}`
-    })
-    .then((data) => {
-      console.log(data);
-    })
-  }
-
   // Function redirects to the /lists/liked view by tracking animesTarget.children
   // What should happen after the swiping is done
   #redirect(){
@@ -109,6 +92,5 @@ export default class extends Controller {
       this.disableButtons();
       window.location.href = "/lists/liked";
     }
-    this.likeCounter();
   }
 }
