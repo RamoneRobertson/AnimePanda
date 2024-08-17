@@ -17,6 +17,8 @@ class AnimesController < ApplicationController
   end
 
   def index
+    chatgpt = OpenaiService.new
+    @welcome_chat = chatgpt.home_chat
     @animes = Anime.all
     best_anime = @animes.sort_by {|anime| anime.popularity}.reverse
     @random_popular_three = best_anime[0..5].sample(3)
@@ -32,6 +34,7 @@ class AnimesController < ApplicationController
 
   def genrate_chatgpt_anime
     mal_service = MyanimelistService.new
+    openai_service = OpenaiService.new
     @user = current_user
     seen_animes = @user.lists.seen.first.animes.select(:id, :title).to_json
     recommended_animes = []
@@ -43,15 +46,20 @@ class AnimesController < ApplicationController
             Only include the english title of the anime
             PROMPT
 
-    response = OpenaiService.new(prompt).call
+    response = openai_service.recommend_anime(prompt)
     recommended_json = response.dig("content")
     recommended_data = JSON.parse(recommended_json)
+    # puts recommended_data
     recommended_data["recommendations"].each do |anime|
       new_anime = Anime.search_by_title(anime["title"])
       if new_anime.empty?
-        mal_id = mal_service.find_anime(anime["title"])["node"]["id"]
-        new_anime = import_anime(mal_id)
-        recommended_animes.push(new_anime)
+        if mal_service.find_anime(anime["title"])["message"] == "invalid q"
+          next
+        else
+          mal_id = mal_service.find_anime(anime["title"])["data"].first["node"]["id"]
+          new_anime = import_anime(mal_id)
+          recommended_animes.push(new_anime)
+        end
       else
         recommended_animes.push(new_anime.first)
       end
