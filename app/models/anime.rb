@@ -1,4 +1,13 @@
+include PgSearch::Model
+
 class Anime < ApplicationRecord
+  pg_search_scope :search_by_title,
+  against: [ :title ],
+  using: {
+    tsearch: { prefix: true } # <-- now `superman batm` will return something!
+  }
+
+
   has_many :bookmarks
   # An anime can be in multiple lists (watchlist, liked, disliked ect...)
   # belongs_to :list, through: :bookmarks
