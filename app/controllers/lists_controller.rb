@@ -6,7 +6,12 @@ class ListsController < ApplicationController
   end
 
   def show_liked
+    @like_counter = nil
+    respond_to do |format|
+      format.text
+    end
     @liked_lists = current_user.liked_list.bookmarks
+
   end
 
   private

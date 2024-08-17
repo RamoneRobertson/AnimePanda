@@ -7,6 +7,7 @@ class AnimesController < ApplicationController
   def recommendations
     @skip_panda = true
     # @hide_navbar = true
+    @like_counter = 0
     @user = current_user
     @animes = genrate_chatgpt_anime
     @recommend_list = @user.lists.find_by(list_type: 'recommendations')
@@ -14,6 +15,7 @@ class AnimesController < ApplicationController
       new_bookmark = Bookmark.new(watch_status: :recommended, anime: anime, list: @recommend_list, preference: nil)
       new_bookmark.save
     end
+
   end
 
   def index
