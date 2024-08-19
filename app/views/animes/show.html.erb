@@ -16,26 +16,20 @@
         </div>
       </div>
       <div class="info row">
-
-          <h2 class="fw-bold text-truncate col-8"
-              style="max-width: 100%; font-size: x-large;"
-              data-anime-target="title">
-            <%= @anime.title %>
-          </h2>
-
-
-
-        <div class="rating-play">
-          <h6 class="fw-bold" data-anime-target="rating">
+        <h2 class="fw-bold text-truncate col-8"
+            style="max-width: 100%; font-size: x-large;"
+            data-anime-target="title">
+          <%= @anime.title %>
+        </h2>
+        <h6 class="fw-bold" data-anime-target="rating">
+          <div class="play-button-container">
             <%= @anime.rating %> <i class="fa-solid fa-star rating-star"></i>
-          </h6>
-          <h3 id="play">Play Trailer</h3>
-          <h2>
-            <i class="fa-solid fa-play play-button"
-              data-action="click->anime#play"
-              data-anime-target="playButton"></i>
-          </h2>
-        </div>
+            <div class="play-trailer-button" data-action="click->anime#play">
+              <i class="fa-solid fa-play play-button" data-anime-target="playButton"></i>
+              <h2 id="play" data-anime-target="playText">Play Trailer</h2>
+            </div>
+          </div>
+        </h6>
         <div class="show-info">
           <% @anime.genre_list.each do |genre| %>
             <% if genre == "psychological" %>
@@ -53,10 +47,8 @@
     </div>
   </div>
 
-  <!-- Iframe Container -->
-  <div data-anime-target="iframeContainer"
-       class="iframe-container"
-       style="display: none;">
+  <!-- Iframe Container for Video -->
+  <div data-anime-target="iframeContainer" class="iframe-container" style="display: none;">
     <iframe
       data-anime-target="iframe"
       width="400"
@@ -66,9 +58,9 @@
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen>
     </iframe>
+    <p id="video-notice">*Some trailers may not be available due to <strong>Regional Restriction</strong>.</p>
   </div>
 
-  <!-- Synopsis Section -->
   <div class="synopsis-container">
     <div class="synopsis" data-anime-target="synopsis">
       <% if @anime.genre_list.count <= 4 %>
@@ -79,16 +71,12 @@
       <div data-anime-target="content" class="synopsis-content">
         <%= @anime.synopsis %>
       </div>
-      <!-- Toggle Button -->
-      <button class="toggle-button"
-              data-anime-target="toggleButton"
-              data-action="click->anime#toggle">
+      <button class="toggle-button" data-anime-target="toggleButton" data-action="click->anime#toggle">
         Read More
       </button>
     </div>
   </div>
 
-  <!-- Information Section -->
   <div class="info-container">
     <% if @anime.genre_list.count <= 4 %>
       <h1>Information</h1>
@@ -103,10 +91,7 @@
     <p>Aired Date: <%= @anime.start_date %> to <%= @anime.end_date %></p>
     <p>Studio: <%= @anime.studio %></p>
     <div class="sticky-button-container">
-      <%= button_to bookmarks_path,
-                    method: :post,
-                    class: "btn btn-success sticky-button",
-                    params: { bookmark: { anime_id: @anime.id, watch_status: :watching } } do %>
+      <%= button_to bookmarks_path, method: :post, class: "btn btn-success sticky-button", params: { bookmark: { anime_id: @anime.id, watch_status: :watching } } do %>
         Add to Watchlist
       <% end %>
     </div>
