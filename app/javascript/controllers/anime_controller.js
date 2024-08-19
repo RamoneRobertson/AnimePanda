@@ -1,7 +1,21 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["iframeContainer", "playButton", "playText"];
+  static targets = ["synopsis", "content", "toggleButton", "iframeContainer", "playButton", "playText"];
+
+  toggle() {
+    const content = this.contentTarget;
+    const button = this.toggleButtonTarget;
+
+    // Toggle the "expanded" class on the content
+    if (content.classList.contains("expanded")) {
+      content.classList.remove("expanded");
+      button.textContent = "Read More";
+    } else {
+      content.classList.add("expanded");
+      button.textContent = "Read Less";
+    }
+  }
 
   play() {
     const iframeContainer = this.iframeContainerTarget;
