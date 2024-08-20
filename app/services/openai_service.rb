@@ -8,11 +8,12 @@ class OpenaiService
   end
 
   def recommend_anime(prompt)
+    animes = Anime.all.select(:id, :title, :rating, :rank, :popularity).to_json
     response = client.chat(
       parameters: {
           model: "gpt-4o-mini", # Required.
           messages: [
-            {role: "system", content: "You are the AnimePanda. ndations based on the user's watched anime. You will recommend five animes. Always respond in JSON format."},
+            {role: "system", content: "You are the AnimePanda. recommendations based on the user's watched anime. Always respond in JSON format. You will recommend five animes from the following JSON #{animes}. "},
             {role: "user", content: prompt }], # Required.
           temperature: 1.5,
           stream: false,
