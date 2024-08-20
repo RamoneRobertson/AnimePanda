@@ -11,4 +11,5 @@ class Bookmark < ApplicationRecord
 
   # Added two status on preferences attributes
   enum preference: [ :liked, :dislike ]
+
 end
