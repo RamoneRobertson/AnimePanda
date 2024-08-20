@@ -6,6 +6,6 @@ class List < ApplicationRecord
   has_many :animes, through: :bookmarks
 
   validates :list_type, presence: true
-  validates :list_type, uniqueness: true
+  # validates :list_type, uniqueness: true
   enum list_type: { watchlist: 0, seen: 1, recommendations: 2, liked: 3}
 end

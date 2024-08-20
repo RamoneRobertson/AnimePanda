@@ -81,9 +81,7 @@ def add_from_mal(user, mal_info)
       anime = add_anime(id)
     end
 
-    if watch_status == "like"
-      list = user.lists.find_by(list_type: 'liked')
-    elsif watch_status == "completed"
+    if watch_status == "completed"
       list = user.lists.find_by(list_type: 'seen')
     elsif watch_status == "watching"
       list = user.lists.find_by(list_type: 'watchlist')
