@@ -54,6 +54,7 @@ gem "nokogiri"
 gem 'acts-as-taggable-on', '>= 9.0.1'
 gem "ruby-openai"
 gem "pg_search"
+gem 'activeadmin'
 
 group :development, :test do
   gem "dotenv-rails"

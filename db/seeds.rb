@@ -81,9 +81,7 @@ def add_from_mal(user, mal_info)
       anime = add_anime(id)
     end
 
-    if watch_status == "like"
-      list = user.lists.find_by(list_type: 'liked')
-    elsif watch_status == "completed"
+    if watch_status == "completed"
       list = user.lists.find_by(list_type: 'seen')
     elsif watch_status == "watching"
       list = user.lists.find_by(list_type: 'watchlist')
@@ -115,3 +113,4 @@ puts "There is a total of #{List.count} lists in the database"
 puts "There is a total of #{Bookmark.count} bookmarks in the database"
 # puts JSON.pretty_generate(user_info)
 # puts user_info["data"]
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
