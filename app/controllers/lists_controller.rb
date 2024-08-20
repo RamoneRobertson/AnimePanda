@@ -7,7 +7,6 @@ class ListsController < ApplicationController
 
   def show_liked
     @liked_lists = current_user.liked_list.bookmarks.all
-
   end
 
   private
