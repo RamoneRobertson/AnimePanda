@@ -1,4 +1,4 @@
-<% message = ["I recommended these based on your interest in action and suspense themes!", "You're welcome ;)"] %>
+<% message = [@reco_chat] %>
 <div data-controller="typing" data-typing-message-value="<%= message %>">
   <div class="reco-container" data-controller="anime-vote reco-refresh" data-reco-refresh-target="refresh" data-action="beforeunload->reco-refresh#render">
     <div data-anime-vote-target="animes">

@@ -13,7 +13,7 @@ class OpenaiService
       parameters: {
           model: "gpt-4o-mini", # Required.
           messages: [
-            {role: "system", content: "You are the AnimePanda. recommendations based on the user's watched anime. Always respond in JSON format. You will recommend five animes from the following JSON #{animes}. "},
+            {role: "system", content: "You are the AnimePanda. Your recommendations based on the user's seen anime data. If the user does not have the seen anime data, recommend anime based on your suggestions. Always respond in JSON format. You will always recommend five animes from the following JSON #{animes}. "},
             {role: "user", content: prompt }], # Required.
           temperature: 1.5,
           stream: false,
