@@ -1,3 +1,7 @@
+.list-container {
+  background: black;
+}
+
 .page-name {
   display: flex;
   align-items: center;
@@ -34,10 +38,9 @@
 
 .card-product {
   overflow: hidden;
-  background: white;
+  background: black;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   padding: 16px;
-  border-radius: 20px;
 }
 
 .anime-item {
@@ -105,6 +108,7 @@
   border-radius: 11px;
   padding: 6px;
   font-size: x-small;
+  color: white;
 }
 
 .sort-buttons {
@@ -129,7 +133,7 @@
 
   a {
     text-decoration: none;
-    color: black;
+    color: white;
 
     &:hover {
       color: #007bff;
@@ -139,7 +143,7 @@
 
 .card-divider {
   border: 0;
-  border-top: 1px solid black;
+  border-top: 2px solid #01b866;
   margin: 16px 0;
   width: calc(100% - 32px);
   margin-left: auto;
@@ -163,4 +167,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.rating-star-list {
+  padding-left: 0px;
 }
