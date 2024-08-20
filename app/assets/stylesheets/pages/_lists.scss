@@ -1,5 +1,5 @@
 .list-container {
-  background: black;
+  // background: black;
 }
 
 .page-name {
@@ -7,6 +7,7 @@
   align-items: center;
   padding-top: 15px;
   padding-bottom: 15px;
+  background: black;
 
   a {
     position: absolute;
@@ -37,10 +38,9 @@
 }
 
 .card-product {
-  overflow: hidden;
-  background: black;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  background: #0F0F13;
   padding: 16px;
+  border-radius: 35px;
 }
 
 .anime-item {
@@ -119,6 +119,7 @@
   padding-bottom: 20px;
   padding-left: 15px;
   padding-right: 15px;
+  background: black;
 }
 
 .sort-button-design {
@@ -141,9 +142,13 @@
   }
 }
 
+.show-wrapper {
+  background-color: black;
+}
+
 .card-divider {
   border: 0;
-  border-top: 2px solid #01b866;
+  border-top: 2px solid black;
   margin: 16px 0;
   width: calc(100% - 32px);
   margin-left: auto;

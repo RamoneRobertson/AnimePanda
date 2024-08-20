@@ -1,59 +1,56 @@
-<div class="list-container">
-  <div class ="page-name">
-    <%= link_to root_path do %>
-    <i class="fa-solid fa-arrow-left text-decoration-none" style="color: white;"></i>
-  <% end %>
-    <h1 style="color: white;">Watchlist</h1>
-  </div>
-  <div class="show-wrapper">
-    <div class="sort-buttons">
-      <div class="sort-button-design text-decoration-none">
-        <%= link_to "All", lists_watchlist_path %>
-      </div>
-      <div class="sort-button-design text-decoration-none">
-        <%= link_to "Watching", lists_watchlist_path(status: "watching") %>
-      </div>
-      <div class="sort-button-design text-decoration-none">
-        <%= link_to "Completed", lists_watchlist_path(status: "completed") %>
-      </div>
-      <div class="sort-button-design text-decoration-none">
-        <%= link_to "Dropped", lists_watchlist_path(status: "dropped") %>
-      </div>
+  <div class="list-container">
+    <div class ="page-name">
+      <%= link_to root_path do %>
+      <i class="fa-solid fa-arrow-left text-decoration-none" style="color: white;"></i>
+    <% end %>
+      <h1 style="color: white;">Watchlist</h1>
     </div>
-
-      <% if @bookmarks.empty? %>
-      <div class="empty-bookmark">
-        <%= image_tag 'sleeping-panda.png', alt: 'No bookmarks' %>
-        <h1 style="color: white;" >Your Watchlist is Empty</h1>
-        <p style="color: white;">Add Anime by pressing <strong>"Add to Watchlist"</strong> through Anime show page</p>
+    <div class="show-wrapper">
+      <div class="sort-buttons">
+        <div class="sort-button-design text-decoration-none">
+          <%= link_to "All", lists_watchlist_path %>
+        </div>
+        <div class="sort-button-design text-decoration-none">
+          <%= link_to "Watching", lists_watchlist_path(status: "watching") %>
+        </div>
+        <div class="sort-button-design text-decoration-none">
+          <%= link_to "Completed", lists_watchlist_path(status: "completed") %>
+        </div>
       </div>
-      <% else %>
-        <div class="card-product">
-            <% @bookmarks.each do |list_animes| %>
-                <div class="anime-item mb-3">
-                  <div class="anime-item-content">
-                    <% if list_animes.anime.picture_url.nil? %>
-                      <p>Image: Image Empty</p>
-                    <% else %>
-                      <img src=<%="#{list_animes.anime.picture_url}" %> class="anime-image">
-                    <% end %>
-                    <div class="card-product-infos">
-                      <strong><h2 style="color: white;"><%= list_animes.anime.title %></h2></strong>
-                      <div class="details-info">
-                        <div class="info-border">Ep <%= list_animes.anime.episode_count %></div>
 
-                        <div class="info-border"><%= list_animes.anime.start_date.year %></div>
+        <% if @bookmarks.empty? %>
+        <div class="empty-bookmark">
+          <%= image_tag 'sleeping-panda.png', alt: 'No bookmarks' %>
+          <h1 style="color: white;" >Your Watchlist is Empty</h1>
+          <p style="color: white;">Add Anime by pressing <strong>"Add to Watchlist"</strong> through Anime show page</p>
+        </div>
+        <% else %>
+          <div class="card-product">
+              <% @bookmarks.each do |list_animes| %>
+                  <div class="anime-item mb-3">
+                    <div class="anime-item-content">
+                      <% if list_animes.anime.picture_url.nil? %>
+                        <p>Image: Image Empty</p>
+                      <% else %>
+                        <img src=<%="#{list_animes.anime.picture_url}" %> class="anime-image">
+                      <% end %>
+                      <div class="card-product-infos">
+                        <strong><h2 style="color: white;"><%= list_animes.anime.title %></h2></strong>
+                        <div class="details-info">
+                          <div class="info-border">Ep <%= list_animes.anime.episode_count %></div>
 
-                        <div class="info-border"><%= list_animes.anime.studio %></div>
+                          <div class="info-border"><%= list_animes.anime.start_date.year %></div>
+
+                          <div class="info-border"><%= list_animes.anime.studio %></div>
+                        </div>
+                        <p class= "pb-3" style="color: white;"><%= list_animes.anime.rating %> <i class="fa-solid fa-star rating-star-list"></i></p>
+                        <p class= "pt-1" style="color: white;">Rank: <%= list_animes.anime.rank %></p>
                       </div>
-                      <p class= "pb-3" style="color: white;"><%= list_animes.anime.rating %> <i class="fa-solid fa-star rating-star-list"></i></p>
-                      <p class= "pt-1" style="color: white;">Rank: <%= list_animes.anime.rank %></p>
                     </div>
                   </div>
-                </div>
-                  <hr class="card-divider">
-              <% end  %>
-        <% end %>
+                    <hr class="card-divider">
+                <% end  %>
+          <% end %>
+      </div>
     </div>
   </div>
-</div>
