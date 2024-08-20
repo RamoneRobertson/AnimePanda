@@ -4,20 +4,22 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="anime-vote"
 export default class extends Controller {
-  // animes -> reco-container div in
+  // animes -> reco-container div
   // anime -> reco-anime div
   // dislike -> dislike btn
   //  like -> like btn
   static targets = ["animes", "anime", "dislike", "like"]
 
   connect(){
-
+    sessionStorage.setItem("likes", "0");
   }
   // Add the yes class from _recommendation.scss, runs the like animation
   like(event){
+    this.#recordLike();
     this.animeTarget.classList.add("yes");
     this.#updatePreference();
     this.#removeBookmark();
+
     this.#redirect();
   }
 
@@ -45,6 +47,25 @@ export default class extends Controller {
       this.animeTarget.remove();
     }
   }
+
+  #recordLike() {
+    const animeId = this.animeTarget.dataset.anime
+    const csrfToken = document.querySelector("[name='csrf-token']").content
+    fetch(`/animes/${animeId}/like`, {
+      method: "POST",
+      headers: {
+        "X-CSRF-Token": csrfToken,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({ liked: true })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("Like registered:", data);
+    })
+  }
+
 
   // function to create a new bookmark with the watch_status set to like
   // Sends a HTTP POST request to /bookmarks
@@ -80,16 +101,15 @@ export default class extends Controller {
     })
   }
 
-  disableButtons(){
+  #disableButtons(){
     this.likeTarget.classList.toggle('d-none');
     this.dislikeTarget.classList.toggle('d-none');
   }
 
   // Function redirects to the /lists/liked view by tracking animesTarget.children
-  // What should happen after the swiping is done
   #redirect(){
     if (this.animesTarget.children.length === 1){
-      this.disableButtons();
+      this.#disableButtons();
       window.location.href = "/lists/liked";
     }
   }

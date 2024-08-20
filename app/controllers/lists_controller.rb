@@ -6,7 +6,8 @@ class ListsController < ApplicationController
   end
 
   def show_liked
-    @liked_lists = current_user.liked_list.bookmarks.where(created_at: 90.seconds.ago..Time.current)
+    @liked_lists = current_user.liked_list.bookmarks.all
+
   end
 
   private
