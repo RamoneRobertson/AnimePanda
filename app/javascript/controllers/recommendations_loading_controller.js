@@ -2,47 +2,53 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="recommendations-loading"
 export default class extends Controller {
+  static target = [ "loadbar" ]
+
   connect() {
     // console.log("hello from loading bar controller");
   }
 
   loading(){
-    // this.#loadBar();
-    // setTimeout(() => {
-    //   this.loading();
-    // }, 100);
+    // const overlay = document.querySelector("#full-overlay");
+    // if(overlay.classList.contains("d-none")){
+    //   overlay.classList.remove("d-none");
+    // }
 
-    const thePanda = document.querySelector("#the-panda");
-    if(thePanda.classList.contains("d-none")){
-      thePanda.classList.remove("d-none");
-    }
+    // this.#performLoad();
+  }
 
-    // const chatBox = document.querySelector("#panda_message");
-    // chatBox.innerText = "Loading...";
+  #performLoad(){
+    const overlay = document.querySelector("#full-overlay");
+    if(overlay === null) return;
+    this.#loadBar();
+    setTimeout(() => {
+      this.#performLoad();
+    }, 100);
   }
 
   #loadBar(){
-    // console.log("Started loading");
-    const loadingDiv = document.querySelector(".turbo-progress-bar");
-    const chatBox = document.querySelector("#panda_message");
+    const loadingprogress = document.querySelector(".turbo-progress-bar");
+
+    // const loadingText = document.querySelector(".load-text");
+    const loadingDiv = document.querySelector(".load-bar");
 
     // if(loadingDiv != null){
     //   // console.log(loadingDiv.style.width);
-    //   console.log(`Turbo amount: ${parseFloat(loadingDiv.style.width)}`);
-    //   const loadWidth = parseFloat(loadingDiv.style.width) - 10;
+    //   console.log(`Turbo amount: ${parseFloat(loadingprogress.style.width)}`);
+    //   const loadWidth = parseFloat(loadingprogress.style.width) - 10;
     //   const loadedPercentage = loadWidth / 10;
     //   console.log(`Calc Perc: ${loadedPercentage*100}%`);
     // }
-    if(loadingDiv != null){
-      const percentage = parseFloat(loadingDiv.style.width);
+    if(loadingprogress != null){
+      const percentage = parseFloat(loadingprogress.style.width);
       console.log(`${percentage} %`)
 
       if(percentage >= 100) return;
 
-      chatBox.innerText = `Loading...${percentage}%`;
+      // loadingText.innerText = `${parseInt(percentage)}%`;
+      loadingDiv.style.width = `${percentage}%`;
     }else{
-      // const chatBox = document.querySelector("#panda_message");
-      // chatBox.innerText = "Loading...";
+
     }
   }
 }

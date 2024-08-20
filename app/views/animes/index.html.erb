@@ -1,4 +1,16 @@
-<div data-controller="typing" data-typing-message-value="<%= [@welcome_chat.to_json] %>">
+<div data-controller="typing recommendations-loading" data-typing-message-value="<%= [@welcome_chat.to_json] %>">
+  <div class="d-flex justify-content-center align-items-center d-none" id="full-overlay"
+    style="position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 100;">
+    <div style="padding: 32px; background: black; border-radius: 24px;">
+      <p class="load-text" data-recommendations-loading-target="loadbar" style="color: white;">Searching...</p>
+      <div style="height: 8px; width: 180px; background-color: white;">
+        <div class="load-bar" data-recommendations-loading-target="loadbar" style="background-color: green; height: 100%;"></div>
+      </div>
+    </div>
+  </div>
   <div class="main-banner d-flex justify-content-center align-items-center">
     <div class="title d-flex justify-content-center align-items-center gap-1">
       <h1 style="font-size: 3rem;">AnimePanda</h1>
@@ -17,7 +29,7 @@
     <div class="buttons p-3" style="position: absolute; bottom: 0; width: 100%;">
       <div class="lucky-button d-flex justify-content-center mb-2">
         <%= link_to animes_recommendations_path do %>
-          <button data-action="click->typing#loading" class="recommend-button btn core-button">Recommend anything</button>
+          <button data-action="click->typing#loading click->recommendations-loading#loading" class="recommend-button btn core-button">Recommend anything</button>
         <% end %>
       </div>
       <div class="buttons-scrolling-wrapper">
