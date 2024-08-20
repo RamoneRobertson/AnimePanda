@@ -43,18 +43,26 @@ class AnimesController < ApplicationController
     openai_service = OpenaiService.new
     @user = current_user
     recommended_animes = []
+    json_format = {"recommendations"=>[{"title"=>"Hunter x Hunter"}, {"title"=>"God Eater"}, {"title"=>"Attack on Titan"}, {"title"=>"Black Clover"}, {"title"=>"Parasyte: The Maxim"}]}
 
     prompt = <<~PROMPT
-            Please respond in the following JSON format: {\"title\": \"\"}.
-            Recommend Anime based on user's following seen anime below.
+            Please respond in the following JSON format: #{json_format}.
+            Recommend 5 Anime based on user's following seen anime below.
             #{seen_animes}
-            Only include the english title of the anime
+            Avoid recommending anime that you already recommended recently.
+            Only include the english title of the anime.
             PROMPT
 
     response = openai_service.recommend_anime(prompt)
     recommended_json = response.dig("content")
     recommended_data = JSON.parse(recommended_json)
-    # puts recommended_data
+
+    # while recommended_data.count < 2 do
+    #   response = openai_service.recommend_anime(prompt)
+    #   recommended_json = response.dig("content")
+    #   recommended_data = JSON.parse(recommended_json)
+    # end
+
     recommended_data["recommendations"].each do |anime|
       new_anime = Anime.search_by_title(anime["title"])
       if new_anime.empty?
@@ -63,7 +71,11 @@ class AnimesController < ApplicationController
         else
           mal_id = mal_service.find_anime(anime["title"])["data"].first["node"]["id"]
           new_anime = import_anime(mal_id)
+          if new_anime.mal_id.nil?
+            next
+          else
           recommended_animes.push(new_anime)
+          end
         end
       else
         recommended_animes.push(new_anime.first)
