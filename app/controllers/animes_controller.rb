@@ -10,7 +10,6 @@ class AnimesController < ApplicationController
     @user = current_user
     seen_animes = @user.lists.seen.first.animes.select(:id, :title).to_json
     @animes = genrate_chatgpt_anime(seen_animes)
-    params[:likes] = 0
 
     @recommend_list = @user.lists.find_by(list_type: 'recommendations')
     reco_animes = @user.lists.recommendations.first.animes.select(:id, :title).to_json

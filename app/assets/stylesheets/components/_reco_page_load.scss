@@ -1,0 +1,46 @@
+.loader {
+  top: 10px;
+  margin: auto;
+  margin-top: 77vw;
+  border: 20px solid #EAF0F6;
+  border-radius: 50%;
+  border-top: 20px solid var(--panda-green);
+  width: 200px;
+  height: 200px;
+  animation: spinner 1s linear infinite;
+
+  .reco-container {
+    display: none;
+  }
+
+  .panda-nav {
+    display: none;
+  }
+
+  .message-box{
+    display: none;
+  }
+
+  .anime-panda-icon{
+    display: none;
+  }
+}
+
+.reco-container {
+  animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+@keyframes spinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

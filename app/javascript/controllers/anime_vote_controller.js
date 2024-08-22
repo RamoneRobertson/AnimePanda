@@ -11,15 +11,15 @@ export default class extends Controller {
   static targets = ["animes", "anime", "dislike", "like"]
 
   connect(){
-    sessionStorage.setItem("likes", "0");
+    console.log(`Likes from anime vote: ${this.animesTarget.dataset.likes}`);
   }
   // Add the yes class from _recommendation.scss, runs the like animation
   like(event){
-    this.#recordLike();
+    this.#incrementLike();
     this.animeTarget.classList.add("yes");
     this.#updatePreference();
     this.#removeBookmark();
-
+    console.log(`Likes from anime vote: ${this.animesTarget.dataset.likes}`);
     this.#redirect();
   }
 
@@ -48,22 +48,8 @@ export default class extends Controller {
     }
   }
 
-  #recordLike() {
-    const animeId = this.animeTarget.dataset.anime
-    const csrfToken = document.querySelector("[name='csrf-token']").content
-    fetch(`/animes/${animeId}/like`, {
-      method: "POST",
-      headers: {
-        "X-CSRF-Token": csrfToken,
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({ liked: true })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log("Like registered:", data);
-    })
+  #incrementLike() {
+    this.animesTarget.dataset.likes = Number(this.animesTarget.dataset.likes) + 1
   }
 
 
@@ -108,7 +94,11 @@ export default class extends Controller {
 
   // Function redirects to the /lists/liked view by tracking animesTarget.children
   #redirect(){
-    if (this.animesTarget.children.length === 1){
+    if (this.animesTarget.children.length == 1 && this.animesTarget.dataset.likes == 0){
+      document.documentElement.classList.add('loader');
+      window.location.reload(true);
+    }
+    else if (this.animesTarget.children.length == 1){
       this.#disableButtons();
       window.location.href = "/lists/liked";
     }
