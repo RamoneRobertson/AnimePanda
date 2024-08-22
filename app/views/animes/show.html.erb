@@ -90,6 +90,7 @@
     <p>Popularity: <%= @anime.popularity %></p>
     <p>Aired Date: <%= @anime.start_date %> to <%= @anime.end_date %></p>
     <p>Studio: <%= @anime.studio %></p>
+    <%= render 'components/similar_anime' %>
     <div class="sticky-button-container">
       <%= button_to bookmarks_path, method: :post, class: "btn btn-success sticky-button", params: { bookmark: { anime_id: @anime.id, watch_status: :watching } } do %>
         Add to Watchlist
