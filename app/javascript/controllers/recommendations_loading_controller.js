@@ -1,58 +1,39 @@
 import { Controller } from "@hotwired/stimulus"
 
 const bigPawSize = "80px";
+let pawArrayIndex = 0;
+let paws = [];
 
 // Connects to data-controller="recommendations-loading"
 export default class extends Controller {
-  static targets = [ "loadbar", "paw" ]
+  static targets = [ "screen", "paw" ]
 
   connect() {
-    console.log("hello from loading bar controller");
-    console.log(this.pawTarget.querySelector("img"));
-    this.pawTarget.querySelector("img").style.width = "80px";
+    this.pawTargets.forEach(element => {
+      paws.push(element.querySelector("img"));
+    });
   }
 
   loading(){
-    // const overlay = document.querySelector("#full-overlay");
-    // if(overlay.classList.contains("d-none")){
-    //   overlay.classList.remove("d-none");
-    // }
-
-    // this.#performLoad();
+    console.log("loading started");
+    this.screenTarget.classList.remove("d-none");
+    this.#performLoad();
   }
 
   #performLoad(){
-    const overlay = document.querySelector("#full-overlay");
-    if(overlay === null) return;
-    this.#loadBar();
     setTimeout(() => {
+      for(let i = 0; i < paws.length; i++){
+        if(i === pawArrayIndex){
+          paws[i].style.width = "70px";
+        }else{
+          paws[i].style.width = "60px";
+        }
+      }
+      pawArrayIndex += 1;
+      if(pawArrayIndex >= paws.length){
+        pawArrayIndex = 0;
+      }
       this.#performLoad();
-    }, 100);
-  }
-
-  #loadBar(){
-    const loadingprogress = document.querySelector(".turbo-progress-bar");
-
-    // const loadingText = document.querySelector(".load-text");
-    const loadingDiv = document.querySelector(".load-bar");
-
-    // if(loadingDiv != null){
-    //   // console.log(loadingDiv.style.width);
-    //   console.log(`Turbo amount: ${parseFloat(loadingprogress.style.width)}`);
-    //   const loadWidth = parseFloat(loadingprogress.style.width) - 10;
-    //   const loadedPercentage = loadWidth / 10;
-    //   console.log(`Calc Perc: ${loadedPercentage*100}%`);
-    // }
-    if(loadingprogress != null){
-      const percentage = parseFloat(loadingprogress.style.width);
-      console.log(`${percentage} %`)
-
-      if(percentage >= 100) return;
-
-      // loadingText.innerText = `${parseInt(percentage)}%`;
-      loadingDiv.style.width = `${percentage}%`;
-    }else{
-
-    }
+    }, 300);
   }
 }
