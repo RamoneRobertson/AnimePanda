@@ -1,23 +1,5 @@
 <div data-controller="typing recommendations-loading" data-typing-message-value="<%= [@welcome_chat.to_json] %>">
-  <div data-recommendations-loading-target="screen" class="d-flex justify-content-center align-items-center d-none" id="full-overlay"
-    style="position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    background-color: #00000069;">
-    <%# <div style="padding: 32px; background: black; border-radius: 24px;">
-      <p class="load-text" data-recommendations-loading-target="loadbar" style="color: white;">Searching...</p>
-      <div style="height: 8px; width: 180px; background-color: white;">
-        <div class="load-bar" data-recommendations-loading-target="loadbar" style="background-color: green; height: 100%;"></div>
-      </div>
-    </div> %>
-    <div style="position: relative;">
-      <div data-recommendations-loading-target="paw" class="loading-paw" style="position: absolute; right: 60px;"><%= image_tag "panda_paw_white.png", width: "60px" %></div>
-      <div data-recommendations-loading-target="paw" class="loading-paw" style="position: absolute; right: 0;"><%= image_tag "panda_paw_white.png", width: "60px", style: "position: relative; top: 15px;" %></div>
-      <div data-recommendations-loading-target="paw" class="loading-paw" style="position: absolute; left: 0;"><%= image_tag "panda_paw_white.png", width: "60px", style: "position: relative; top: -15px;" %></div>
-      <div data-recommendations-loading-target="paw" class="loading-paw" style="position: absolute; left: 60px;"><%= image_tag "panda_paw_white.png", width: "60px" %></div>
-    </div>
-  </div>
+  <%= render "components/paw_loading" %>
   <div class="main-banner d-flex justify-content-center align-items-center">
     <div class="title d-flex justify-content-center align-items-center gap-1">
       <h1 style="font-size: 3rem;">AnimePanda</h1>
