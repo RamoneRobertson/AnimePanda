@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="anime-vote"
 export default class extends Controller {
-  // animes -> reco-container div in
+  // animes -> reco-container div
   // anime -> reco-anime div
   // dislike -> dislike btn
   //  like -> like btn
@@ -15,6 +15,7 @@ export default class extends Controller {
   }
   // Add the yes class from _recommendation.scss, runs the like animation
   like(event){
+    this.#incrementLike();
     this.animeTarget.classList.add("yes");
     this.#updatePreference();
     this.#removeBookmark();
@@ -38,7 +39,6 @@ export default class extends Controller {
     //  remove the nope class found in _recommendation.scss, to prepare for the next anime in the stack
     if(event.animationName === 'dislike'){
       this.animeTarget.classList.remove("nope")
-      console.log("Dislike animation done!")
     }
 
     // On a like or dislike remove the item from the HTML
@@ -46,6 +46,11 @@ export default class extends Controller {
       this.animeTarget.remove();
     }
   }
+
+  #incrementLike() {
+    this.animesTarget.dataset.likes = Number(this.animesTarget.dataset.likes) + 1
+  }
+
 
   // function to create a new bookmark with the watch_status set to like
   // Sends a HTTP POST request to /bookmarks
@@ -81,10 +86,19 @@ export default class extends Controller {
     })
   }
 
+  #disableButtons(){
+    this.likeTarget.classList.toggle('d-none');
+    this.dislikeTarget.classList.toggle('d-none');
+  }
+
   // Function redirects to the /lists/liked view by tracking animesTarget.children
-  // What should happen after the swiping is done
   #redirect(){
-    if (this.animesTarget.children.length === 1){
+    if (this.animesTarget.children.length == 1 && this.animesTarget.dataset.likes == 0){
+      document.documentElement.classList.add('loader');
+      window.location.reload(true);
+    }
+    else if (this.animesTarget.children.length == 1){
+      this.#disableButtons();
       window.location.href = "/lists/liked";
     }
   }

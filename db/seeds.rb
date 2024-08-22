@@ -43,7 +43,7 @@ user_mal_info = mal_service.call_user(new_user.mal_username)
 def add_anime(id)
   mal_service = MyanimelistService.new
   info = mal_service.call_anime(id)
-  title = info["alternative_titles"]["en"]
+  info["alternative_titles"]["en"] == "" ? title = info["title"] : title = info["alternative_titles"]["en"]
   picture_url = info["main_picture"]["large"]
   start_date = info["start_date"]
   synopsis = info["synopsis"]
@@ -56,7 +56,7 @@ def add_anime(id)
   genres = info["genres"]
 
   new_anime = Anime.new(title: title, picture_url: picture_url, start_date: start_date, synopsis: synopsis, rating: rating, rank: rank, episode_count: episode_count, popularity: popularity, studio: studio, trailer: trailer, mal_id: id)
-  puts "---------- #{new_anime.title} ----------"
+  puts "---------- #{new_anime.title}(#{id}) ----------"
   anime_genre_list = []
   genres.each do |genre|
     puts "genre tag: #{genre["name"]}"

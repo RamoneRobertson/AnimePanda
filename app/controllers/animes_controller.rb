@@ -5,19 +5,26 @@ require 'open-uri'
 class AnimesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
   def recommendations
+    current_user.liked_list.bookmarks.destroy_all
     chatgpt = OpenaiService.new
-    @skip_panda = true
-    # @hide_navbar = true
     @user = current_user
     seen_animes = @user.lists.seen.first.animes.select(:id, :title).to_json
     @animes = genrate_chatgpt_anime(seen_animes)
+
     @recommend_list = @user.lists.find_by(list_type: 'recommendations')
     reco_animes = @user.lists.recommendations.first.animes.select(:id, :title).to_json
     @reco_chat = chatgpt.reco_chat(seen_animes, reco_animes)
+
     @animes.each do |anime|
       new_bookmark = Bookmark.new(watch_status: :recommended, anime: anime, list: @recommend_list, preference: nil)
-      new_bookmark.save
+      new_bookmark.save if !new_bookmark.anime_id.nil?
     end
+  end
+
+  def like
+    @anime = Anime.find(params[:id])
+    swipe_session = session[:liked_anime_ids] = []
+    swipe_session << @anime.id unless swipe_session.include?(@anime.id)
   end
 
   def index
@@ -30,11 +37,23 @@ class AnimesController < ApplicationController
   end
 
   def show
+    mal_service = MyanimelistService.new
     chatgpt = OpenaiService.new
     @user = current_user
     @liked = @user.lists.find_by(list_type: 'liked')
     @anime = Anime.find(params[:id])
     @show_chat = chatgpt.show_chat(@anime.title)
+    recommended = mal_service.call_mal_recos(@anime.mal_id)
+    @reco_mal = []
+    recommended[0..2].each do |anime|
+      mal_id = anime["node"]["id"]
+      if Anime.find_by(mal_id: mal_id).nil?
+        new_anime = import_anime(mal_id)
+      else
+        new_anime = Anime.find_by(mal_id: mal_id)
+      end
+      @reco_mal.push(new_anime)
+    end
     hide_panda
   end
 
@@ -55,34 +74,36 @@ class AnimesController < ApplicationController
 
     response = openai_service.recommend_anime(prompt)
     recommended_json = response.dig("content")
-    recommended_data = JSON.parse(recommended_json)
+    # checked parsed content
+    begin
+      recommended_data = JSON.parse(recommended_json)
+    rescue JSON::ParserError => e
+      puts "There was an error parsing the JSON: #{e.message}"
+      recommended_data = {"recommendations"=>[{"title"=>"Hunter x Hunter"}, {"title"=>"God Eater"}, {"title"=>"Attack on Titan"}, {"title"=>"Black Clover"}, {"title"=>"Parasyte: The Maxim"}]}
+    end
+    recommended_data = {"recommendations"=>[{"title"=>"Hunter x Hunter"}, {"title"=>"God Eater"}, {"title"=>"Attack on Titan"}, {"title"=>"Black Clover"}, {"title"=>"Parasyte: The Maxim"}]} if  recommended_data["recommendations"].first.class != Hash || !recommended_data["recommendations"].first.key?("title")
 
-    # while recommended_data.count < 2 do
-    #   response = openai_service.recommend_anime(prompt)
-    #   recommended_json = response.dig("content")
-    #   recommended_data = JSON.parse(recommended_json)
-    # end
 
     recommended_data["recommendations"].each do |anime|
       new_anime = Anime.search_by_title(anime["title"])
       if new_anime.empty?
-        if mal_service.find_anime(anime["title"])["message"] == "invalid q"
+        if mal_service.find_anime(anime["title"])["data"].empty?
           next
         else
           mal_id = mal_service.find_anime(anime["title"])["data"].first["node"]["id"]
-          new_anime = import_anime(mal_id)
-          if new_anime.mal_id.nil?
-            next
+          if Anime.find_by(mal_id: mal_id).nil?
+            new_anime = import_anime(mal_id)
           else
-          recommended_animes.push(new_anime)
+            new_anime = Anime.find_by(mal_id: mal_id)
           end
+          recommended_animes.push(new_anime)
         end
       else
         recommended_animes.push(new_anime.first)
       end
     end
-
     recommended_animes
+
   end
 
   def import_anime(id)
@@ -112,6 +133,10 @@ class AnimesController < ApplicationController
 
 
   private
+
+  def clear_likes
+    current_user.liked_list.bookmarks.destroy
+  end
 
   def hide_navbar
     @hide_navbar = true
