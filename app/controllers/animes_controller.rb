@@ -48,7 +48,6 @@ class AnimesController < ApplicationController
       @reco_mal.push(new_anime)
     end
     hide_panda
-    raise
   end
 
   def genrate_chatgpt_anime(seen_animes)
