@@ -65,9 +65,50 @@ class OpenaiService
                                       #{recos}
                                       It was based on the user's watched anime list below.
                                       #{seen}
-                                      Follow the format bellow.
+                                      Follow the format below.
                                       I recommended these based on your interest in action, fantasy, and suspense in titles like Jujutsu Kaisen and Death Note. Explore brilliant storylines in epic worlds!"},
-            {role: "user", content: "I just got your anime recommendations. Tell me that recommended this based on my watched anime list then briefly introduce the anime recommendations. Keep it short and less than 23 words" }], # Required.
+            {role: "user", content: "I just got your anime recommendations. Tell me why recommended this based on my watched anime list then briefly introduce the anime recommendations. Keep it short and less than 23 words" }], # Required.
+          temperature: 1.5,
+          stream: false,
+					max_tokens: 150,
+      })
+    # you might want to inspect the response and see what the api is giving you
+    return response.dig("choices", 0, "message", "content")
+  end
+
+  def per_reco_chat(seen, anime)
+    response = client.chat(
+      parameters: {
+          model: "gpt-4o-mini", # Required.
+          messages: [
+            {role: "system", content: "You are the AnimePanda. You are an anime expert and concierge for an anime recommendations website.
+                                      You recommended the anime below.
+                                      #{anime.title}
+                                      It was based on the user's watched anime list below.
+                                      #{seen}
+                                      Follow the format below.
+                                      I recommended Frieren: Beyond Journey's End due to your taste for fantasy and character depth seen in shows like Mushoku Tensei. It explores the emotional journey of a mage after heroics end."},
+            {role: "user", content: "I just got your anime recommendations. Tell me why you recommended this based on my watched anime list then briefly introduce the anime recommendation. Keep it short and less than 23 words" }], # Required.
+          temperature: 1.5,
+          stream: false,
+					max_tokens: 150,
+      })
+    # you might want to inspect the response and see what the api is giving you
+    return response.dig("choices", 0, "message", "content")
+  end
+
+  def watchlist_chat(watchlist)
+    response = client.chat(
+      parameters: {
+          model: "gpt-4o-mini", # Required.
+          messages: [
+            {role: "system", content: "You are the AnimePanda. You are an anime expert and concierge for an anime recommendations website.
+                                      The user's watchlist is below
+                                      #{watchlist}
+                                      The user is checking their watchlist.
+                                      If the user's watchlist is empty, tell them it's empty and recommend an anime to add in their watchlist.
+                                      Be quirky and funny."},
+            {role: "user", content: "I am checking my watchlist. Ask me if I already watched anything on my watchlist and what did I think of it. If I don't have anything in my watchlist, recommend me a random anime. Keep it short and less than 23 words" }], # Required.
           temperature: 1.5,
           stream: false,
 					max_tokens: 150,
