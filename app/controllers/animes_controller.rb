@@ -16,7 +16,7 @@ class AnimesController < ApplicationController
     @reco_chat = chatgpt.reco_chat(seen_animes, reco_animes)
     @animes.each do |anime|
       new_bookmark = Bookmark.new(watch_status: :recommended, anime: anime, list: @recommend_list, preference: nil)
-      new_bookmark.save
+      new_bookmark.save if !new_bookmark.anime_id.nil?
     end
   end
 
@@ -55,34 +55,36 @@ class AnimesController < ApplicationController
 
     response = openai_service.recommend_anime(prompt)
     recommended_json = response.dig("content")
-    recommended_data = JSON.parse(recommended_json)
+    # checked parsed content
+    begin
+      recommended_data = JSON.parse(recommended_json)
+    rescue JSON::ParserError => e
+      puts "There was an error parsing the JSON: #{e.message}"
+      recommended_data = {"recommendations"=>[{"title"=>"Hunter x Hunter"}, {"title"=>"God Eater"}, {"title"=>"Attack on Titan"}, {"title"=>"Black Clover"}, {"title"=>"Parasyte: The Maxim"}]}
+    end
+    recommended_data = {"recommendations"=>[{"title"=>"Hunter x Hunter"}, {"title"=>"God Eater"}, {"title"=>"Attack on Titan"}, {"title"=>"Black Clover"}, {"title"=>"Parasyte: The Maxim"}]} if  recommended_data["recommendations"].first.class != Hash || !recommended_data["recommendations"].first.key?("title")
 
-    # while recommended_data.count < 2 do
-    #   response = openai_service.recommend_anime(prompt)
-    #   recommended_json = response.dig("content")
-    #   recommended_data = JSON.parse(recommended_json)
-    # end
 
     recommended_data["recommendations"].each do |anime|
       new_anime = Anime.search_by_title(anime["title"])
       if new_anime.empty?
-        if mal_service.find_anime(anime["title"])["message"] == "invalid q"
+        if mal_service.find_anime(anime["title"])["data"].empty?
           next
         else
           mal_id = mal_service.find_anime(anime["title"])["data"].first["node"]["id"]
-          new_anime = import_anime(mal_id)
-          if new_anime.mal_id.nil?
-            next
+          if Anime.find_by(mal_id: mal_id).nil?
+            new_anime = import_anime(mal_id)
           else
-          recommended_animes.push(new_anime)
+            new_anime = Anime.find_by(mal_id: mal_id)
           end
+          recommended_animes.push(new_anime)
         end
       else
         recommended_animes.push(new_anime.first)
       end
     end
-
     recommended_animes
+
   end
 
   def import_anime(id)
