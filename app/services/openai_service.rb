@@ -15,7 +15,7 @@ class OpenaiService
           messages: [
             {role: "system", content: "You are the AnimePanda. Your recommendations based on the user's seen anime data. If the user does not have the seen anime data, recommend anime based on your suggestions. Always respond in JSON format. You will always recommend five animes from the following JSON #{animes}. "},
             {role: "user", content: prompt }], # Required.
-          temperature: 1.5,
+          temperature: 1,
           stream: false,
 					max_tokens: 150,
           response_format: { type: "json_object" } # might want to check this
