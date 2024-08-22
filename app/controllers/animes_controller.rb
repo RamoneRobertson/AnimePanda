@@ -37,11 +37,23 @@ class AnimesController < ApplicationController
   end
 
   def show
+    mal_service = MyanimelistService.new
     chatgpt = OpenaiService.new
     @user = current_user
     @liked = @user.lists.find_by(list_type: 'liked')
     @anime = Anime.find(params[:id])
     @show_chat = chatgpt.show_chat(@anime.title)
+    recommended = mal_service.call_mal_recos(@anime.mal_id)
+    @reco_mal = []
+    recommended[0..2].each do |anime|
+      mal_id = anime["node"]["id"]
+      if Anime.find_by(mal_id: mal_id).nil?
+        new_anime = import_anime(mal_id)
+      else
+        new_anime = Anime.find_by(mal_id: mal_id)
+      end
+      @reco_mal.push(new_anime)
+    end
     hide_panda
   end
 

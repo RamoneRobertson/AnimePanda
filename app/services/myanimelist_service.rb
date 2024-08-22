@@ -116,4 +116,22 @@ class MyanimelistService
     end
     trailer
   end
+
+  def call_mal_recos(id)
+    uri = URI("#{BASE_URL}/anime/#{id}?fields=recommendations")
+    # Step 2: Create an HTTP request object
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true if uri.scheme == 'https'  # Use SSL/TLS if the URL is HTTPS
+
+    # Step 3: Create the GET request and set headers
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request['X-MAL-CLIENT-ID'] = ENV['MAL_CLIENT_ID']  # Replace with your actual client ID
+
+    # Step 4: Send the HTTP request
+    response = http.request(request)
+
+    # Step 5: Parse the JSON response
+    data = JSON.parse(response.body)
+    data["recommendations"]
+  end
 end
