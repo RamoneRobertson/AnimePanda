@@ -11,7 +11,7 @@ export default class extends Controller {
   static targets = ["animes", "anime", "dislike", "like"]
 
   connect(){
-    console.log(`Likes from anime vote: ${this.animesTarget.dataset.likes}`);
+
   }
   // Add the yes class from _recommendation.scss, runs the like animation
   like(event){
@@ -19,7 +19,6 @@ export default class extends Controller {
     this.animeTarget.classList.add("yes");
     this.#updatePreference();
     this.#removeBookmark();
-    console.log(`Likes from anime vote: ${this.animesTarget.dataset.likes}`);
     this.#redirect();
   }
 
