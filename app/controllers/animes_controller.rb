@@ -5,19 +5,26 @@ require 'open-uri'
 class AnimesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
   def recommendations
+    current_user.liked_list.bookmarks.destroy_all
     chatgpt = OpenaiService.new
-    @skip_panda = true
-    # @hide_navbar = true
     @user = current_user
     seen_animes = @user.lists.seen.first.animes.select(:id, :title).to_json
     @animes = genrate_chatgpt_anime(seen_animes)
+
     @recommend_list = @user.lists.find_by(list_type: 'recommendations')
     reco_animes = @user.lists.recommendations.first.animes.select(:id, :title).to_json
     @reco_chat = chatgpt.reco_chat(seen_animes, reco_animes)
+
     @animes.each do |anime|
       new_bookmark = Bookmark.new(watch_status: :recommended, anime: anime, list: @recommend_list, preference: nil)
       new_bookmark.save if !new_bookmark.anime_id.nil?
     end
+  end
+
+  def like
+    @anime = Anime.find(params[:id])
+    swipe_session = session[:liked_anime_ids] = []
+    swipe_session << @anime.id unless swipe_session.include?(@anime.id)
   end
 
   def index
@@ -25,16 +32,28 @@ class AnimesController < ApplicationController
     @welcome_chat = chatgpt.home_chat
     @animes = Anime.all
     best_anime = @animes.sort_by {|anime| anime.popularity}.reverse
-    @random_popular_three = best_anime[0..5].sample(3)
+    @random_popular = best_anime[0...50].sample(10)
     @top_anime = @animes.sort_by {|anime| anime.rating }.reverse[0..3]
   end
 
   def show
+    mal_service = MyanimelistService.new
     chatgpt = OpenaiService.new
     @user = current_user
     @liked = @user.lists.find_by(list_type: 'liked')
     @anime = Anime.find(params[:id])
     @show_chat = chatgpt.show_chat(@anime.title)
+    recommended = mal_service.call_mal_recos(@anime.mal_id)
+    @reco_mal = []
+    recommended[0..2].each do |anime|
+      mal_id = anime["node"]["id"]
+      if Anime.find_by(mal_id: mal_id).nil?
+        new_anime = import_anime(mal_id)
+      else
+        new_anime = Anime.find_by(mal_id: mal_id)
+      end
+      @reco_mal.push(new_anime)
+    end
     hide_panda
   end
 
@@ -114,6 +133,10 @@ class AnimesController < ApplicationController
 
 
   private
+
+  def clear_likes
+    current_user.liked_list.bookmarks.destroy
+  end
 
   def hide_navbar
     @hide_navbar = true
