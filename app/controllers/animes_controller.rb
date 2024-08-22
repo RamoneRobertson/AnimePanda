@@ -5,19 +5,26 @@ require 'open-uri'
 class AnimesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
   def recommendations
+    current_user.liked_list.bookmarks.destroy_all
     chatgpt = OpenaiService.new
-    @skip_panda = true
-    # @hide_navbar = true
     @user = current_user
     seen_animes = @user.lists.seen.first.animes.select(:id, :title).to_json
     @animes = genrate_chatgpt_anime(seen_animes)
+
     @recommend_list = @user.lists.find_by(list_type: 'recommendations')
     reco_animes = @user.lists.recommendations.first.animes.select(:id, :title).to_json
     @reco_chat = chatgpt.reco_chat(seen_animes, reco_animes)
+
     @animes.each do |anime|
       new_bookmark = Bookmark.new(watch_status: :recommended, anime: anime, list: @recommend_list, preference: nil)
-      new_bookmark.save
+      new_bookmark.save if !new_bookmark.anime_id.nil?
     end
+  end
+
+  def like
+    @anime = Anime.find(params[:id])
+    swipe_session = session[:liked_anime_ids] = []
+    swipe_session << @anime.id unless swipe_session.include?(@anime.id)
   end
 
   def index
@@ -43,34 +50,48 @@ class AnimesController < ApplicationController
     openai_service = OpenaiService.new
     @user = current_user
     recommended_animes = []
+    json_format = {"recommendations"=>[{"title"=>"Hunter x Hunter"}, {"title"=>"God Eater"}, {"title"=>"Attack on Titan"}, {"title"=>"Black Clover"}, {"title"=>"Parasyte: The Maxim"}]}
 
     prompt = <<~PROMPT
-            Please respond in the following JSON format: {\"title\": \"\"}.
-            Recommend Anime based on user's following seen anime below.
+            Please respond in the following JSON format: #{json_format}.
+            Recommend 5 Anime based on user's following seen anime below.
             #{seen_animes}
-            Only include the english title of the anime
+            Avoid recommending anime that you already recommended recently.
+            Only include the english title of the anime.
             PROMPT
 
     response = openai_service.recommend_anime(prompt)
     recommended_json = response.dig("content")
-    recommended_data = JSON.parse(recommended_json)
-    # puts recommended_data
+    # checked parsed content
+    begin
+      recommended_data = JSON.parse(recommended_json)
+    rescue JSON::ParserError => e
+      puts "There was an error parsing the JSON: #{e.message}"
+      recommended_data = {"recommendations"=>[{"title"=>"Hunter x Hunter"}, {"title"=>"God Eater"}, {"title"=>"Attack on Titan"}, {"title"=>"Black Clover"}, {"title"=>"Parasyte: The Maxim"}]}
+    end
+    recommended_data = {"recommendations"=>[{"title"=>"Hunter x Hunter"}, {"title"=>"God Eater"}, {"title"=>"Attack on Titan"}, {"title"=>"Black Clover"}, {"title"=>"Parasyte: The Maxim"}]} if  recommended_data["recommendations"].first.class != Hash || !recommended_data["recommendations"].first.key?("title")
+
+
     recommended_data["recommendations"].each do |anime|
       new_anime = Anime.search_by_title(anime["title"])
       if new_anime.empty?
-        if mal_service.find_anime(anime["title"])["message"] == "invalid q"
+        if mal_service.find_anime(anime["title"])["data"].empty?
           next
         else
           mal_id = mal_service.find_anime(anime["title"])["data"].first["node"]["id"]
-          new_anime = import_anime(mal_id)
+          if Anime.find_by(mal_id: mal_id).nil?
+            new_anime = import_anime(mal_id)
+          else
+            new_anime = Anime.find_by(mal_id: mal_id)
+          end
           recommended_animes.push(new_anime)
         end
       else
         recommended_animes.push(new_anime.first)
       end
     end
-
     recommended_animes
+
   end
 
   def import_anime(id)
@@ -100,6 +121,10 @@ class AnimesController < ApplicationController
 
 
   private
+
+  def clear_likes
+    current_user.liked_list.bookmarks.destroy
+  end
 
   def hide_navbar
     @hide_navbar = true

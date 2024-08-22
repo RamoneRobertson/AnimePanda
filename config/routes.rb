@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   # root "posts#index"
   resources :animes, only: [:show] do
     collection do
-      get :recommendations
+      get :recommendations, param: :likes
+    end
+
+    member do
+      post :like
     end
   end
   # resources :animes, only: [:index, :show]
