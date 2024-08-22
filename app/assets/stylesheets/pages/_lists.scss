@@ -1,8 +1,13 @@
+.list-container {
+  // background: black;
+}
+
 .page-name {
   display: flex;
   align-items: center;
   padding-top: 15px;
   padding-bottom: 15px;
+  background: black;
 
   a {
     position: absolute;
@@ -33,11 +38,9 @@
 }
 
 .card-product {
-  overflow: hidden;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  background: #161620;
   padding: 16px;
-  border-radius: 20px;
+  border-radius: 35px;
 }
 
 .anime-item {
@@ -105,6 +108,7 @@
   border-radius: 11px;
   padding: 6px;
   font-size: x-small;
+  color: white;
 }
 
 .sort-buttons {
@@ -115,6 +119,7 @@
   padding-bottom: 20px;
   padding-left: 15px;
   padding-right: 15px;
+  background: black;
 }
 
 .sort-button-design {
@@ -129,7 +134,7 @@
 
   a {
     text-decoration: none;
-    color: black;
+    color: white;
 
     &:hover {
       color: #007bff;
@@ -137,9 +142,13 @@
   }
 }
 
+.show-wrapper {
+  background-color: black;
+}
+
 .card-divider {
   border: 0;
-  border-top: 1px solid black;
+  border-top: 2px solid black;
   margin: 16px 0;
   width: calc(100% - 32px);
   margin-left: auto;
@@ -163,4 +172,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.rating-star-list {
+  padding-left: 0px;
 }

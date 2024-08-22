@@ -1,6 +1,7 @@
 class ListsController < ApplicationController
   def show_watchlist
-    @animes_lists = current_user.watchlist.bookmarks
+    @watching_anime = current_user.watchlist.bookmarks
+    @seen_anime = current_user.seen_list.bookmarks
     filter_status
     hide_navbar
   end
@@ -14,13 +15,11 @@ class ListsController < ApplicationController
   def filter_status
     case params[:status]
       when 'watching'
-        @bookmarks = @animes_lists.watching
+        @bookmarks = @watching_anime
       when 'completed'
-        @bookmarks = @animes_lists.completed
-      when 'dropped'
-        @bookmarks = @animes_lists.dropped
+        @bookmarks = @seen_anime
       else
-        @bookmarks = @animes_lists.all
+        @bookmarks = Bookmark.all
       end
   end
 
