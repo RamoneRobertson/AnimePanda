@@ -1,11 +1,15 @@
 import { Controller } from "@hotwired/stimulus"
 
+const bigPawSize = "80px";
+
 // Connects to data-controller="recommendations-loading"
 export default class extends Controller {
-  static target = [ "loadbar" ]
+  static targets = [ "loadbar", "paw" ]
 
   connect() {
-    // console.log("hello from loading bar controller");
+    console.log("hello from loading bar controller");
+    console.log(this.pawTarget.querySelector("img"));
+    this.pawTarget.querySelector("img").style.width = "80px";
   }
 
   loading(){
