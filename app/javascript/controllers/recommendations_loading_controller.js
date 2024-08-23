@@ -17,23 +17,28 @@ export default class extends Controller {
   loading(){
     console.log("loading started");
     this.screenTarget.classList.remove("d-none");
+    this.#movePaws();
     this.#performLoad();
   }
 
   #performLoad(){
     setTimeout(() => {
-      for(let i = 0; i < paws.length; i++){
-        if(i === pawArrayIndex){
-          paws[i].style.width = "70px";
-        }else{
-          paws[i].style.width = "60px";
-        }
-      }
-      pawArrayIndex += 1;
-      if(pawArrayIndex >= paws.length){
-        pawArrayIndex = 0;
-      }
+      this.#movePaws();
       this.#performLoad();
     }, 300);
+  }
+
+  #movePaws(){
+    for(let i = 0; i < paws.length; i++){
+      if(i === pawArrayIndex){
+        paws[i].style.width = "70px";
+      }else{
+        paws[i].style.width = "60px";
+      }
+    }
+    pawArrayIndex += 1;
+    if(pawArrayIndex >= paws.length){
+      pawArrayIndex = 0;
+    }
   }
 }
