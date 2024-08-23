@@ -1,0 +1,23 @@
+.similar-animes-container {
+  padding-top: 10px;
+}
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+}
+
+.similar-anime-images {
+  display: flex;
+  gap: 10px;
+}
+
+.similar-anime-img {
+  width: 170px;
+  height: 240px;
+  border-radius: 10px;
+  display: inline-block;
+
+}

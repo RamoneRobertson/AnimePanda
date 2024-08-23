@@ -1,0 +1,20 @@
+<div class="similar-animes-container">
+  <h1>Similar Animes</h1>
+  <% if @reco_mal.empty? %>
+    <div class="scrolling-wrapper">
+      <div class="similar-anime-images">
+        <% @similar_animes.each do |similar_anime| %>
+          <%= image_tag similar_anime.picture_url, class: "similar-anime-img" %>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="scrolling-wrapper">
+      <div class="similar-anime-images">
+      <% @reco_mal.each do |animes|  %>
+        <%= image_tag animes.picture_url, class: "similar-anime-img" %>
+      <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
