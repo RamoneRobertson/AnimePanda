@@ -1,7 +1,7 @@
 <div class="similar-animes-container">
   <h1>Similar Animes</h1>
   <% if @reco_mal.empty? %>
-    <div class="scrolling-wrapper">
+    <div class="similar-scrolling-wrapper">
       <div class="similar-anime-images">
         <% @similar_animes.each do |similar_anime| %>
           <%= link_to anime_path(similar_anime.id) do %>
@@ -11,7 +11,7 @@
       </div>
     </div>
   <% else %>
-    <div class="scrolling-wrapper">
+    <div class="similar-scrolling-wrapper">
       <div class="similar-anime-images">
       <% @reco_mal.each do |animes|  %>
         <%= link_to anime_path(animes.id) do %>
