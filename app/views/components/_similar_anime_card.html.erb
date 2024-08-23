@@ -4,7 +4,9 @@
     <div class="scrolling-wrapper">
       <div class="similar-anime-images">
         <% @similar_animes.each do |similar_anime| %>
-          <%= image_tag similar_anime.picture_url, class: "similar-anime-img" %>
+          <%= link_to anime_path(similar_anime.id) do %>
+            <%= image_tag similar_anime.picture_url, class: "similar-anime-img" %>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -12,7 +14,9 @@
     <div class="scrolling-wrapper">
       <div class="similar-anime-images">
       <% @reco_mal.each do |animes|  %>
-        <%= image_tag animes.picture_url, class: "similar-anime-img" %>
+        <%= link_to anime_path(animes.id) do %>
+          <%= image_tag animes.picture_url, class: "similar-anime-img" %>
+        <% end %>
       <% end %>
       </div>
     </div>
