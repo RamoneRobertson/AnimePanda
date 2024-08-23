@@ -9,13 +9,13 @@
     <div class="show-wrapper">
       <div class="sort-buttons">
         <div class="sort-button-design text-decoration-none">
-          <%= link_to "All", lists_watchlist_path %>
-        </div>
-        <div class="sort-button-design text-decoration-none">
           <%= link_to "Watching", lists_watchlist_path(status: "watching") %>
         </div>
         <div class="sort-button-design text-decoration-none">
           <%= link_to "Completed", lists_watchlist_path(status: "completed") %>
+        </div>
+        <div class="sort-button-design text-decoration-none">
+          <%= link_to "All", lists_watchlist_path %>
         </div>
       </div>
 
