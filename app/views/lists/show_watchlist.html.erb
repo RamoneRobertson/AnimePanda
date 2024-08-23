@@ -1,9 +1,10 @@
 <div class="show-page-container">
-  <div class="list-container">
+  <% message = [@watchlist_chat] %>
+  <div class="list-container" data-controller="typing" data-typing-message-value="<%= message %>">
     <div class ="page-name">
       <%= link_to root_path do %>
       <i class="fa-solid fa-arrow-left text-decoration-none" style="color: white;"></i>
-    <% end %>
+      <% end %>
       <h1 style="color: white;">Watchlist</h1>
     </div>
     <div class="show-wrapper">
@@ -64,5 +65,6 @@
           <% end %>
       </div>
     </div>
+    <%= render "components/panda_button" %>
   </div>
 </div>

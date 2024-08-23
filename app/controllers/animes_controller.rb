@@ -32,7 +32,7 @@ class AnimesController < ApplicationController
     @welcome_chat = chatgpt.home_chat
     @animes = Anime.all
     best_anime = @animes.sort_by {|anime| anime.popularity}.reverse
-    @random_popular_three = best_anime[0..5].sample(3)
+    @random_popular = best_anime[0...50].sample(10)
     @top_anime = @animes.sort_by {|anime| anime.rating }.reverse[0..3]
   end
 

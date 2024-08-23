@@ -3,6 +3,7 @@
     <%# <div style="height: 100vh; background-color: rgb(0 0 0 / 32%);"></div> %>
     <div class="px-3">
       <% if current_user.nil? %>
+        <div data-navbar-toggle-target="innerElements" class="no-opacity opacity-transition no-width mb-3 pb-1 fw-bold border-bottom border-2 d-none" style="width: 60%;"><%= link_to "Home", root_path, class: "text-decoration-none text-dark" %></div>
         <div data-navbar-toggle-target="innerElements" class="no-opacity opacity-transition no-width fw-bold d-none"><%= link_to "Log in", new_user_session_path, class: "text-decoration-none text-dark" %></div>
       <% else %>
         <div data-navbar-toggle-target="innerElements" class="no-opacity opacity-transition no-width mb-3 pb-1 fw-bold border-bottom border-2 d-none" style="width: 60%;"><%= link_to "Home", root_path, class: "text-decoration-none text-dark" %></div>

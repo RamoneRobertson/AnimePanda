@@ -40,3 +40,27 @@
     transition: height 0.6s;
   }
 }
+
+.message-box{
+  background-color: var(--panda-green);
+  color: var(--panda-white);
+  max-width: 69%;
+  right: 60px;
+  position: absolute;
+  bottom: 80px;
+  border-radius: 12px;
+
+  .bubble-arrow{
+    position: absolute;
+    bottom: -15px;
+    right: 10px;
+    border: 23px solid transparent;
+    border-top-color: var(--panda-green);
+    border-bottom: 0;
+    border-right: 0;
+  }
+
+  p{
+    margin: 0; padding: 8px 16px;
+  }
+}
