@@ -18,7 +18,6 @@
           <%= link_to "All", lists_watchlist_path %>
         </div>
       </div>
-
         <% if @bookmarks.empty? %>
         <div class="empty-bookmark">
           <%= image_tag 'sleeping-panda.png', alt: 'No bookmarks' %>
@@ -28,6 +27,17 @@
         <% else %>
           <div class="card-product">
               <% @bookmarks.each do |list_animes| %>
+                    <% if params[:status] == "watching" %>
+                      <div class="anime-status">
+                        <h5 class="dot-status" style= "color: #01b866;"> •</h5>
+                        <p style="color: white; margin-bottom: 0px;"> Watching</p>
+                      </div>
+                    <% elsif params[:status] == "completed" %>
+                      <div class="anime-status">
+                        <h5 class="dot-status" style= "color: gray;"> •</h5>
+                        <p style="color: white; margin-bottom: 0px;"> Completed</p>
+                      </div>
+                    <% end %>
                   <div class="anime-item mb-3">
                     <div class="anime-item-content">
                       <% if list_animes.anime.picture_url.nil? %>
@@ -44,8 +54,8 @@
 
                           <div class="info-border"><%= list_animes.anime.studio %></div>
                         </div>
-                        <p class= "pb-3" style="color: white;"><%= list_animes.anime.rating %> <i class="fa-solid fa-star rating-star-list"></i></p>
-                        <p class= "pt-1" style="color: white;">Rank: <%= list_animes.anime.rank %></p>
+                        <p style="color: white;"><%= list_animes.anime.rating %> <i class="fa-solid fa-star rating-star-list"></i></p>
+                        <p class="pt-3" style="color: white;">Rank: <%= list_animes.anime.rank %></p>
                       </div>
                     </div>
                   </div>

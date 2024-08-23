@@ -9,6 +9,7 @@
   padding-top: 15px;
   padding-bottom: 15px;
   background: black;
+  padding-top: 80px;
 
   a {
     position: absolute;
@@ -36,6 +37,19 @@
   img {
     width: 80%;
   }
+}
+
+.anime-status {
+
+  padding-left: 10px;
+  margin-bottom: 0px;
+  .dot-status {
+    padding-right: 5px;
+    margin-bottom: 0px;
+  }
+
+  display: flex;
+
 }
 
 .card-product {

@@ -3,7 +3,6 @@ class ListsController < ApplicationController
     @watching_anime = current_user.watchlist.bookmarks
     @seen_anime = current_user.seen_list.bookmarks
     filter_status
-    hide_navbar
   end
 
   def show_liked
