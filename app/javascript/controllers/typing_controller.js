@@ -10,21 +10,21 @@ export default class extends Controller {
 
   connect() {
     if(this.messageValue == null) return;
-    this.#updateChat(this.messageValue)
+    this.updateChat(this.messageValue)
   }
 
   loading(){
     if(this.pandaTarget.classList.contains("d-none")){
       this.pandaTarget.classList.remove("d-none");
     }
-    this.#updateChat(["Just a moment..."]);
+    this.updateChat(["Just a moment..."]);
   }
 
   disable(){
     this.pandaTarget.classList.add("d-none");
   }
 
-  #updateChat(array){
+  updateChat(array){
     if(currentTyped != null){
       // stop current typed animation if there is one
       currentTyped.destroy();

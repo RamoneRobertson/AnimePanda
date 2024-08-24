@@ -5,4 +5,8 @@ export default class extends Controller {
   connect() {
     console.log("connected to panda comment ")
   }
+
+  greet(){
+    console.log("hello");
+  }
 }
