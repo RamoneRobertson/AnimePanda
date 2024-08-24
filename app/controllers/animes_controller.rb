@@ -79,7 +79,7 @@ class AnimesController < ApplicationController
     @similar_animes = Anime.where(id: similar_anime_sorted)
 
     # Other stuff
-    hide_panda
+    # hide_panda
   end
 
   def genrate_chatgpt_anime(seen_animes)
