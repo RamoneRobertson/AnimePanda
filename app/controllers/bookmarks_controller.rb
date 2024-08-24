@@ -29,17 +29,14 @@ class BookmarksController < ApplicationController
 
 
   def update
-    # Get all the list from the user
-    # Get the bookmark that needs updating
     @bookmark_target = Bookmark.find(params[:id])
-    # Get Watch status on a bookmark
-    # Update watch_status into "completed"
-    # Change the list_id of bookmark to seen_list id
 
     @bookmark_target = Bookmark.find(params[:id])
     @list = @bookmark_target.list
      if @bookmark_target.update(list_id:  current_user.lists.seen[0].id)
       redirect_to request.referer, notice: 'Marked as seen successfully!'
+     else
+      redirect_to request.referer, notice: 'Marked as seen failed'
     end
   end
 
