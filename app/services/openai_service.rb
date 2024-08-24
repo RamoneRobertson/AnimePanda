@@ -108,7 +108,7 @@ class OpenaiService
                                       The user is checking their watchlist.
                                       If the user's watchlist is empty, tell them it's empty and recommend an anime to add in their watchlist.
                                       Be quirky and funny."},
-            {role: "user", content: "I am checking my watchlist. Ask me if I already watched anything on my watchlist and what did I think of it. If I don't have anything in my watchlist, recommend me a random anime. Keep it short and less than 23 words" }], # Required.
+            {role: "user", content: "I am checking my watchlist. Ask me if I already watched a specific anime on my watchlist and what did I think of it. If I don't have anything in my watchlist, recommend me a random anime. Keep it short and less than 23 words" }], # Required.
           temperature: 1.5,
           stream: false,
 					max_tokens: 150,
