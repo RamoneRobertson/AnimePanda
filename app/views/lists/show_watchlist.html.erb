@@ -32,6 +32,7 @@
               <div class="anime-status">
                 <h5 class="dot-status" style= "color: #01b866;"> •</h5>
                 <p style="color: white; margin-bottom: 0px;"> Watching</p>
+                <%= button_to "Mark as seen", bookmark_path(list_animes.id), method: :patch, class: "btn btn-primary" %>
               </div>
             <% elsif params[:status] == "completed" %>
               <div class="anime-status">
@@ -61,7 +62,7 @@
               </div>
             </div>
             <hr class="card-divider">
-        <% end  %>
+        <% end %>
          </div>
       <% end %>
     </div>

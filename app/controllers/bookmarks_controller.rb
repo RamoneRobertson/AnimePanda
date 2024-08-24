@@ -28,9 +28,20 @@ class BookmarksController < ApplicationController
   end
 
 
-  # def update_to_watching(bookmark)
-  #   bookmark.watch_status = "watching"
-  # end
+  def update
+    # Get all the list from the user
+    # Get the bookmark that needs updating
+    @bookmark_target = Bookmark.find(params[:id])
+    # Get Watch status on a bookmark
+    # Update watch_status into "completed"
+    # Change the list_id of bookmark to seen_list id
+
+    @bookmark_target = Bookmark.find(params[:id])
+    @list = @bookmark_target.list
+     if @bookmark_target.update(list_id:  current_user.lists.seen[0].id)
+      redirect_to request.referer, notice: 'Marked as seen successfully!'
+    end
+  end
 
   def update_list(bookmark)
     @user = current_user
@@ -58,8 +69,13 @@ class BookmarksController < ApplicationController
 
   #   # end
   # end
+  private
 
   def bookmark_params
     params.require(:bookmark).permit(:anime_id, :watch_status, :id, :preference)
+  end
+
+  def method_name
+
   end
 end

@@ -6,6 +6,12 @@ class ListsController < ApplicationController
     watchlist = current_user.lists.watchlist.first.animes.select(:id, :title).to_json
     @watchlist_chat = chatgpt.watchlist_chat(watchlist)
     filter_status
+    # console
+
+  end
+
+  def update
+    @bookmark_target.Bookmark.update(list_id: current_user.seen_list.id)
   end
 
   def show_liked
@@ -28,4 +34,5 @@ class ListsController < ApplicationController
   def hide_navbar
     @hide_navbar = true
   end
+
 end
