@@ -6,6 +6,7 @@ class ListsController < ApplicationController
     watchlist = current_user.lists.watchlist.first.animes.select(:id, :title).to_json
     @watchlist_chat = chatgpt.watchlist_chat(watchlist)
     filter_status
+    # raise
   end
 
   def show_liked
