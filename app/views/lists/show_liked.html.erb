@@ -1,5 +1,5 @@
 <div class="list-container" style=>
-  <div class="page-name">
+  <div class="page-name liked-list">
     <%= link_to animes_recommendations_path do %>
       <i class="fa-solid fa-arrow-left text-decoration-none" style="color: white;"></i>
     <% end %>
@@ -23,9 +23,7 @@
                   </strong>
                   <div class="details-info">
                     <div class="info-border">Ep <%= liked_animes.anime.episode_count %></div>
-
                     <div class="info-border"><%= liked_animes.anime.start_date.year %></div>
-
                     <div class="info-border"><%= liked_animes.anime.studio %></div>
                   </div>
                   <p class="pb-3" style="color: white;"><%= liked_animes.anime.rating %> <i class="fa-solid fa-star rating-star"></i></p>

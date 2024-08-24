@@ -49,6 +49,7 @@
         <h2><i class="fa-solid fa-paw"></i></h2>
         <h2>Popular Anime</h2>
       </div>
+      <p class="category-desc">Browse some popular anime.</p>
       <div class="scrolling-wrapper">
         <% @random_popular.each do |item| %>
           <%= link_to anime_path(item) do %>
@@ -68,6 +69,7 @@
         <h2><i class="fa-solid fa-paw"></i></h2>
         <h2>Top Anime</h2>
       </div>
+      <p class="category-desc">Best rated anime.</p>
       <div class="top-cards rounded-4 my-3 box-shadow-effect" style="background-color: var(--panda-white);">
         <% @top_anime.each_with_index do |anime, index| %>
           <% if index == @top_anime.size - 1  %>
@@ -88,6 +90,15 @@
       </div>
     </div>
   </div>
+  <div class="search-anime">
+    <div class="container p-3">
+      <div class="d-flex gap-2">
+        <h2><i class="fa-solid fa-paw"></i></h2>
+        <h2>Find an Anime</h2>
+      </div>
+      <p class="category-desc">Find a specific anime.</p>
+    </div>
+  </div>
   <svg class="footer-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
     <path
     fill="var(--panda-black)"
@@ -105,7 +116,7 @@
         <div class="team-mate d-flex gap-3">
           <p style="margin: 0">Michael Stump</p>
           <div class="d-flex gap-2">
-            <%= link_to "#" do  %>
+            <%= link_to "https://www.linkedin.com/in/michael-stump-79695a324/" do  %>
               <i class="fa-brands fa-linkedin"></i>
             <% end %>
             <%= link_to "https://github.com/DisasterMike" do  %>
