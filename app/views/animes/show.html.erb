@@ -94,10 +94,11 @@
   <div class="synopsis-container">
     <div class="synopsis" data-anime-target="synopsis">
       <% if @anime.genre_list.count <= 4 %>
-        <h2>Synopsis</h2>
+        <h2><i class="fa-solid fa-scroll"></i> Synopsis</h2>
       <% else %>
-        <h2 class="pt-4">Synopsis</h2>
+        <h2 class="pt-4"><i class="fa-solid fa-scroll"></i> Synopsis</h2>
       <% end %>
+        <p><i class="fa-solid fa-layer-group"></i> <%= @anime.episode_count %> episodes</p>
       <div data-anime-target="content" class="synopsis-content">
         <%= @anime.synopsis %>
       </div>
@@ -111,15 +112,15 @@
     <% if @anime.genre_list.count <= 4 %>
       <h1>Information</h1>
     <% else %>
-      <h2 class="pt-4">Information</h2>
+      <h2 class="pt-4"><i class="fa-solid fa-circle-info"></i> More info</h2>
     <% end %>
-    <p>Title: <%= @anime.title %></p>
-    <p>Episode: <%= @anime.episode_count %></p>
-    <p>Rating: <%= @anime.rating %></p>
-    <p>Rank: <%= @anime.rank %></p>
-    <p>Popularity: <%= @anime.popularity %></p>
-    <p>Aired Date: <%= @anime.start_date %> to <%= @anime.end_date %></p>
-    <p>Studio: <%= @anime.studio %></p>
+    <div class="d-flex gap-3">
+      <p><i class="fa-solid fa-star"></i> <%= @anime.rating %></p>
+      <p><i class="fa-solid fa-ranking-star"></i> <%= @anime.rank %></p>
+      <p><i class="fa-solid fa-heart"></i> <%= @anime.popularity %></p>
+    </div>
+    <p><i class="fa-solid fa-calendar"></i> Release:  <%= @anime.start_date %></p>
+    <p><i class="fa-solid fa-film"></i> Studio:  <%= @anime.studio %></p>
     <%= render "components/similar_anime_card" %>
     <div class="sticky-button-container">
       <%= button_to bookmarks_path, method: :post, class: "btn btn-success sticky-button", params: { bookmark: { anime_id: @anime.id, watch_status: :watching } } do %>
