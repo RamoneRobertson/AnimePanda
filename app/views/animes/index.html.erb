@@ -1,4 +1,4 @@
-<div data-controller="typing recommendations-loading" data-typing-message-value="<%= [@welcome_chat.to_json] %>">
+<div data-controller="typing recommendations-loading genre-toggle" data-typing-message-value="<%= [@welcome_chat.to_json] %>">
   <%= render "components/paw_loading" %>
   <div class="main-banner d-flex justify-content-center align-items-center">
     <div class="title d-flex justify-content-center align-items-center gap-1">
@@ -22,6 +22,17 @@
         <% end %>
       </div>
       <div class="buttons-scrolling-wrapper">
+        <% genre_array = ["Shounen", "Action", "Slice of Life"] %>
+        <% genre_array.each do |genre| %>
+          <%= render "components/genre_button", name: genre %>
+        <% end %>
+        <div data-genre-toggle-target="genre" class="sub-button box-shadow-effect d-flex align-items-center">
+          <label class="container">
+            <input data-action="click->genre-toggle#toggle" type="checkbox" style="display: none;">
+            <span class="checkbox-text">Action</span>
+            <span class="checkmark"></span>
+          </label>
+        </div>
         <div class="button-card">
           <button class="btn sub-button box-shadow-effect">Action</button>
         </div>

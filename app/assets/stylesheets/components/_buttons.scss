@@ -28,6 +28,10 @@
   border-radius: 8px;
   // box-shadow: 0px 0px 8px 0px #0000002b;
 }
+.sub-button.active{
+  background-color: var(--panda-black);
+  color: var(--panda-white);
+}
 .sub-button:hover{
   background-color: var(--panda-black);
   color: var(--panda-white);
