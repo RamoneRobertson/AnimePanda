@@ -21,45 +21,75 @@
             data-anime-target="title">
           <%= @anime.title %>
         </h2>
-        <h6 class="fw-bold" data-anime-target="rating">
-          <div class="play-button-container">
-            <%= @anime.rating %> <i class="fa-solid fa-star rating-star"></i>
-            <div class="play-trailer-button" data-action="click->anime#play">
-              <i class="fa-solid fa-play play-button" data-anime-target="playButton"></i>
-              <h2 id="play" data-anime-target="playText">Play Trailer</h2>
+  <% if @anime.trailer.empty? %>
+          <h6 class="fw-bold" data-anime-target="rating">
+            <div class="play-button-container">
+              <%= @anime.rating %> <i class="fa-solid fa-star rating-star"></i>
+              <div class="play-trailer-button">
+                <i class="fa-solid fa-link-slash play-button"></i>
+                <h2>No Trailer</h2>
+              </div>
             </div>
-          </div>
-        </h6>
-        <div class="show-info">
-          <% @anime.genre_list.each do |genre| %>
-            <% if genre == "psychological" %>
-              <h6 class="info-border text-truncate">
-                <%= genre.capitalize %>
-              </h6>
-            <% else %>
-              <h6 class="info-border">
-                <%= genre.capitalize %>
-              </h6>
+          </h6>
+          <div class="show-info">
+            <% @anime.genre_list.each do |genre| %>
+              <% if genre == "psychological" %>
+                <h6 class="info-border text-truncate">
+                  <%= genre.capitalize %>
+                </h6>
+              <% else %>
+                <h6 class="info-border">
+                  <%= genre.capitalize %>
+                </h6>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% else %>
 
-  <!-- Iframe Container for Video -->
-  <div data-anime-target="iframeContainer" class="iframe-container" style="display: none;">
-    <iframe
-      data-anime-target="iframe"
-      width="400"
-      height="550"
-      src="<%= @anime.trailer %>&loop=1&controls=0&rel=0&playlist=<%= @anime.trailer.split('/').last.split('?').first %>"
-      frameborder="0"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-    <p id="video-notice">*Some trailers may not be available due to <strong>Regional Restriction</strong>.</p>
-  </div>
+    <h6 class="fw-bold" data-anime-target="rating">
+            <div class="play-button-container">
+              <%= @anime.rating %> <i class="fa-solid fa-star rating-star"></i>
+              <div class="play-trailer-button" data-action="click->anime#play">
+                <i class="fa-solid fa-play play-button" data-anime-target="playButton"></i>
+                <h2 id="play" data-anime-target="playText">Play Trailer</h2>
+              </div>
+            </div>
+          </h6>
+          <div class="show-info">
+            <% @anime.genre_list.each do |genre| %>
+              <% if genre == "psychological" %>
+                <h6 class="info-border text-truncate">
+                  <%= genre.capitalize %>
+                </h6>
+              <% else %>
+                <h6 class="info-border">
+                  <%= genre.capitalize %>
+                </h6>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Iframe Container for Video -->
+    <div data-anime-target="iframeContainer" class="iframe-container" style="display: none;">
+      <iframe
+        data-anime-target="iframe"
+        width="400"
+        height="550"
+        src="<%= @anime.trailer %>&loop=1&controls=0&rel=0&playlist=<%= @anime.trailer.split('/').last.split('?').first %>"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+      <p id="video-notice">*Some trailers may not be available due to <strong>Regional Restriction</strong>.</p>
+    </div>
+  <% end %>
+
 
   <div class="synopsis-container">
     <div class="synopsis" data-anime-target="synopsis">
