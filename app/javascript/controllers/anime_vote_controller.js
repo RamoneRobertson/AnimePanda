@@ -4,31 +4,34 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="anime-vote"
 export default class extends Controller {
-  // animes -> reco-container div
-  // anime -> reco-anime div
-  // dislike -> dislike btn
-  //  like -> like btn
-  static targets = ["animes", "anime", "dislike", "like"]
+  static values = {
+    recos: Array
+  }
+
+  static targets = ["animes", "anime", "dislike", "like", "comment"]
 
   connect(){
-
-  }
-  // Add the yes class from _recommendation.scss, runs the like animation
-  like(event){
-    this.#incrementLike();
-    this.animeTarget.classList.add("yes");
-    this.#updatePreference();
-    this.#removeBookmark();
-    this.dispatch('like', { detail: { message: ["Glad you like it!"] } })
-    this.#redirect();
+    this.comments = [...this.recosValue]
   }
 
-  // Add the nope class from _recommendation.scss, runs the dislike animation
-  dislike(event){
-    this.animeTarget.classList.add("nope");
-    this.#removeBookmark();
-    this.dispatch('dislike', { detail: { message: [":("] } })
-    this.#redirect();
+  vote(event){
+    if(event.currentTarget === this.likeTarget){
+      this.#updatePreference();
+      this.#incrementLike();
+      this.animeTarget.classList.add("yes");
+      this.#pandaComment();
+      this.#redirect();
+    }
+    else if(event.currentTarget === this.dislikeTarget){
+      this.animeTarget.classList.add('nope');
+      this.#pandaComment();
+      this.#redirect();
+    }
+  }
+
+  #pandaComment(){
+    const comment = this.comments.splice(1, 1)[0]
+    this.dispatch('vote', { detail: { message: [comment] } })
   }
 
   // run after the animation is complete
@@ -53,7 +56,6 @@ export default class extends Controller {
     this.animesTarget.dataset.likes = Number(this.animesTarget.dataset.likes) + 1
   }
 
-
   // function to create a new bookmark with the watch_status set to like
   // Sends a HTTP POST request to /bookmarks
   #updatePreference(){
@@ -70,21 +72,6 @@ export default class extends Controller {
         anime_id: `${animeId}`,
         watch_status: "like"
       })
-    })
-  }
-
-  // function to remove bookmark from the recommend_list in animes controller
-  // Sends a HTTP DELETE request to /bookmarks/params[:id]
-  #removeBookmark(){
-    // the data-bk value set on the reco-anime container
-    const bookmarkId = this.animeTarget.dataset.bk
-    const csrfToken = document.querySelector("[name='csrf-token']").content
-    fetch(`/bookmarks/${bookmarkId}`, {
-      method: "DELETE",
-      headers: {
-        "X-CSRF-Token": csrfToken,
-        "Content-Type": "application/json",
-        "Accept": "text/plain" }
     })
   }
 

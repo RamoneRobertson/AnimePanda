@@ -21,6 +21,7 @@ class AnimesController < ApplicationController
     # @recommend_list = @user.lists.find_by(list_type: 'recommendations')
     reco_animes = @user.lists.recommendations.first.animes.select(:id, :title).to_json
     @reco_chat = chatgpt.reco_chat(seen_animes, reco_animes)
+    @message = [@reco_chat, "Enjoy binge watching!"]
   end
 
   def like
