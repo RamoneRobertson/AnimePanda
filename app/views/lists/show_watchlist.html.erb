@@ -1,23 +1,24 @@
-  <div class="list-container">
+<div class="show-page-container">
+  <% message = [@watchlist_chat] %>
+  <div class="list-container" data-controller="typing" data-typing-message-value="<%= message %>">
     <div class ="page-name">
       <%= link_to root_path do %>
       <i class="fa-solid fa-arrow-left text-decoration-none" style="color: white;"></i>
-    <% end %>
+      <% end %>
       <h1 style="color: white;">Watchlist</h1>
     </div>
     <div class="show-wrapper">
       <div class="sort-buttons">
-        <div class="sort-button-design text-decoration-none">
-          <%= link_to "All", lists_watchlist_path %>
-        </div>
         <div class="sort-button-design text-decoration-none">
           <%= link_to "Watching", lists_watchlist_path(status: "watching") %>
         </div>
         <div class="sort-button-design text-decoration-none">
           <%= link_to "Completed", lists_watchlist_path(status: "completed") %>
         </div>
+        <div class="sort-button-design text-decoration-none">
+          <%= link_to "All", lists_watchlist_path %>
+        </div>
       </div>
-
         <% if @bookmarks.empty? %>
         <div class="empty-bookmark">
           <%= image_tag 'sleeping-panda.png', alt: 'No bookmarks' %>
@@ -27,6 +28,17 @@
         <% else %>
           <div class="card-product">
               <% @bookmarks.each do |list_animes| %>
+                    <% if params[:status] == "watching" %>
+                      <div class="anime-status">
+                        <h5 class="dot-status" style= "color: #01b866;"> •</h5>
+                        <p style="color: white; margin-bottom: 0px;"> Watching</p>
+                      </div>
+                    <% elsif params[:status] == "completed" %>
+                      <div class="anime-status">
+                        <h5 class="dot-status" style= "color: gray;"> •</h5>
+                        <p style="color: white; margin-bottom: 0px;"> Completed</p>
+                      </div>
+                    <% end %>
                   <div class="anime-item mb-3">
                     <div class="anime-item-content">
                       <% if list_animes.anime.picture_url.nil? %>
@@ -43,8 +55,8 @@
 
                           <div class="info-border"><%= list_animes.anime.studio %></div>
                         </div>
-                        <p class= "pb-3" style="color: white;"><%= list_animes.anime.rating %> <i class="fa-solid fa-star rating-star-list"></i></p>
-                        <p class= "pt-1" style="color: white;">Rank: <%= list_animes.anime.rank %></p>
+                        <p style="color: white;"><%= list_animes.anime.rating %> <i class="fa-solid fa-star rating-star-list"></i></p>
+                        <p class="pt-3" style="color: white;">Rank: <%= list_animes.anime.rank %></p>
                       </div>
                     </div>
                   </div>
@@ -53,4 +65,6 @@
           <% end %>
       </div>
     </div>
+    <%= render "components/panda_button" %>
   </div>
+</div>
