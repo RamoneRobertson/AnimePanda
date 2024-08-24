@@ -54,6 +54,31 @@ class AnimesController < ApplicationController
       end
       @reco_mal.push(new_anime)
     end
+
+    # Get random similar animes through genre
+    @five_similar_animes = Anime.tagged_with(@anime.genre_list, any:true).sample(5)
+
+    # Get Anime with most matching genres
+    target_anime_id = @anime.id
+    target_anime_genre = @anime.genre_list
+
+    other_animes = Anime.where.not(id: target_anime_id)
+
+    anime_genre_count = {}
+
+    other_animes.each do |anime|
+      other_anime_genre = anime.genre_list
+
+      number_of_matching_genre = (target_anime_genre & other_anime_genre).size
+
+      anime_genre_count[anime.id] = number_of_matching_genre
+    end
+
+    similar_anime_sorted = anime_genre_count.sort_by { |_, v| -v }.first(5).map(&:first)
+
+    @similar_animes = Anime.where(id: similar_anime_sorted)
+
+    # Other stuff
     hide_panda
   end
 
