@@ -34,6 +34,17 @@ class AnimesController < ApplicationController
     best_anime = @animes.sort_by {|anime| anime.popularity}.reverse
     @random_popular = best_anime[0...50].sample(10)
     @top_anime = @animes.sort_by {|anime| anime.rating }.reverse[0..3]
+
+    if params[:query].present?
+      # @searched_animes = @animes.where("title ILIKE ?", "%#{params[:query]}%")
+      @searched_animes = Anime.search_by_title(params[:query])
+    end
+
+    respond_to do |format|
+      format.html
+      # format.text { render partial: "components/searched_anime_card", locals: { animes: @searched_animes }, formats: [:html] }
+      format.text { render partial: "components/popular_anime_card", locals: { random_popular: @searched_animes }, formats: [:html] }
+    end
   end
 
   def show

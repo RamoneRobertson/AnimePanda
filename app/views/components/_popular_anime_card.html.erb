@@ -1,26 +1,38 @@
-<div class="pop-anime-card rounded-5 h-100 box-shadow-effect">
-  <div class="pop-image" style="background-image: url('<%= item.picture_url %>');">
-  </div>
-  <div class="pop-info p-3 mt-3">
-    <h4><%= item.title %></h4>
-    <div class="episodes d-flex gap-2">
-      <p><i class="fa-solid fa-layer-group"></i></p>
-      <% if item.episode_count == 0 %>
-        <p>No episodes available yet.</p>
-      <% else %>
-        <p><strong><%= item.episode_count %></strong> episode<%= "s" if item.episode_count > 1 %></p>
-      <% end %>
-    </div>
-    <p class="anime-synopsis"><i><%= item.synopsis[0..75] %>...</i></p>
-    <div class="pop-icons d-flex gap-3">
-      <div class="rating d-flex align-items-center gap-2 rounded-pill bg-light">
-        <p><i class="fa-solid fa-star"></i></p>
-        <p><%= item.rating %></p>
+<% if random_popular.any? %>
+  <% random_popular.each do |item| %>
+    <%= link_to anime_path(item) do %>
+      <div class="home-anime-card p-3 h-100">
+        <div class="pop-anime-card rounded-5 h-100 box-shadow-effect">
+          <div class="pop-image" style="background-image: url('<%= item.picture_url %>');">
+          </div>
+          <div class="pop-info p-3 mt-3">
+            <h4><%= item.title %></h4>
+            <div class="episodes d-flex gap-2">
+              <p><i class="fa-solid fa-layer-group"></i></p>
+              <% if item.episode_count == 0 %>
+                <p>No episodes available yet.</p>
+              <% else %>
+                <p><strong><%= item.episode_count %></strong> episode<%= "s" if item.episode_count > 1 %></p>
+              <% end %>
+            </div>
+            <p class="anime-synopsis"><i><%= item.synopsis[0..75] %>...</i></p>
+            <div class="pop-icons d-flex gap-3">
+              <div class="rating d-flex align-items-center gap-2 rounded-pill bg-light">
+                <p><i class="fa-solid fa-star"></i></p>
+                <p><%= item.rating %></p>
+              </div>
+              <div class="popularity d-flex align-items-center gap-2 rounded-pill bg-light">
+                <p><i class="fa-solid fa-heart"></i></p>
+                <p><%= item.popularity %></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="popularity d-flex align-items-center gap-2 rounded-pill bg-light">
-        <p><i class="fa-solid fa-heart"></i></p>
-        <p><%= item.popularity %></p>
-      </div>
-    </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <div class="container p-3">
+    <p>Couldn't find any animes...</p>
   </div>
-</div>
+<% end %>
