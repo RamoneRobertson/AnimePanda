@@ -21,7 +21,7 @@ class ListsController < ApplicationController
       when 'completed'
         @bookmarks = @seen_anime
       else
-        @bookmarks = Bookmark.all
+        @bookmarks = @seen_anime + @watching_anime
       end
   end
 
