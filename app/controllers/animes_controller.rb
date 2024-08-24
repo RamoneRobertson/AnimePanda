@@ -42,8 +42,11 @@ class AnimesController < ApplicationController
 
     respond_to do |format|
       format.html
-      # format.text { render partial: "components/searched_anime_card", locals: { animes: @searched_animes }, formats: [:html] }
-      format.text { render partial: "components/popular_anime_card", locals: { random_popular: @searched_animes }, formats: [:html] }
+      format.text {
+        render partial: "components/popular_anime_card",
+        locals: { random_popular: @searched_animes },
+        formats: [:html]
+      }
     end
   end
 

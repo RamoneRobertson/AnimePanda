@@ -18,18 +18,16 @@ export default class extends Controller {
     this.foundAnimeTarget.innerHTML = "";
 
     const url = `${this.formTarget.action}?query=${this.inputTarget.value}`;
-    // console.log(url);
 
     fetch(url, {
       headers: { "Accept": "text/plain" }
     })
     .then(resposne => resposne.text())
     .then(data => {
-      // console.log(data);
       this.foundAnimeTarget.innerHTML = data;
     });
 
-    // fetch the anime's list and find the anime
-    // insert html into foundAnimeTarget div
+    // show some text to say it's loading while it tries to fetch..
+    this.foundAnimeTarget.insertAdjacentHTML("beforeend", '<div class="container p-3"><p>Loading...</p></div>');
   }
 }
