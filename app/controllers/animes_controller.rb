@@ -134,7 +134,7 @@ class AnimesController < ApplicationController
   def import_anime(id)
     mal_service = MyanimelistService.new
     info = mal_service.call_anime(id)
-    title = info["alternative_titles"]["en"]
+    info["alternative_titles"]["en"] == "" ? title = info["title"] : title = info["alternative_titles"]["en"]
     picture_url = info["main_picture"]["large"]
     start_date = info["start_date"]
     synopsis = info["synopsis"]
