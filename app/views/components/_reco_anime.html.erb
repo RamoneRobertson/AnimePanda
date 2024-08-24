@@ -1,5 +1,5 @@
-<% @recommend_list.bookmarks.first(5).each do |bookmark| %>
-  <div class="reco-anime" data-anime-vote-target="anime" data-reco-refresh-target="anime"  data-anime="<%= bookmark.anime_id %>" data-bk="<%= bookmark.id %>" data-action="animationend->anime-vote#animationDone">
+<% @recommend_list.bookmarks.each do |bookmark| %>
+  <div class="reco-anime" data-anime-vote-target="anime" data-reco-refresh-target="anime" data-anime="<%= bookmark.anime_id %>" data-bk="<%= bookmark.id %>" data-comment="" data-action="animationend->anime-vote#animationDone">
     <% if bookmark.anime.trailer? %>
       <div class="reco-trailer">
         <iframe class="fade-img" width="100%" height="420px" src="<%= bookmark.anime.trailer %>&mute=1&controls=0&playlist=<%=bookmark.anime.trailer.scan(/(?<=\/embed\/)[^?]+/)[0]%>&loop=1">

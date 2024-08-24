@@ -5,20 +5,22 @@ require 'open-uri'
 class AnimesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
   def recommendations
+    @user = current_user
     current_user.liked_list.bookmarks.destroy_all
     chatgpt = OpenaiService.new
-    @user = current_user
     seen_animes = @user.lists.seen.first.animes.select(:id, :title).to_json
-    @animes = genrate_chatgpt_anime(seen_animes)
-
+    @animes = genrate_chatgpt_anime(seen_animes) # 5
+    @user.lists.recommendations.first.bookmarks.destroy_all # 0 bookmarks
     @recommend_list = @user.lists.find_by(list_type: 'recommendations')
-    reco_animes = @user.lists.recommendations.first.animes.select(:id, :title).to_json
-    @reco_chat = chatgpt.reco_chat(seen_animes, reco_animes)
-
+    @reco_comments = []
     @animes.each do |anime|
       new_bookmark = Bookmark.new(watch_status: :recommended, anime: anime, list: @recommend_list, preference: nil)
       new_bookmark.save if !new_bookmark.anime_id.nil?
+      @reco_comments << chatgpt.per_reco_chat(seen_animes, anime)
     end
+    # @recommend_list = @user.lists.find_by(list_type: 'recommendations')
+    reco_animes = @user.lists.recommendations.first.animes.select(:id, :title).to_json
+    @reco_chat = chatgpt.reco_chat(seen_animes, reco_animes)
   end
 
   def like
