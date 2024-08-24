@@ -1,0 +1,23 @@
+.panda-search-bar{
+  background: white;
+  border-radius: 32px;
+  padding: 8px;
+  width: fit-content;
+  min-width: 50%;
+}
+
+.search-panda-button{
+  color: var(--panda-white);
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background-color: var(--panda-black);
+  // padding: 7px;
+  transform: rotate(23deg);
+  border: none;
+}
+
+.search-text-field{
+  border: none;
+  background: none;
+  flex-grow: 1;
+}

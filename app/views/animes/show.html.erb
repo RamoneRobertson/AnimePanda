@@ -1,4 +1,4 @@
-<div data-controller="anime" style="background-color: black;">
+<div data-controller="anime scroll-down-loader" style="background-color: black;">
   <!-- Image Container -->
   <div class="picture">
     <div class="image-container"
@@ -15,13 +15,13 @@
           <% end %>
         </div>
       </div>
-      <div class="info row">
+      <div class="info row m-0">
         <h2 class="fw-bold text-truncate col-8"
             style="max-width: 100%; font-size: x-large;"
             data-anime-target="title">
           <%= @anime.title %>
         </h2>
-  <% if @anime.trailer.empty? %>
+        <% if @anime.trailer.empty? %>
           <h6 class="fw-bold" data-anime-target="rating">
             <div class="play-button-container">
               <%= @anime.rating %> <i class="fa-solid fa-star rating-star"></i>
@@ -48,84 +48,78 @@
       </div>
     </div>
   <% else %>
-
     <h6 class="fw-bold" data-anime-target="rating">
-            <div class="play-button-container">
-              <%= @anime.rating %> <i class="fa-solid fa-star rating-star"></i>
-              <div class="play-trailer-button" data-action="click->anime#play">
-                <i class="fa-solid fa-play play-button" data-anime-target="playButton"></i>
-                <h2 id="play" data-anime-target="playText">Play Trailer</h2>
-              </div>
-            </div>
-          </h6>
-          <div class="show-info">
-            <% @anime.genre_list.each do |genre| %>
-              <% if genre == "psychological" %>
-                <h6 class="info-border text-truncate">
-                  <%= genre.capitalize %>
-                </h6>
-              <% else %>
-                <h6 class="info-border">
-                  <%= genre.capitalize %>
-                </h6>
-              <% end %>
-            <% end %>
-          </div>
+      <div class="play-button-container">
+        <%= @anime.rating %> <i class="fa-solid fa-star rating-star"></i>
+        <div class="play-trailer-button" data-action="click->anime#play">
+          <i class="fa-solid fa-play play-button" data-anime-target="playButton"></i>
+          <h2 id="play" data-anime-target="playText">Play Trailer</h2>
         </div>
       </div>
+    </h6>
+    <div class="show-info">
+      <% @anime.genre_list.each do |genre| %>
+        <% if genre == "psychological" %>
+          <h6 class="info-border text-truncate">
+            <%= genre.capitalize %>
+          </h6>
+        <% else %>
+          <h6 class="info-border">
+            <%= genre.capitalize %>
+          </h6>
+        <% end %>
+      <% end %>
     </div>
-
-    <!-- Iframe Container for Video -->
-    <div data-anime-target="iframeContainer" class="iframe-container" style="display: none;">
-      <iframe
+  </div>
+</div>
+</div>
+<!-- Iframe Container for Video -->
+<div data-anime-target="iframeContainer" class="iframe-container" style="display: none;">
+  <iframe
         data-anime-target="iframe"
         width="400"
         height="550"
-        src="<%= @anime.trailer %>&loop=1&controls=0&rel=0&playlist=<%= @anime.trailer.split('/').last.split('?').first %>"
+        src="<%= @anime.trailer %>&loop=1&controls=0&rel=0&playlist=<%= @anime.trailer.split('/').last.split('?').first %>&mute=1"
         frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
-      </iframe>
-      <p id="video-notice">*Some trailers may not be available due to <strong>Regional Restriction</strong>.</p>
-    </div>
-  <% end %>
-
-
-  <div class="synopsis-container">
-    <div class="synopsis" data-anime-target="synopsis">
-      <% if @anime.genre_list.count <= 4 %>
-        <h2><i class="fa-solid fa-scroll"></i> Synopsis</h2>
-      <% else %>
-        <h2 class="pt-4"><i class="fa-solid fa-scroll"></i> Synopsis</h2>
-      <% end %>
-        <p><i class="fa-solid fa-layer-group"></i> <%= @anime.episode_count %> episodes</p>
-      <div data-anime-target="content" class="synopsis-content">
-        <%= @anime.synopsis %>
-      </div>
-      <button class="toggle-button" data-anime-target="toggleButton" data-action="click->anime#toggle">
-        Read More
-      </button>
-    </div>
-  </div>
-
-  <div class="info-container">
+  </iframe>
+  <p id="video-notice">*Some trailers may not be available due to <strong>Regional Restriction</strong>.</p>
+</div>
+<% end %>
+<div class="synopsis-container">
+  <div class="synopsis" data-anime-target="synopsis">
     <% if @anime.genre_list.count <= 4 %>
-      <h1>Information</h1>
+      <h2><i class="fa-solid fa-scroll"></i> Synopsis</h2>
     <% else %>
-      <h2 class="pt-4"><i class="fa-solid fa-circle-info"></i> More info</h2>
+      <h2 class="pt-4"><i class="fa-solid fa-scroll"></i> Synopsis</h2>
     <% end %>
-    <div class="d-flex gap-3">
-      <p><i class="fa-solid fa-star"></i> <%= @anime.rating %></p>
-      <p><i class="fa-solid fa-ranking-star"></i> <%= @anime.rank %></p>
-      <p><i class="fa-solid fa-heart"></i> <%= @anime.popularity %></p>
+    <div data-anime-target="content" class="synopsis-content">
+      <%= @anime.synopsis %>
     </div>
-    <p><i class="fa-solid fa-calendar"></i> Release:  <%= @anime.start_date %></p>
-    <p><i class="fa-solid fa-film"></i> Studio:  <%= @anime.studio %></p>
-    <%= render "components/similar_anime_card" %>
-    <div class="sticky-button-container">
-      <%= button_to bookmarks_path, method: :post, class: "btn btn-success sticky-button", params: { bookmark: { anime_id: @anime.id, watch_status: :watching } } do %>
-        Add to Watchlist
-      <% end %>
-    </div>
+    <button class="toggle-button" data-anime-target="toggleButton" data-action="click->anime#toggle">
+      Read More
+    </button>
   </div>
+</div>
+<div class="info-container">
+  <% if @anime.genre_list.count <= 4 %>
+    <h1><i class="fa-solid fa-circle-info"></i> More info</h1>
+  <% else %>
+    <h2 class="pt-4"><i class="fa-solid fa-circle-info"></i> More info</h2>
+  <% end %>
+  <div class="d-flex gap-3">
+    <p><i class="fa-solid fa-star"></i> <%= @anime.rating %></p>
+    <p><i class="fa-solid fa-ranking-star"></i> <%= @anime.rank %></p>
+    <p><i class="fa-solid fa-heart"></i> <%= @anime.popularity %></p>
+  </div>
+  <p><i class="fa-solid fa-calendar"></i> Release:  <%= @anime.start_date %></p>
+  <p><i class="fa-solid fa-film"></i> Studio:  <%= @anime.studio %></p>
+  <%= render "components/similar_anime_card" %>
+  <div class="sticky-button-container">
+    <%= button_to bookmarks_path, method: :post, class: "btn btn-success sticky-button", params: { bookmark: { anime_id: @anime.id, watch_status: :watching } } do %>
+      Add to Watchlist
+    <% end %>
+  </div>
+</div>
 </div>
