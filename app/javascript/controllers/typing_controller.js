@@ -9,37 +9,50 @@ export default class extends Controller {
   static targets = [ "panda" ]
 
   connect() {
-    if(this.messageValue == null) return;
-    this.updateChat(this.messageValue)
+    if (this.messageValue == null) return;
+    this.updateChat({ detail: { message: this.messageValue } }); // Ensure initial chat is set with an array
   }
 
-  loading(){
-    if(this.pandaTarget.classList.contains("d-none")){
+  loading() {
+    if (this.pandaTarget.classList.contains("d-none")) {
       this.pandaTarget.classList.remove("d-none");
     }
-    this.updateChat(["Just a moment..."]);
+    this.updateChat({ detail: { message: ["Just a moment..."] } });
+  }
+
+  disableChat() {
+    setTimeout(() => {
+      this.element.classList.add("d-none");
+    }, 2000);
   }
 
   disable(){
     this.pandaTarget.classList.add("d-none");
   }
 
-  updateChat(array){
-    if(currentTyped != null){
-      // stop current typed animation if there is one
-      currentTyped.destroy();
+  updateChat(event) {
+    const array = event.detail.message; // Get the array of strings from the dispatched event
+
+    if (!Array.isArray(array)) {
+      console.error("Expected an array of strings, but got:", array);
+      return;
     }
+
+    if (currentTyped != null) {
+      currentTyped.destroy(); // Stop current typed animation if there is one
+    }
+
     this.pandaTarget.classList.remove("d-none");
-    const typed = new Typed(document.querySelector("#panda_message"), {
-      strings: array,
+
+    const typed = new Typed("#panda_message", {
+      strings: array, // Use the array passed from the event
       showCursor: false,
       smartBackspace: true,
-      // onComplete: (self) => {this.#diableChat()},
-      // onLastStringBackspaced: (self) => {this.#diableChat()},
       typeSpeed: 25
-    })
+    });
+
     currentTyped = typed;
-  }
+}
 
   #diableChat(){
     console.log("finshed typing");

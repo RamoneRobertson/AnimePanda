@@ -1,6 +1,6 @@
 <% message = [@reco_chat, "Enjoy binge watching!"] %>
-<div data-controller="typing" data-typing-message-value="<%= message %>">
-  <div class="reco-container" data-controller="anime-vote reco-refresh panda-comment" data-action="anime-vote:like->typing#updateChat">
+<div data-controller="typing" data-typing-message-value="<%= message %>" data-action="anime-vote:dislike->typing#updateChat">
+  <div class="reco-container" data-controller="anime-vote reco-refresh" data-action="anime-vote:like->typing#updateChat">
     <div data-anime-vote-target="animes" data-reco-refresh-target="animes" data-likes=0>
       <%= render "components/reco_anime" %>
     </div>

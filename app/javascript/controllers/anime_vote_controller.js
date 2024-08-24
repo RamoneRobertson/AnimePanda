@@ -19,7 +19,7 @@ export default class extends Controller {
     this.animeTarget.classList.add("yes");
     this.#updatePreference();
     this.#removeBookmark();
-    this.dispatch('like', { detail: { message: ["Anime Liked!", "Glad you like it!"] } })
+    this.dispatch('like', { detail: { message: ["Glad you like it!"] } })
     this.#redirect();
   }
 
@@ -27,6 +27,7 @@ export default class extends Controller {
   dislike(event){
     this.animeTarget.classList.add("nope");
     this.#removeBookmark();
+    this.dispatch('dislike', { detail: { message: [":("] } })
     this.#redirect();
   }
 
