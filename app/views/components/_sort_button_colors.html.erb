@@ -1,0 +1,33 @@
+<div class="sort-buttons">
+  <% if params[:status] == "watching" %>
+  <div class="sort-button-green">
+      <%= link_to "Watching", lists_watchlist_path(status: "watching") %>
+    </div>
+    <div class="sort-button-black">
+      <%= link_to "Completed", lists_watchlist_path(status: "completed") %>
+    </div>
+    <div class="sort-button-black" >
+      <%= link_to "All", lists_watchlist_path%>
+    </div>
+  <% elsif params[:status] == "completed" %>
+    <div class="sort-button-black">
+      <%= link_to "Watching", lists_watchlist_path(status: "watching") %>
+    </div>
+    <div class="sort-button-green">
+      <%= link_to "Completed", lists_watchlist_path(status: "completed") %>
+    </div>
+    <div class="sort-button-black" >
+      <%= link_to "All", lists_watchlist_path%>
+    </div>
+  <% else %>
+    <div class="sort-button-black">
+      <%= link_to "Watching", lists_watchlist_path(status: "watching") %>
+    </div>
+    <div class="sort-button-black">
+      <%= link_to "Completed", lists_watchlist_path(status: "completed") %>
+    </div>
+    <div class="sort-button-green" >
+      <%= link_to "All", lists_watchlist_path%>
+    </div>
+  <% end %>
+</div>
