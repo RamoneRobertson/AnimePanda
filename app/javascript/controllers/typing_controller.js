@@ -31,7 +31,6 @@ export default class extends Controller {
   }
 
   updateChat(event) {
-    console.log("it's working")
     const array = event.detail.message; // Get the array of strings from the dispatched event
 
     if (!Array.isArray(array)) {

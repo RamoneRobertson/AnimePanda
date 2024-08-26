@@ -9,7 +9,6 @@ export default class extends Controller {
     });
 
     window.addEventListener("beforeunload", (event) => {
-      localStorage.clear();
       document.documentElement.classList.add("loader");
     })
   }

@@ -9,8 +9,8 @@ class AnimesController < ApplicationController
     current_user.liked_list.bookmarks.destroy_all
     chatgpt = OpenaiService.new
     seen_animes = @user.lists.seen.first.animes.select(:id, :title).to_json
-    @animes = genrate_chatgpt_anime(seen_animes) # 5
-    @user.lists.recommendations.first.bookmarks.destroy_all # 0 bookmarks
+    @animes = genrate_chatgpt_anime(seen_animes)
+    @user.lists.recommendations.first.bookmarks.destroy_all
     @recommend_list = @user.lists.find_by(list_type: 'recommendations')
     @reco_comments = []
     @animes.each do |anime|
@@ -18,16 +18,6 @@ class AnimesController < ApplicationController
       new_bookmark.save if !new_bookmark.anime_id.nil?
       @reco_comments << chatgpt.per_reco_chat(seen_animes, anime)
     end
-    # @recommend_list = @user.lists.find_by(list_type: 'recommendations')
-    reco_animes = @user.lists.recommendations.first.animes.select(:id, :title).to_json
-    @reco_chat = chatgpt.reco_chat(seen_animes, reco_animes)
-    @message = [@reco_chat, "Enjoy binge watching!"]
-  end
-
-  def like
-    @anime = Anime.find(params[:id])
-    swipe_session = session[:liked_anime_ids] = []
-    swipe_session << @anime.id unless swipe_session.include?(@anime.id)
   end
 
   def index
@@ -161,10 +151,6 @@ class AnimesController < ApplicationController
 
 
   private
-
-  def clear_likes
-    current_user.liked_list.bookmarks.destroy
-  end
 
   def hide_navbar
     @hide_navbar = true

@@ -2,9 +2,9 @@
   data-controller="anime-vote typing"
   data-typing-message-value="<%= @reco_comments.slice(0, 1) %>"
   data-action="anime-vote:vote->typing#updateChat"
-  data-anime-vote-recos-value="<% @reco_comments %>"
+  data-anime-vote-recos-value="<%= @reco_comments %>"
   >
-  <div class="d-none" >
+  <div class="d-none"  >
     <% @reco_comments.each do |comment| %>
       <p data-anime-vote-target="comment">
         <%= comment %>
@@ -12,7 +12,7 @@
     <% end %>
   </div>
   <div>
-    <div class="reco-container" data-controller="reco-refresh">
+    <div class="reco-container" data-controller="reco-refresh recommendations-loading">
       <div data-anime-vote-target="animes" data-reco-refresh-target="animes" data-likes=0>
         <%= render "components/reco_anime" %>
       </div>
