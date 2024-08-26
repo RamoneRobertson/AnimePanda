@@ -30,13 +30,11 @@ class BookmarksController < ApplicationController
 
   def update
     @bookmark_target = Bookmark.find(params[:id])
-
-    @bookmark_target = Bookmark.find(params[:id])
     @list = @bookmark_target.list
-     if @bookmark_target.update(list_id:  current_user.lists.seen[0].id)
-      redirect_to request.referer, notice: 'Marked as seen successfully!'
+     if @bookmark_target.update(watch_status: 1, list_id:  current_user.lists.seen[0].id)
+      redirect_to request.referer, notice: 'Marked as seen'
      else
-      redirect_to request.referer, notice: 'Marked as seen failed'
+      redirect_to request.referer, notice: 'Error, failed to mark as seen'
     end
   end
 
