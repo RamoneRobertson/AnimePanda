@@ -11,7 +11,7 @@ class BookmarksController < ApplicationController
         @anime = Anime.find(bookmark_params[:anime_id])
         if @bookmark.list.list_type == 'watchlist'
           flash[:notice] = "Anime is added to your watchlist"
-          redirect_to @anime
+          redirect_to anime_path(@anime)
         end
       # else
       #   @bookmark = @user.lists.recommendations[0].bookmarks.find_by(bookmark_params["anime_id"])
