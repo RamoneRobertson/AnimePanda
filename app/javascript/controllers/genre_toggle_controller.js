@@ -30,7 +30,7 @@ export default class extends Controller {
     }else{
       link = document.querySelector(".lucky-button > a").href = `${recommendationsLink}?genre=${queryArray}`;
     }
-    console.log(link);
+    // console.log(link);
   }
 
   #makeLink(){
