@@ -4,6 +4,7 @@ require 'open-uri'
 
 class AnimesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
+
   def recommendations
     @user = current_user
     current_user.liked_list.bookmarks.destroy_all

@@ -1,5 +1,4 @@
 class BookmarksController < ApplicationController
-
   def create
     # @user = current_user
     #check if added in recommended list
@@ -12,6 +11,8 @@ class BookmarksController < ApplicationController
         if @bookmark.list.list_type == 'watchlist'
           flash[:notice] = "Anime is added to your watchlist"
           redirect_to anime_path(@anime)
+        else
+          redirect_to request.referer, notice: 'Error, failed to mark as seen'
         end
       # else
       #   @bookmark = @user.lists.recommendations[0].bookmarks.find_by(bookmark_params["anime_id"])
@@ -70,7 +71,4 @@ class BookmarksController < ApplicationController
     params.require(:bookmark).permit(:anime_id, :watch_status, :id, :preference)
   end
 
-  def method_name
-
-  end
 end
