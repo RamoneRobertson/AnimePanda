@@ -18,6 +18,12 @@ class AnimesController < ApplicationController
       new_bookmark.save if !new_bookmark.anime_id.nil?
       @reco_comments << chatgpt.per_reco_chat(seen_animes, anime)
     end
+
+    @load_comment = @reco_comments.slice(0, 1).first
+    regex = /recommended\s([^.!?]*?)(?=\sbecause|\sdue\s|\sfor\s|[.!?])/i
+    match = @load_comment.match(regex)
+    title = match[1]
+    @highlighted_comment = [@load_comment.gsub(title, "<span class=\"highlight\">#{title}</strong>")]
   end
 
   def index

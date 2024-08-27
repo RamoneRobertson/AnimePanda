@@ -30,8 +30,15 @@ export default class extends Controller {
   }
 
   #pandaComment(){
-    const comment = this.comments.splice(1, 1)[0]
-    this.dispatch('vote', { detail: { message: [comment] } })
+    if(this.comments.length !== 1){
+      const comment = this.comments.splice(1, 1)[0]
+      const regex = /recommended\s([^.!?]*?)(?=\sbecause|\sdue\s|\sfor\s|[.!?])/i;
+      const match = comment.match(regex);
+      const title = match ? match[1] : null;
+      const highlightedTitle = comment.replace(title, `<span class="highlight">${title}</span>`);
+      this.commentTarget.classList.add('highlight')
+      this.dispatch('vote', { detail: { message: [highlightedTitle] } })
+    }
   }
 
   // run after the animation is complete

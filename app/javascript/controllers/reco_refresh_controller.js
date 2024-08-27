@@ -4,12 +4,14 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ['animes']
   connect() {
-    window.addEventListener("load", (event) => {
-      document.documentElement.classList.remove("loader");
-    });
+    // const otherController = this.application.getControllerForElementAndIdentifier(this.loadTarget, 'load')
+    // window.addEventListener("load", (event) => {
+    //   otherController.load();
+    //   // document.documentElement.classList.remove("loader");
+    // });
 
-    window.addEventListener("beforeunload", (event) => {
-      document.documentElement.classList.add("loader");
-    })
+    // window.addEventListener("beforeunload", (event) => {
+    //   otherController.load();
+    // })
   }
 }

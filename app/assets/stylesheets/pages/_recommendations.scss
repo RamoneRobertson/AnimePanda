@@ -104,3 +104,17 @@
     color: var(--panda-green);
   }
 }
+
+.highlight {
+  color: var(--panda-red);
+  animation: glow 2s ease-in-out infinite
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 20px var(--panda-red);
+  }
+  to {
+    text-shadow: 0 0 30px rgb(159, 4, 4) 0 0 10px #fb2b2b;
+  }
+}
