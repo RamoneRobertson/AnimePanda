@@ -1,7 +1,7 @@
 <% if random_popular.any? %>
   <% random_popular.each do |item| %>
     <%= link_to anime_path(item) do %>
-      <div class="home-anime-card p-3 h-100">
+      <div data-action="click->recommendations-loading#loading" class="home-anime-card p-3 h-100">
         <div class="pop-anime-card rounded-5 h-100 box-shadow-effect">
           <div class="pop-image" style="background-image: url('<%= item.picture_url %>');">
           </div>

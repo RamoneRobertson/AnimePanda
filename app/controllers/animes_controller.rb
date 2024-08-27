@@ -62,9 +62,9 @@ class AnimesController < ApplicationController
     @liked = @user.lists.find_by(list_type: 'liked')
     @anime = Anime.find(params[:id])
     @show_chat = chatgpt.show_chat(@anime.title)
-    recommended = mal_service.call_mal_recos(@anime.mal_id)
+    @recommended = mal_service.call_mal_recos(@anime.mal_id)
     @reco_mal = []
-    recommended[0..2].each do |anime|
+    @recommended[0..2].each do |anime|
       mal_id = anime["node"]["id"]
       if Anime.find_by(mal_id: mal_id).nil?
         new_anime = import_anime(mal_id)
@@ -160,7 +160,7 @@ class AnimesController < ApplicationController
     rating = info["mean"]
     episode_count = info["num_episodes"]
     popularity = info["popularity"]
-    studio = info["studios"][0]["name"]
+    studio = info["studios"].empty? ? "" : info["studios"][0]["name"]
     rank = info["rank"].to_i
     trailer = mal_service.find_trailer(id)
     genres = info["genres"]
