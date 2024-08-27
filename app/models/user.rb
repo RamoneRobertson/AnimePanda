@@ -13,6 +13,10 @@
     lists.liked.first
   end
 
+  def recommend_list
+    lists.recommendations.first
+  end
+
   def seen_list
     lists.seen.first
   end
