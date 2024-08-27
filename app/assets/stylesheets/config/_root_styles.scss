@@ -1,5 +1,6 @@
 :root{
   --anime-card-pic-height: 200px;
+  // font-size: 1.2rem;
   // --banner-bg-color: #88B04B;
 }
 
@@ -12,4 +13,12 @@ a {
   color: inherit; /* Makes the link color inherit from its parent element */
   background: none; /* Removes any background */
   border: none; /* Removes any border */
+}
+
+h1, h2{
+  font-family: "Chicle", cursive;
+}
+
+h3, h4{
+  font-family: "Akaya Telivigala", cursive;
 }
