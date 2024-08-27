@@ -6,6 +6,12 @@
         <i class="fa-solid fa-arrow-left text-decoration-none" style="color: white;"></i>
       <% end %>
       <h1 style="color: white;">Watchlist</h1>
+      <!-- Button trigger modal -->
+      <%# <div data-controller="toggle" class="mt-5"> %>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Sync MyAnimeList
+        </button>
+      <%# </div> %>
     </div>
     <div class="show-wrapper">
       <%= render "components/sort_button_colors" %>
@@ -64,4 +70,44 @@
     </div>
   </div>
   <%= render "components/panda_button" %>
+</div>
+
+<%#= button_to 'Sync MyAnimelist', edit_user_registration_path, method: :get %>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">MyAnimeList Sync</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Please enter your MyAnimeList Username below:</p>
+        <%= form_for(@user, url: user_registration_path, method: :put) do |form| %>
+          <% if @user.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+              <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <%= form.label :mal_username %>
+            <%= form.text_field :mal_username %> <!-- Assuming 'name' is an attribute you want to update -->
+          </div>
+
+          <div class="actions">
+            <%= form.submit "Sync" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

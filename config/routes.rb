@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
+  get 'users/edit'
+  get 'users/update'
   devise_for :users, controllers: {
   registrations: 'users/registrations',
   sessions: 'users/sessions'
   }
+  resources :users, only: [:edit, :update]
+
   # devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
