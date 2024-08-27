@@ -11,7 +11,7 @@ class BookmarksController < ApplicationController
         @anime = Anime.find(bookmark_params[:anime_id])
         if @bookmark.list.list_type == 'watchlist'
           flash[:notice] = "Anime is added to your watchlist"
-          redirect_to @anime
+          redirect_to anime_path(@anime)
         end
       # else
       #   @bookmark = @user.lists.recommendations[0].bookmarks.find_by(bookmark_params["anime_id"])
@@ -28,9 +28,15 @@ class BookmarksController < ApplicationController
   end
 
 
-  # def update_to_watching(bookmark)
-  #   bookmark.watch_status = "watching"
-  # end
+  def update
+    @bookmark_target = Bookmark.find(params[:id])
+    @list = @bookmark_target.list
+     if @bookmark_target.update(watch_status: 1, list_id:  current_user.lists.seen[0].id)
+      redirect_to request.referer, notice: 'Marked as seen'
+     else
+      redirect_to request.referer, notice: 'Error, failed to mark as seen'
+    end
+  end
 
   def update_list(bookmark)
     @user = current_user
@@ -58,8 +64,13 @@ class BookmarksController < ApplicationController
 
   #   # end
   # end
+  private
 
   def bookmark_params
     params.require(:bookmark).permit(:anime_id, :watch_status, :id, :preference)
+  end
+
+  def method_name
+
   end
 end
