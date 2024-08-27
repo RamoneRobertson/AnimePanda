@@ -41,6 +41,12 @@ class AnimesController < ApplicationController
         formats: [:html]
       }
     end
+
+    @genre_array = ["Action", "Adventure", "Avant Garde",
+      "Award Winning", "Boys Love", "Comedy", "Drama", "Fantasy",
+      "Girls Love", "Gourmet", "Horror", "Mystery", "Romance",
+      "Sci-fi", "Slice of Life", "Sports", "Supernatural", "Suspense"]
+    # @genre_array.shuffle!
   end
 
   def show
