@@ -10,7 +10,7 @@ class MyanimelistService
   end
 
   def call_top_rank
-    uri = URI("#{BASE_URL}/anime/ranking?ranking_type=all&limit=100")
+    uri = URI("#{BASE_URL}/anime/ranking?ranking_type=all&limit=115")
     # Step 2: Create an HTTP request object
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true if uri.scheme == 'https'  # Use SSL/TLS if the URL is HTTPS
@@ -28,7 +28,7 @@ class MyanimelistService
   end
 
   def call_popular
-    uri = URI("#{BASE_URL}/anime/ranking?ranking_type=bypopularity&limit=20")
+    uri = URI("#{BASE_URL}/anime/ranking?ranking_type=bypopularity&limit=35")
     # Step 2: Create an HTTP request object
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true if uri.scheme == 'https'  # Use SSL/TLS if the URL is HTTPS
