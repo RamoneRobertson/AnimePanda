@@ -4,12 +4,14 @@ require 'open-uri'
 
 class AnimesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
+
   def recommendations
     @user = current_user
+    params["genre"].nil? == true ? genres = "not set" : genres = params["genre"]
     current_user.liked_list.bookmarks.destroy_all
     chatgpt = OpenaiService.new
     seen_animes = @user.lists.seen.first.animes.select(:id, :title).to_json
-    @animes = genrate_chatgpt_anime(seen_animes)
+    @animes = genrate_chatgpt_anime(seen_animes, genres)
     @user.lists.recommendations.first.bookmarks.destroy_all
     @recommend_list = @user.lists.find_by(list_type: 'recommendations')
     @reco_comments = []
@@ -48,10 +50,8 @@ class AnimesController < ApplicationController
       }
     end
 
-    @genre_array = ["Action", "Adventure", "Avant Garde",
-      "Award Winning", "Boys Love", "Comedy", "Drama", "Fantasy",
-      "Girls Love", "Gourmet", "Horror", "Mystery", "Romance",
-      "Sci-fi", "Slice of Life", "Sports", "Supernatural", "Suspense"]
+    @genre_array = ["Shounen", "Slice of Life", "Comedy", "Seinen", "Romance",
+      "Sci-fi", "Sports", "Suspense"]
     # @genre_array.shuffle!
   end
 
@@ -101,7 +101,7 @@ class AnimesController < ApplicationController
     # hide_panda
   end
 
-  def genrate_chatgpt_anime(seen_animes)
+  def genrate_chatgpt_anime(seen_animes, genres)
     mal_service = MyanimelistService.new
     openai_service = OpenaiService.new
     @user = current_user
@@ -112,6 +112,8 @@ class AnimesController < ApplicationController
             Please respond in the following JSON format: #{json_format}.
             Recommend 5 Anime based on user's following seen anime below.
             #{seen_animes}
+            if the user set the genres below, recommend animes that have the same genres.
+            genres: #{genres}
             Avoid recommending anime that you already recommended recently.
             Only include the english title of the anime.
             PROMPT

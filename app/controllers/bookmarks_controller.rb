@@ -1,5 +1,4 @@
 class BookmarksController < ApplicationController
-
   def create
     # @user = current_user
     #check if added in recommended list
@@ -70,7 +69,4 @@ class BookmarksController < ApplicationController
     params.require(:bookmark).permit(:anime_id, :watch_status, :id, :preference)
   end
 
-  def method_name
-
-  end
 end
