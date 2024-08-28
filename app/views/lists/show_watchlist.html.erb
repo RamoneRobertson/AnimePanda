@@ -1,17 +1,21 @@
 <% message = [@watchlist_chat] %>
 <div class="show-page-container" data-controller="typing" data-typing-message-value="<%= message %>">
   <div class="list-container" style="min-height: 100vh;">
-    <div class ="page-name">
-      <%= link_to root_path do %>
-        <i class="fa-solid fa-arrow-left text-decoration-none" style="color: white;"></i>
-      <% end %>
-      <h1 style="color: white;">Watchlist</h1>
-      <!-- Button trigger modal -->
-      <%# <div data-controller="toggle" class="mt-5"> %>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Sync MyAnimeList
+    <div class="page-name d-flex justify-content-between align-items-center w-100">
+        <div style="width: 90px;" class="d-flex align-items-center">
+          <%= link_to root_path do %>
+            <i class="fa-solid fa-arrow-left text-decoration-none" style="color: white;"></i>
+          <% end %>
+        </div>
+        <div>
+          <h1 style="color: white;" class="mb-0 mx-auto">Watchlist</h1>
+        </div>
+        <!-- Button trigger modal -->
+
+        <button type="button" class="btn btn-primary btn-sm rounded-pill me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          MAL <i class="fa-solid fa-rotate" style="color: #ffffff;"></i>
         </button>
-      <%# </div> %>
+
     </div>
     <div class="show-wrapper">
       <%= render "components/sort_button_colors" %>
@@ -104,7 +108,7 @@
           </div>
 
           <div class="actions">
-            <%= form.submit "Sync" %>
+            <%= form.submit "Sync", class: "btn btn btn-dark" %>
           </div>
         <% end %>
       </div>
