@@ -10,6 +10,11 @@
 
   font-size: 1.2rem;
   padding: 8px 16px;
+  transition: all 0.2s;
+}
+.core-button:hover{
+  background-color: var(--panda-sub);
+  color: var(--panda-white);
 }
 
 .genre-button{
@@ -47,6 +52,20 @@
 
   .button-card {
     flex: 0 0 auto;
+  }
+}
+
+@media (min-width: 960px) {
+  .buttons-scrolling-wrapper{
+    justify-content: center;
+  }
+
+  .genre-button{
+    padding: 6px 12px;
+  }
+
+  .core-button{
+    font-size: 1.5rem;
   }
 }
 
