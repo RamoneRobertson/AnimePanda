@@ -35,8 +35,7 @@ export default class extends Controller {
       const regex = /recommended\s([^.!?]*?)(?=\sbecause|\sdue\s|\sfor\s|[.!?])/i;
       const match = comment.match(regex);
       const title = match ? match[1] : null;
-      const highlightedTitle = comment.replace(title, `<span class="highlight">${title}</span>`);
-      this.commentTarget.classList.add('highlight')
+      const highlightedTitle = comment.replace(title, `<span style="color: red;">${title}</span>`);
       this.dispatch('vote', { detail: { message: [highlightedTitle] } })
     }
   }

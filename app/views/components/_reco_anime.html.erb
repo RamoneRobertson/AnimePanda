@@ -7,7 +7,7 @@
       </div>
     <% else %>
       <div class="reco-img fade-img">
-        <%= image_tag bookmark.anime.picture_url, alt: "A poster of the bookmark.anime displaying the characters and overall theme", class: "fade-img" %>
+        <%= image_tag bookmark.anime.picture_url, alt: "A poster of the anime displaying the characters and overall theme", class: "fade-img" %>
       </div>
     <% end %>
     <div data-controller="show-more">
@@ -29,7 +29,9 @@
         <p data-show-more-target="expander" data-action="click->show-more#toggleSynopsis">Read More</p>
       </div>
       <div class="reco-info">
-        <h4>Info</h4>
+        <span>
+          <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+        </span>
         <p>Episodes: <%= bookmark.anime.episode_count %></p>
         <p>Studio: <%= bookmark.anime.studio %></p>
       </div>

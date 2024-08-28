@@ -23,7 +23,7 @@ class AnimesController < ApplicationController
     regex = /recommended\s([^.!?]*?)(?=\sbecause|\sdue\s|\sfor\s|[.!?])/i
     match = @load_comment.match(regex)
     title = match[1]
-    @highlighted_comment = [@load_comment.gsub(title, "<span class=\"highlight\">#{title}</strong>")]
+    @highlighted_comment = [@load_comment.gsub(title, "<span style=\"color: red;\">#{title}</span>")]
   end
 
   def index
