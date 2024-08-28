@@ -8,11 +8,9 @@
       <div class="gradient-overlay"></div>
     </div>
     <div class="text-overlay">
-      <div class="back-arrow">
+      <div class="back-arrow" data-controller="back-button">
         <div class="title d-flex gap-3">
-          <%= link_to root_path do %>
-            <i class="fa-solid fa-arrow-left text-decoration-none pt-5"></i>
-          <% end %>
+          <i class="fa-solid fa-arrow-left text-decoration-none pt-5" data-back-button-target="arrow" data-action="click->back-button#goBack"></i>
         </div>
       </div>
       <div class="info row m-0">

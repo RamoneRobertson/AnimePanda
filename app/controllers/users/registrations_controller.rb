@@ -3,7 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-
+  before_action :configure_permitted_parameters, if: :devise_controller?
   # GET /resource/sign_up
   # def new
   #   super
@@ -33,6 +33,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
     new_watch_list.save
   end
 
+  protected
+
+  # Override Devise's update_resource method to allow updating without password
+  def update_resource(resource, params)
+    if params[:password].blank? && params[:password_confirmation].blank?
+      resource.update_without_password(params)
+    else
+      super
+    end
+  end
+
+  def after_update_path_for(resource)
+    # Redirect to a specific path after update
+    lists_watchlist_path(status: 'completed') # Replace with your desired path
+  end
+
+  # Permit additional parameters for account update
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:account_update, keys: [:mal_username, :email, :password, :password_confirmation])
+  end
   # GET /resource/edit
   # def edit
   #   super
