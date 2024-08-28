@@ -32,11 +32,13 @@ export default class extends Controller {
   #pandaComment(){
     if(this.comments.length !== 1){
       const comment = this.comments.splice(1, 1)[0]
-      const regex = /recommended\s([^.!?]*?)(?=\sbecause|\sdue\s|\sfor\s|[.!?])/i;
+      const regex = /recommended\s([^.!?]*?)(?=\sbecause|\sdue\s|\sfor\s|[.?])/i;
       const match = comment.match(regex);
       const title = match ? match[1] : null;
-      const highlightedTitle = comment.replace(title, `<span style="color: red;">${title}</span>`);
-      this.dispatch('vote', { detail: { message: [highlightedTitle] } })
+      if(title){
+        const highlightedTitle = comment.replace(title, `<span style="color: #DD1E73;">${title}</span>`);
+        this.dispatch('vote', { detail: { message: [highlightedTitle] } })
+      }
     }
   }
 
@@ -89,7 +91,6 @@ export default class extends Controller {
   // Function redirects to the /lists/liked view by tracking animesTarget.children
   #redirect(){
     if (this.animesTarget.children.length == 1 && this.animesTarget.dataset.likes == 0){
-      document.documentElement.classList.add('loader');
       window.location.reload(true);
     }
     else if (this.animesTarget.children.length == 1){

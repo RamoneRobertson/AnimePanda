@@ -4,7 +4,7 @@
   data-action="anime-vote:vote->typing#updateChat"
   data-anime-vote-recos-value="<%= @reco_comments %>"
   >
-  <%= render "components/paw_loading" %>
+  <%= render "components/paw_loading", data: { action: "beforeunload->recommendations-loading#loading" } %>
   <div class="d-none">
     <% @reco_comments.each do |comment| %>
       <p data-anime-vote-target="comment">
@@ -12,7 +12,7 @@
       </p>
     <% end %>
   </div>
-  <div data-action="anime-vote:redirect->recommendations-loading#loading">
+  <div>
     <div class="reco-container" data-controller="reco-refresh">
       <div data-anime-vote-target="animes" data-reco-refresh-target="animes" data-likes=0>
         <%= render "components/reco_anime" %>

@@ -12,7 +12,7 @@ export default class extends Controller {
     this.synopsisTarget.classList.toggle('reco-synopsis-expanded');
     this.synopsisTarget.classList.toggle('fade-img')
     if(this.expanderTarget.innerText === "Read More"){
-      this.expanderTarget.innerText = "Show Less"
+      this.expanderTarget.innerText = "Read Less"
     }
     else{
       this.expanderTarget.innerText = "Read More"
