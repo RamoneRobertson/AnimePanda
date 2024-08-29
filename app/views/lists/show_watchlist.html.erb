@@ -64,6 +64,9 @@
                   </div>
                   <p style="color: white;"><%= list_animes.anime.rating %> <i class="fa-solid fa-star rating-star-list"></i></p>
                   <p class="pt-3" style="color: white;">Rank: <%= list_animes.anime.rank %></p>
+                  <%= link_to "https://www.crunchyroll.com/search?q=#{list_animes.anime.title}" do %>
+                    <button class="mt-3 btn btn-secondary"><i class="fa-solid fa-tv" style="color: #ffffff;"></i> Watch</button>
+                  <% end %>
                 </div>
               </div>
             </div>

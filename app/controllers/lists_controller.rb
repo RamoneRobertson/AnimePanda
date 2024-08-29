@@ -50,22 +50,51 @@ class ListsController < ApplicationController
       watch_status = node[1] == "plan_to_watch" ? "like" : node[1]
 
       list = ""
-
       if Anime.exists?(mal_id: id)
         anime = Anime.find_by(mal_id: id)
       else
         anime = add_anime(id)
+        # raise
       end
 
       if watch_status == "completed"
         list = user.lists.find_by(list_type: 'seen')
       elsif watch_status == "watching"
         list = user.lists.find_by(list_type: 'watchlist')
+      else
+        list = user.lists.find_by(list_type: 'liked')
       end
       new_bookmark = Bookmark.new(anime: anime, watch_status: watch_status)
       new_bookmark.list = list
       new_bookmark.save
     end
+  end
+
+  def add_anime(id)
+    mal_service = MyanimelistService.new
+    info = mal_service.call_anime(id)
+    info["alternative_titles"]["en"] == "" ? title = info["title"] : title = info["alternative_titles"]["en"]
+    picture_url = info["main_picture"]["large"]
+    start_date = info["start_date"]
+    synopsis = info["synopsis"]
+    rating = info["mean"]
+    episode_count = info["num_episodes"]
+    popularity = info["popularity"]
+    studio = info["studios"].empty? ? "" : info["studios"][0]["name"]
+    rank = info["rank"].to_i
+    trailer = mal_service.find_trailer(id)
+    genres = info["genres"]
+
+    new_anime = Anime.new(title: title, picture_url: picture_url, start_date: start_date, synopsis: synopsis, rating: rating, rank: rank, episode_count: episode_count, popularity: popularity, studio: studio, trailer: trailer, mal_id: id)
+    puts "---------- #{new_anime.title}(#{id}) ----------"
+    anime_genre_list = []
+    genres.each do |genre|
+      puts "genre tag: #{genre["name"]}"
+      anime_genre_list.push(genre["name"])
+    end
+    new_anime.genre_list = anime_genre_list.join(",")
+    new_anime.save
+    new_anime
   end
 
   def filter_status

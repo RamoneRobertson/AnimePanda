@@ -50,7 +50,7 @@ def add_anime(id)
   rating = info["mean"]
   episode_count = info["num_episodes"]
   popularity = info["popularity"]
-  studio = info["studios"][0]["name"]
+  studio = info["studios"].empty? ? "" : info["studios"][0]["name"]
   rank = info["rank"].to_i
   trailer = mal_service.find_trailer(id)
   genres = info["genres"]
