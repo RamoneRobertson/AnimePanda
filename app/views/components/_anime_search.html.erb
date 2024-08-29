@@ -3,7 +3,7 @@
   <div><i class="fa-solid fa-paw search-panda-button"></i></div> %>
   <%= form_with url: root_path, method: :get, remote: true, class: "panda-search-bar d-flex", data: {search_bar_target: "form",  action: "submit->search-bar#action" } do %>
     <%= text_field_tag :query, params[:query], class: "search-text-field", placeholder: "Search for anime...", data: {search_bar_target: "input"}%>
-    <div style="transform: rotate(23deg);">
+    <div style="transform: rotate(23deg); -webkit-transform: rotate(23deg);">
       <%= button_tag type: 'submit', class: 'search-panda-button' do %>
         <i class="fa-solid fa-paw"></i>
       <% end %>
