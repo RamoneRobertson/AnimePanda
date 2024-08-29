@@ -53,6 +53,7 @@
 .main-banner{
   height: 30vh;
   background-color: var(--panda-black);
+  align-items: center;
 
   .title{
     position: relative;
@@ -68,6 +69,7 @@
 
     // font-weight: bold;
     color: var(--panda-white);
+    font-size: 4rem;
   }
   i{
     font-size: 1.9rem;
@@ -135,5 +137,21 @@ a {
 
   i{
     font-size: 1.2rem;
+  }
+}
+
+
+
+@media (min-width: 960px) {
+  .main-banner{
+
+    align-items: end;
+
+    h1{
+      font-size: 6rem;
+    }
+    i{
+      font-size: 3rem;
+    }
   }
 }
