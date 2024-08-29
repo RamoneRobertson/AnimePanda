@@ -64,3 +64,12 @@
     color: #FFB7C5;
   }
 }
+
+.pop-add-button{
+  border: none;
+  border-radius: 8px;
+  background-color: var(--panda-green);
+}
+.pop-add-button:hover{
+  background-color: var(--panda-black);
+}
