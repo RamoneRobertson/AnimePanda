@@ -17,7 +17,7 @@ export default class extends Controller {
   }
 
   loading(){
-    console.log("loading started");
+    console.log("loading started from load function");
     this.screenTarget.classList.remove("d-none");
     this.#movePaws();
     this.#performLoad();

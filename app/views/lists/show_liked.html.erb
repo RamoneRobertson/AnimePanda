@@ -1,5 +1,5 @@
-
-<div class="liked-list-container">
+<div class="liked-list-container" data-controller="recommendations-loading">
+  <%= render "components/paw_loading" %>
   <div class="page-name liked-list">
     <h1 style="color: white;">Liked Anime</h1>
   </div>
@@ -9,7 +9,7 @@
         <div class="anime-item mb-3">
           <div class="card-design">
             <%= link_to anime_path(liked_animes.anime) do %>
-              <div class="anime-item-content">
+              <div class="anime-item-content" data-action="click->recommendations-loading#loading">
                 <% if liked_animes.anime.picture_url.nil? %>
                   <p>Image: Image Empty</p>
                 <% else %>
