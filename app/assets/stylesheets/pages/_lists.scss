@@ -115,8 +115,16 @@
 }
 
 .anime-image {
-  height: 170px;
-  width: 120px;
+  height: 200px;
+  width: 140px;
+  padding: 5px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.anime-image-like {
+  height: 200px;
+  width: 140px;
   padding: 5px;
   border-radius: 15px;
   object-fit: cover;

@@ -8,6 +8,7 @@ export default class extends Controller {
   }
 
   goBack() {
-    window.history.back()
+    console.log(window.history)
+    // window.history.back()
   }
 }

@@ -34,13 +34,17 @@ class ListsController < ApplicationController
 
     @matching_anime_id = @liked_array & @watch_anime
 
-    @matching_anime_id.each do |anime_ids|
-      animes_in_liked_list = @liked_lists.find{ |liked_anime| liked_anime.anime.id == anime_ids }
-      if animes_in_liked_list.present?
-        animes_in_liked_list.destroy
-        redirect_to request.referer
-      end
-    end
+    # # @matching_anime_id.each do |anime_ids|
+    #   animes_in_liked_list = @liked_lists.find{ |liked_anime| liked_anime.anime.id == anime_ids }
+    #   if animes_in_liked_list.present?
+    #     animes_in_liked_list.destroy
+    #     redirect_to request.referer
+    #     break
+    #   end
+    # # end
+
+    @liked_lists.where( anime_id: @matching_anime_id).destroy_all
+    @liked_lists.reload
   end
 
   def add_from_mal(user, mal_info)
