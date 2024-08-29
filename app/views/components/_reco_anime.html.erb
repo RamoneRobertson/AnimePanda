@@ -12,10 +12,10 @@
     <% end %>
     <div data-controller="show-more">
       <div class="reco-header">
-        <h3><%= bookmark.anime.title %></h3>
+        <h2><%= bookmark.anime.title %></h2>
         <div class="reco-tags">
           <% bookmark.anime.genre_list.each do |genre| %>
-            <% if genre == "high stakes game" || genre == "award winning" || genre == "romantic subtext" || genre == "organized crime" %>
+            <% if genre == "high stakes game" || genre == "award winning" || genre == "romantic subtext" || genre == "organized crime" || genre == "anthropomorph" || genre == "strategy game"%>
               <button class="reco-genre-tag text-truncate"><%= genre %></button>
             <% else %>
               <button class="reco-genre-tag"><%= genre %></button>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="reco-synopsis fade-img" data-show-more-target="synopsis">
-        <h4>Synopsis</h4>
+        <h3>Synopsis</h3>
         <p><%= bookmark.anime.synopsis.sub(/\s*\[Written by MAL Rewrite\]\s*$/, '') %></p>
       </div>
       <div class="green-expand-link">
@@ -38,8 +38,12 @@
         <span>
           <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
         </span>
-        <p>Episodes: <%= bookmark.anime.episode_count %></p>
-        <p>Studio: <%= bookmark.anime.studio %></p>
+        <div class="info-icons">
+          <%# Episodes %>
+          <p><i class="fa-solid fa-layer-group" style="color: #ffffff;"></i><span style="color: #ffffff"> Episodes:</span> <%= bookmark.anime.episode_count %></p>
+          <%# Studio %>
+          <p><i class="fa-solid fa-film" style="color: #ffffff;"></i> <span style="color: #ffffff"> Studio:</span> <%= bookmark.anime.studio %></p>
+        </div>
       </div>
     </div>
   </div>

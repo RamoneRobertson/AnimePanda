@@ -22,7 +22,7 @@ class AnimesController < ApplicationController
     end
 
     @load_comment = @reco_comments.slice(0, 1).first
-    regex = /recommended\s([^.!?]*?)(?=\sbecause|\sdue\s|\sfor\s|[.!?])/i
+    regex = /recommended\s([^.!?]*?)(?=\sbecause|\sas|\sdue\s|\sfor\s|[.!?])/i
     match = @load_comment.match(regex)
     title = match[1]
 

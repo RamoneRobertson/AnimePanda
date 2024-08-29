@@ -5,7 +5,7 @@
   background: #000;
   color: #FFFFFF;
   overflow: scroll;
-  padding-top: 64px;
+  padding-top: 48px;
 
   img{
     width: 100%;
@@ -13,12 +13,23 @@
 
   .reco-img{
     object-fit: fill;
+    z-index: -5;
+  }
+
+  .reco-trailer {
+    iframe{
+      z-index: -10;
+    }
   }
 
   .reco-header{
+    padding: 8px;
+    margin-top: -32px;
+
     text-align: center;
-    h3 {
+    h2 {
       margin: 8px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     }
 
     .reco-tags {
@@ -40,6 +51,14 @@
       border-radius: 100px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     }
+
+    i{
+      font-size: 20px;
+    }
+
+    span {
+      font-size: 24px;
+    }
   }
 
   .reco-info {
@@ -53,6 +72,14 @@
       font-size: 32px;
       margin-bottom: 1.6rem;
     }
+
+    .info-icons{
+      font-size: 1rem;
+
+      i {
+        font-size: 1.2rem;
+      }
+    }
   }
 
   .reco-synopsis {
@@ -64,8 +91,8 @@
     -webkit-line-clamp: 5;
     padding: 16px;
 
-    h4 {
-      color: #FFFFFF;
+    h3 {
+      color: var(--panda-white);
     }
 
     P {
