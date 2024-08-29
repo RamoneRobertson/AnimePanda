@@ -27,7 +27,7 @@ class AnimesController < ApplicationController
     title = match[1]
 
     if(title)
-      @highlighted_comment = [@load_comment.gsub(title, "<span style=\"color: #DD1E73;\">#{title}</span>")]
+      @highlighted_comment = [@load_comment.gsub(title, "<span class=\"highlight\">#{title}</span>")]
     end
   end
 

@@ -38,7 +38,7 @@ export default class extends Controller {
       const match = comment.match(regex);
       const title = match ? match[1] : null;
       if(title){
-        const highlightedTitle = comment.replace(title, `<span style="color: #DD1E73;">${title}</span>`);
+        const highlightedTitle = comment.replace(title, `<span class="highlight">${title}</span>`);
         this.dispatch('vote', { detail: { message: [highlightedTitle] } })
       }
     }
