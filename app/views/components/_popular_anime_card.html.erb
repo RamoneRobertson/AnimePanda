@@ -32,7 +32,7 @@
         </div>
       <% end %>
       <div class="list-add">
-        <%= button_to bookmarks_path, method: :post, params: { bookmark: { anime_id: item.id, watch_status: :watching } } do %>
+        <%= button_to bookmarks_path, method: :post, params: { bookmark: { anime_id: item.id, watch_status: :watching }, home: true } do %>
           <i class="fa-solid fa-plus" style="color: #1edd88;"></i>
         <% end %>
       </div>
