@@ -32,8 +32,8 @@
         </div>
       <% end %>
       <div class="list-add">
-        <%= button_to bookmarks_path, method: :post, params: { bookmark: { anime_id: item.id, watch_status: :watching }, home: true } do %>
-          <i class="fa-solid fa-plus" style="color: #1edd88;"></i>
+        <%= button_to bookmarks_path, method: :post, params: { bookmark: { anime_id: item.id, watch_status: :watching }, home: true }, class: "pop-add-button box-shadow-effect" do %>
+          <i class="fa-solid fa-plus" style="color: var(--panda-white);"></i>
         <% end %>
       </div>
     </div>
