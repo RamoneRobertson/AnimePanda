@@ -14,8 +14,11 @@
   // padding: 7px;
   // transform: rotate(23deg);
   border: none;
-  // width: 36px;
-  // height: 36px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .search-text-field{
