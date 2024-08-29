@@ -16,6 +16,7 @@ export default class extends Controller {
 
   vote(event){
     if(event.currentTarget === this.likeTarget){
+      this.#animateBtn(event);
       this.#updatePreference();
       this.#incrementLike();
       this.animeTarget.classList.add("yes");
@@ -23,6 +24,7 @@ export default class extends Controller {
       this.#redirect();
     }
     else if(event.currentTarget === this.dislikeTarget){
+      this.#animateBtn(event)
       this.animeTarget.classList.add('nope');
       this.#pandaComment();
       this.#redirect();
@@ -30,8 +32,34 @@ export default class extends Controller {
   }
 
   #pandaComment(){
-    const comment = this.comments.splice(1, 1)[0]
-    this.dispatch('vote', { detail: { message: [comment] } })
+    if(this.comments.length !== 1){
+      const comment = this.comments.splice(1, 1)[0]
+      const regex = /recommended\s([^.!?]*?)(?=\sbecause|\sas|\sdue\s|\sfor\s|[.?])/i;
+      const match = comment.match(regex);
+      const title = match ? match[1] : null;
+      if(title){
+        const highlightedTitle = comment.replace(title, `<span style="color: #DD1E73;">${title}</span>`);
+        this.dispatch('vote', { detail: { message: [highlightedTitle] } })
+      }
+    }
+  }
+
+  #animateBtn(event){
+    if(event.currentTarget === this.likeTarget){
+      this.likeTarget.classList.remove('animate');
+      this.likeTarget.classList.add('animate');
+      setTimeout(() => {
+        this.likeTarget.classList.remove('animate');
+      },700);
+    }
+    else if(event.currentTarget === this.dislikeTarget){
+      this.dislikeTarget.classList.remove('animate');
+      this.dislikeTarget.classList.add('animate');
+      setTimeout(() => {
+        this.dislikeTarget.classList.remove('animate');
+      },700);
+    }
+
   }
 
   // run after the animation is complete
@@ -83,7 +111,7 @@ export default class extends Controller {
   // Function redirects to the /lists/liked view by tracking animesTarget.children
   #redirect(){
     if (this.animesTarget.children.length == 1 && this.animesTarget.dataset.likes == 0){
-      document.documentElement.classList.add('loader');
+      this.#disableButtons();
       window.location.reload(true);
     }
     else if (this.animesTarget.children.length == 1){

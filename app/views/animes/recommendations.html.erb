@@ -1,22 +1,23 @@
 <div
-  data-controller="anime-vote typing"
-  data-typing-message-value="<%= @reco_comments.slice(0, 1) %>"
+  data-controller="anime-vote typing recommendations-loading"
+  data-typing-message-value="<%= @highlighted_comment %>"
   data-action="anime-vote:vote->typing#updateChat"
   data-anime-vote-recos-value="<%= @reco_comments %>"
   >
-  <div class="d-none"  >
+  <div class="d-none">
     <% @reco_comments.each do |comment| %>
       <p data-anime-vote-target="comment">
         <%= comment %>
       </p>
     <% end %>
   </div>
-  <div>
-    <div class="reco-container" data-controller="reco-refresh recommendations-loading">
-      <div data-anime-vote-target="animes" data-reco-refresh-target="animes" data-likes=0>
+  <div data-action="unload@window->recommendations-loading#loading">
+    <div class="reco-container">
+      <div data-anime-vote-target="animes" data-likes=0>
         <%= render "components/reco_anime" %>
       </div>
       <%= render "components/reco_buttons" %>
+      <%= render "components/paw_loading" %>
     </div>
     <%= render "components/panda_button" %>
   </div>

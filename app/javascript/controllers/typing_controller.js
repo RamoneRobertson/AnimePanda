@@ -55,7 +55,6 @@ export default class extends Controller {
 }
 
   #diableChat(){
-    console.log("finshed typing");
     setTimeout(() => {
       this.element.classList.add("d-none");
     }, 2000);

@@ -1,5 +1,5 @@
 <% @recommend_list.bookmarks.each do |bookmark| %>
-  <div class="reco-anime" data-anime-vote-target="anime" data-reco-refresh-target="anime" data-anime="<%= bookmark.anime_id %>" data-bk="<%= bookmark.id %>" data-comment="" data-action="animationend->anime-vote#animationDone">
+  <div class="reco-anime" data-anime-vote-target="anime" data-anime="<%= bookmark.anime_id %>" data-bk="<%= bookmark.id %>" data-comment="" data-action="animationend->anime-vote#animationDone">
     <% if bookmark.anime.trailer? %>
       <div class="reco-trailer">
         <iframe class="fade-img" width="100%" height="420px" src="<%= bookmark.anime.trailer %>&mute=1&controls=0&playlist=<%=bookmark.anime.trailer.scan(/(?<=\/embed\/)[^?]+/)[0]%>&loop=1">
@@ -7,14 +7,20 @@
       </div>
     <% else %>
       <div class="reco-img fade-img">
-        <%= image_tag bookmark.anime.picture_url, alt: "A poster of the bookmark.anime displaying the characters and overall theme", class: "fade-img" %>
+        <%= image_tag bookmark.anime.picture_url, alt: "A poster of the anime displaying the characters and overall theme", class: "fade-img" %>
       </div>
     <% end %>
     <div data-controller="show-more">
       <div class="reco-header">
-        <h3><%= bookmark.anime.title %></h3>
+        <h2><%= bookmark.anime.title %></h2>
         <div class="reco-tags">
-          <%= bookmark.anime.genre_list.join(", ").downcase %>
+          <% bookmark.anime.genre_list.each do |genre| %>
+            <% if genre == "high stakes game" || genre == "award winning" || genre == "romantic subtext" || genre == "organized crime" || genre == "anthropomorph" || genre == "strategy game"%>
+              <button class="reco-genre-tag text-truncate"><%= genre %></button>
+            <% else %>
+              <button class="reco-genre-tag"><%= genre %></button>
+            <% end %>
+          <% end %>
         </div>
         <div>
           <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
@@ -22,16 +28,22 @@
         </div>
       </div>
       <div class="reco-synopsis fade-img" data-show-more-target="synopsis">
-        <h4>Synopsis</h4>
+        <h3>Synopsis</h3>
         <p><%= bookmark.anime.synopsis.sub(/\s*\[Written by MAL Rewrite\]\s*$/, '') %></p>
       </div>
       <div class="green-expand-link">
         <p data-show-more-target="expander" data-action="click->show-more#toggleSynopsis">Read More</p>
       </div>
       <div class="reco-info">
-        <h4>Info</h4>
-        <p>Episodes: <%= bookmark.anime.episode_count %></p>
-        <p>Studio: <%= bookmark.anime.studio %></p>
+        <span>
+          <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
+        </span>
+        <div class="info-icons">
+          <%# Episodes %>
+          <p><i class="fa-solid fa-layer-group" style="color: #ffffff;"></i><span style="color: #ffffff"> Episodes:</span> <%= bookmark.anime.episode_count %></p>
+          <%# Studio %>
+          <p><i class="fa-solid fa-film" style="color: #ffffff;"></i> <span style="color: #ffffff"> Studio:</span> <%= bookmark.anime.studio %></p>
+        </div>
       </div>
     </div>
   </div>
