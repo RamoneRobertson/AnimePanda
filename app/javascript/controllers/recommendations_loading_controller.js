@@ -14,6 +14,11 @@ export default class extends Controller {
       paws.push(element.querySelector("img"));
     });
     whitePawSrc = this.pawTargets[0].querySelector("img").src;
+
+    // add d-none back in to reove bug of loading stuck on screen
+    if(!this.screenTarget.classList.contains("d-none")){
+      this.screenTarget.classList.add("d-none");
+    }
   }
 
   loading(){
