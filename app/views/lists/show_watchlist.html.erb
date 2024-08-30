@@ -98,11 +98,11 @@
               </ul>
             </div>
           <% end %>
-          <div class="field">
-            <%= form.label :mal_username %>
+          <div class="field pb-3">
+            <%= form.label :mal_username, "Username: " %>
             <%= form.text_field :mal_username %> <!-- Assuming 'name' is an attribute you want to update -->
           </div>
-          <div class="actions">
+          <div class="actions d-flex justify-content-end">
             <%= form.submit "Sync", class: "btn btn btn-dark" %>
           </div>
         <% end %>

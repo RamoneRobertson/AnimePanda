@@ -237,7 +237,8 @@
 
 .card-divider {
   border: 0;
-  border-top: 2px solid black;
+  // border-top: 2px solid black;
+  border-top: 2px solid #cbcbcb;
   margin: 16px 0;
   width: calc(100% - 32px);
   margin-left: auto;
