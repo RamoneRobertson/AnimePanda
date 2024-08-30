@@ -34,11 +34,11 @@ export default class extends Controller {
   #pandaComment(){
     if(this.comments.length !== 1){
       const comment = this.comments.splice(1, 1)[0]
-      const regex = /recommended\s([^.!?]*?)(?=\sbecause|\sas|\sdue\s|\sfor\s|[.?])/i;
+      const regex = /recommended\s([^.!?]*?[\w\s'!-.]*?)(?=\sbecause|\sas|\sdue\s|\sfor\s|[.?])/i;
       const match = comment.match(regex);
       const title = match ? match[1] : null;
       if(title){
-        const highlightedTitle = comment.replace(title, `<span style="color: #DD1E73;">${title}</span>`);
+        const highlightedTitle = comment.replace(title, `<span class="highlight">${title}</span>`);
         this.dispatch('vote', { detail: { message: [highlightedTitle] } })
       }
     }

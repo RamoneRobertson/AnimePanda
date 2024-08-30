@@ -22,12 +22,13 @@ class AnimesController < ApplicationController
     end
 
     @load_comment = @reco_comments.slice(0, 1).first
-    regex = /recommended\s([^.!?]*?)(?=\sbecause|\sas|\sdue\s|\sfor\s|[.!?])/i
+    regex = /recommended\s([^.!?]*?[\w\s'!-.]*?)(?=\sbecause|\sas|\sdue\s|\sfor\s|[.?])/i;
     match = @load_comment.match(regex)
-    title = match[1]
+    title = match ? match[1].strip : nil
+    # title = match[1]
 
     if(title)
-      @highlighted_comment = [@load_comment.gsub(title, "<span style=\"color: #DD1E73;\">#{title}</span>")]
+      @highlighted_comment = [@load_comment.gsub(title, "<span class=\"highlight\">#{title}</span>")]
     end
   end
 
