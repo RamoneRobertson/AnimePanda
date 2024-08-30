@@ -2,22 +2,20 @@
 <div class="show-page-container" data-controller="typing" data-typing-message-value="<%= message %>">
   <div class="list-container" style="min-height: 100vh;">
     <div class="page-name d-flex justify-content-between align-items-center w-100">
-        <div style="width: 90px;" class="d-flex align-items-center">
-          <%= link_to root_path do %>
-            <i class="fa-solid fa-arrow-left text-decoration-none" style="color: white;"></i>
-          <% end %>
-        </div>
-        <div>
-          <h1 style="color: white;" class="mb-0 mx-auto">Watchlist</h1>
-        </div>
-        <!-- Button trigger modal -->
-
-        <button type="button" class="btn btn-primary btn-sm rounded-pill me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          MAL <i class="fa-solid fa-rotate" style="color: #ffffff;"></i>
-        </button>
-
+      <div style="width: 90px;" class="d-flex align-items-center">
+        <%= link_to root_path do %>
+          <i class="fa-solid fa-arrow-left text-decoration-none" style="color: white;"></i>
+        <% end %>
+      </div>
+      <div>
+        <h1 style="color: white;" class="mb-0 mx-auto">Watchlist</h1>
+      </div>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-sm rounded-pill me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        MAL <i class="fa-solid fa-rotate" style="color: #ffffff;"></i>
+      </button>
     </div>
-    <div class="show-wrapper">
+    <div class="show-wrapper px-3">
       <%= render "components/sort_button_colors" %>
       <% if @bookmarks.empty? %>
         <div class="empty-bookmark">
@@ -29,17 +27,17 @@
         <div class="card-product">
           <% @bookmarks.each do |list_animes| %>
             <% if params[:status] == "watching" %>
-              <div class="anime-status">
+              <div class="anime-status pb-3">
                 <div class="status-text">
                   <h5 class="dot-status" style= "color: #01b866;"> •</h5>
                   <p style="color: white; margin-bottom: 0px;"> Watching</p>
                 </div>
                 <%= button_to bookmark_path(list_animes.id), method: :patch, class: "btn btn-modern-seen" do %>
-                  <i class="fas fa-check"></i> Seen
+                  <i class="fas fa-check d-none"></i> Mark as Seen
                 <% end %>
               </div>
             <% elsif params[:status] == "completed" %>
-              <div class="anime-status">
+              <div class="anime-status pb-3">
                 <div class="status-text">
                   <h5 class="dot-status" style= "color: gray;"> •</h5>
                   <p style="color: white; margin-bottom: 0px;"> Completed</p>
@@ -57,31 +55,28 @@
                   <strong>
                     <h2 style="color: white;"><%= list_animes.anime.title %></h2>
                   </strong>
-                  <div class="details-info">
-                    <div class="info-border">Ep <%= list_animes.anime.episode_count %></div>
-                    <div class="info-border"><%= list_animes.anime.start_date.year %></div>
-                    <div class="info-border"><%= list_animes.anime.studio %></div>
+                  <div class="details-info pb-1">
+                    <div class="info-border my-1">Ep <%= list_animes.anime.episode_count %></div>
+                    <div class="info-border my-1"><%= list_animes.anime.start_date.year %></div>
+                    <div class="info-border my-1"><%= list_animes.anime.studio %></div>
                   </div>
                   <p style="color: white;"><%= list_animes.anime.rating %> <i class="fa-solid fa-star rating-star-list"></i></p>
-                  <p class="pt-3" style="color: white;">Rank: <%= list_animes.anime.rank %></p>
+                  <p class="pt-1" style="color: white;">Rank: <%= list_animes.anime.rank %></p>
                   <%= link_to "https://www.crunchyroll.com/search?q=#{list_animes.anime.title}" do %>
-                    <button class="mt-3 btn btn-secondary"><i class="fa-solid fa-tv" style="color: #ffffff;"></i> Watch</button>
+                    <button class="mt-3 btn btn-secondary rounded-5"><i class="fa-solid fa-tv pe-1" style="color: #ffffff;"></i> Watch</button>
                   <% end %>
                 </div>
               </div>
             </div>
             <hr class="card-divider">
-        <% end %>
-         </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
   <%= render "components/panda_button" %>
 </div>
-
 <%#= button_to 'Sync MyAnimelist', edit_user_registration_path, method: :get %>
-
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -96,7 +91,6 @@
           <% if @user.errors.any? %>
             <div id="error_explanation">
               <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
               <ul>
                 <% @user.errors.full_messages.each do |message| %>
                   <li><%= message %></li>
@@ -104,12 +98,10 @@
               </ul>
             </div>
           <% end %>
-
           <div class="field">
             <%= form.label :mal_username %>
             <%= form.text_field :mal_username %> <!-- Assuming 'name' is an attribute you want to update -->
           </div>
-
           <div class="actions">
             <%= form.submit "Sync", class: "btn btn btn-dark" %>
           </div>
