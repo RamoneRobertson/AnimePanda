@@ -42,15 +42,15 @@
 
     .reco-genre-tag{
       pointer-events: none;
-      background-color: var(--panda-green);
-      border: none;
-      color: var(--panda-white);
+      background-color: transparent;
+      border: 1.5px solid #b9b9b9;
+      color: #dcdcdc;
       text-align: center;
       text-decoration: none;
       display: inline-block;
       border-radius: 100px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-      text-wrap: nowrap;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+      font-size: 0.9rem;
     }
 
     i{
