@@ -13,14 +13,14 @@
     <div data-controller="show-more">
       <div class="reco-header">
         <h2><%= bookmark.anime.title %></h2>
-        <div class="reco-tags">
-          <% bookmark.anime.genre_list.each do |genre| %>
-            <% if genre == "high stakes game" || genre == "award winning" || genre == "romantic subtext" || genre == "organized crime" || genre == "anthropomorph" || genre == "strategy game" || genre == "performing arts"%>
-              <button class="reco-genre-tag text-truncate"><%= genre %></button>
-            <% else %>
-              <button class="reco-genre-tag"><%= genre %></button>
-            <% end %>
-          <% end %>
+        <div class="reco-tag-icons">
+          <div style="padding: 0 32px;">
+            <div class="d-flex justify-content-center mb-2" style="flex-wrap: wrap; gap: 10px;">
+              <% bookmark.anime.genre_list.each do |genre| %>
+                <button class="reco-genre-tag"><%= genre %></button>
+              <% end %>
+            </div>
+          </div>
         </div>
         <div>
           <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
