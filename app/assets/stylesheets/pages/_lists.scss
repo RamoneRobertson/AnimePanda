@@ -171,7 +171,9 @@
 }
 
 .info-border {
-  background-color: #01b866;
+  // background-color: #01b866;
+  background-color: transparent;
+  border: 1.5px solid #b9b9b9;
   border-radius: 11px;
   padding: 6px;
   font-size: x-small;
