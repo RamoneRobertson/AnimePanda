@@ -5,7 +5,7 @@
 .fade-img:after {
   content:"";
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   left: 0;
   right: 0;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #000 100%);
