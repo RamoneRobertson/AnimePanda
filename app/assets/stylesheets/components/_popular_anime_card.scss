@@ -69,6 +69,11 @@
   border: none;
   border-radius: 8px;
   background-color: var(--panda-green);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .pop-add-button:hover{
   background-color: var(--panda-black);
