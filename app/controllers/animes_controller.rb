@@ -12,11 +12,11 @@ class AnimesController < ApplicationController
     chatgpt = OpenaiService.new
     seen_animes = @user.lists.seen.first.animes.select(:id, :title).to_json
     @animes = genrate_chatgpt_anime(seen_animes, genres)
-    @user.lists.recommendations.first.bookmarks.destroy_all
-    @recommend_list = @user.lists.find_by(list_type: 'recommendations')
+    @user.lists.session.first.bookmarks.destroy_all
+    @session_list = @user.lists.find_by(list_type: 'session')
     @reco_comments = []
     @animes.each do |anime|
-      new_bookmark = Bookmark.new(watch_status: :recommended, anime: anime, list: @recommend_list, preference: nil)
+      new_bookmark = Bookmark.new(watch_status: :session, anime: anime, list: @session_list, preference: nil)
       new_bookmark.save if !new_bookmark.anime_id.nil?
       @reco_comments << chatgpt.per_reco_chat(seen_animes, anime)
     end
