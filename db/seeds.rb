@@ -31,6 +31,10 @@ new_liked_list = List.new(list_type: :liked)
 new_liked_list.user = new_user
 new_liked_list.save
 
+new_session_list = List.new(list_type: :session)
+new_session_list.user = new_user
+new_session_list.save
+
 new_watch_list = List.new()
 new_watch_list.user = new_user
 new_watch_list.save

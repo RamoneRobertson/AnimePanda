@@ -53,6 +53,8 @@ class BookmarksController < ApplicationController
       @bookmark.list = @user.lists.find_by(list_type: 'recommendations')
     elsif @bookmark.watch_status == "like"
       @bookmark.list = @user.lists.find_by(list_type: 'liked')
+    elsif @bookmark.watch_status == "session"
+      @bookmark.list = @user.lists.find_by(list_type: 'session')
     else
       @bookmark.list = @user.lists.find_by(list_type: 'dropped')
     end
