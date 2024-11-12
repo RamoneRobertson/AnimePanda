@@ -6,6 +6,7 @@ class AnimesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def recommendations
+    @hide_navbar = true
     @user = current_user
     params["genre"].nil? == true ? genres = "not set" : genres = params["genre"]
     current_user.liked_list.bookmarks.destroy_all
